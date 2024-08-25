@@ -1,10 +1,17 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
 
+    <% if notice.present? %>
+        <br>
+        <div class="alert alert-success"><%= notice %></div>
+    <% end %>
+    <br>
+
+</div>
 <%= render @uf_tank %>
 
 <div>
-  <%= link_to "Edit this uf tank", edit_uf_tank_path(@uf_tank) %> |
-  <%= link_to "Back to uf tanks", uf_tanks_path %>
+  <%= link_to "Edit this UF tank", edit_uf_tank_path(@uf_tank) %> |
+  <%= link_to "Back to UF tanks", uf_tanks_path %>
 
-  <%= button_to "Destroy this uf tank", @uf_tank, method: :delete %>
+  <%= button_to "Destroy this UF tank", @uf_tank, method: :delete %>
 </div>

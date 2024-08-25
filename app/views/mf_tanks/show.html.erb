@@ -1,4 +1,12 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+
+    <% if notice.present? %>
+        <br>
+        <div class="alert alert-success"><%= notice %></div>
+    <% end %>
+    <br>
+
+</div>
 
 <%= render @mf_tank %>
 

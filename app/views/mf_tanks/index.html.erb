@@ -1,14 +1,74 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
 
-<h1>Mf tanks</h1>
+    <% if notice.present? %>
+        <br>
+        <div class="alert alert-success"><%= notice %></div>
+    <% end %>
+    <br>
 
-<div id="mf_tanks">
-  <% @mf_tanks.each do |mf_tank| %>
-    <%= render mf_tank %>
-    <p>
-      <%= link_to "Show this mf tank", mf_tank %>
-    </p>
-  <% end %>
 </div>
 
-<%= link_to "New mf tank", new_mf_tank_path %>
+<div class="container">
+
+    <div class="row align-middle">
+        <div class="col text-start">
+            <h1>MF Tank Analysis</h1>
+        </div>
+        <div class="col text-end">
+            <%= link_to " New ", new_mf_tank_path, type: 'button', class: 'bi bi-plus-circle-fill btn btn-outline-primary btn-sm rounded-pill p-2' %>
+        </div>
+    </div>
+    <br>
+    <table style="overflow: hidden" class="table rounded-3 ">
+        <thead>
+            <tr>
+                <th scope="col" class="align-middle">Date</th>
+                <th scope="col" class="align-middle">Density</th>
+                <th scope="col" class="align-middle">pH</th>
+                <th scope="col" class="align-middle">Viscosity</th>
+                <th scope="col" class="align-middle">Gel Time</th>
+                <th scope="col" class="align-middle">%Solid</th>
+                <th scope="col" class="align-middle"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <% if @mf_tanks.any? %>
+                <% @mf_tanks.each do |tank| %>
+                    <tr style="cursor:pointer;">
+                        <td class="align-middle"><%= tank.date.to_s.gsub("-","/") %></td>
+                        <td class="align-middle"><%= tank.density %></td>
+                        <td class="align-middle"><%= tank.ph %></td>
+                        <td class="align-middle"><%= tank.viscosity %></td>
+                        <td class="align-middle"><%= tank.reaction_time %></td>
+                        <td class="align-middle"><%= tank.solid_content %></td>
+                        <td class="align-middle">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <%= link_to '', edit_mf_tank_url(tank), class: "btn btn-outline-primary btn-sm bi bi-pencil-square m-1 rounded-pill " %>
+                                <%= link_to '', mf_tanks_path(tank), class: "btn btn-outline-primary btn-sm bi bi-eye-fill m-1 rounded-pill" %>
+                            </div>
+                        </td>
+                    </tr>
+                <% end %>
+            <% end %>
+
+        </tbody>
+
+
+        <% unless @mf_tanks.any? %>
+            <tfoot>
+
+                <tr>
+                    <td colspan="4">
+                        <div class="alert alert-warning mb-0 text-center" role="alert">
+                            No UF Test found.
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+
+        <% end %>
+    </table>
+</div>
+

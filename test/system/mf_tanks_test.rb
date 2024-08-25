@@ -7,7 +7,7 @@ class MfTanksTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     visit mf_tanks_url
-    assert_selector "h1", text: "Mf tanks"
+    assert_selector "h1", text: "MF tanks"
   end
 
   test "should create mf tank" do
@@ -19,15 +19,16 @@ class MfTanksTest < ApplicationSystemTestCase
     fill_in "Initial temp", with: @mf_tank.initial_temp
     fill_in "Ph", with: @mf_tank.ph
     fill_in "Reaction time", with: @mf_tank.reaction_time
+    fill_in "Solid content", with: @mf_tank.solid_content
     fill_in "Tank number", with: @mf_tank.tank_number
     fill_in "Viscosity", with: @mf_tank.viscosity
-    click_on "Create Mf tank"
+    click_on "Create MF tank"
 
-    assert_text "Mf tank was successfully created"
+    assert_text "MF tank was successfully created"
     click_on "Back"
   end
 
-  test "should update Mf tank" do
+  test "should update MF tank" do
     visit mf_tank_url(@mf_tank)
     click_on "Edit this mf tank", match: :first
 
@@ -36,18 +37,19 @@ class MfTanksTest < ApplicationSystemTestCase
     fill_in "Initial temp", with: @mf_tank.initial_temp
     fill_in "Ph", with: @mf_tank.ph
     fill_in "Reaction time", with: @mf_tank.reaction_time
+    fill_in "Solid content", with: @mf_tank.solid_content
     fill_in "Tank number", with: @mf_tank.tank_number
     fill_in "Viscosity", with: @mf_tank.viscosity
-    click_on "Update Mf tank"
+    click_on "Update MF tank"
 
-    assert_text "Mf tank was successfully updated"
+    assert_text "MF tank was successfully updated"
     click_on "Back"
   end
 
-  test "should destroy Mf tank" do
+  test "should destroy MF tank" do
     visit mf_tank_url(@mf_tank)
     click_on "Destroy this mf tank", match: :first
 
-    assert_text "Mf tank was successfully destroyed"
+    assert_text "MF tank was successfully destroyed"
   end
 end

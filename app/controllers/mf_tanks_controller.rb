@@ -25,7 +25,7 @@ class MfTanksController < ApplicationController
 
     respond_to do |format|
       if @mf_tank.save
-        format.html { redirect_to mf_tank_url(@mf_tank), notice: "Mf tank was successfully created." }
+        format.html { redirect_to mf_tank_url(@mf_tank), notice: "MF tank was successfully created." }
         format.json { render :show, status: :created, location: @mf_tank }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class MfTanksController < ApplicationController
   def update
     respond_to do |format|
       if @mf_tank.update(mf_tank_params)
-        format.html { redirect_to mf_tank_url(@mf_tank), notice: "Mf tank was successfully updated." }
+        format.html { redirect_to mf_tank_url(@mf_tank), notice: "MF tank was successfully updated." }
         format.json { render :show, status: :ok, location: @mf_tank }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class MfTanksController < ApplicationController
     @mf_tank.destroy!
 
     respond_to do |format|
-      format.html { redirect_to mf_tanks_url, notice: "Mf tank was successfully destroyed." }
+      format.html { redirect_to mf_tanks_url, notice: "MF tank was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -65,6 +65,6 @@ class MfTanksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def mf_tank_params
-      params.require(:mf_tank).permit(:date, :initial_temp, :tank_number, :ph, :viscosity, :density, :reaction_time)
+      params.require(:mf_tank).permit(:date, :initial_temp, :tank_number, :ph, :viscosity, :density, :reaction_time, :solid_content)
     end
 end

@@ -1,2 +1,0 @@
-class ResinTank < ApplicationRecord
-end

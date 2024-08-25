@@ -1,14 +1,59 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+    <div class="row align-middle">
+        <div class="col text-start">
+            <h1>Pallets</h1>
+        </div>
+        <div class="col text-end">
+            <%= link_to " New Pallet ", new_pallet_path, type: 'button', class: 'bi bi-plus-circle-fill btn btn-outline-primary btn-sm rounded-pill p-2' %>
+        </div>
+    </div>
 
-<h1>Pallets</h1>
+    <br>
+    <table style="overflow: hidden" class="table rounded-3">
+        <thead class="table">
+            <tr>
+                <th scope="col" class="align-middle">Pallet Num.</th>
+                <th scope="col" class="align-middle">Color Num.</th>
+                <th scope="col" class="align-middle">Customer</th>
+                <th scope="col" class="align-middle">Status</th>
+                <th scope="col" class="align-middle"></th>
+            </tr>
+        </thead>
 
-<div id="pallets">
-  <% @pallets.each do |pallet| %>
-    <%= render pallet %>
-    <p>
-      <%= link_to "Show this pallet", pallet %>
-    </p>
-  <% end %>
+        <tbody>
+            <% if @pallets.any? %>
+                <% @pallets.each do |pallet| %>
+                    <tr style="cursor:pointer;">
+
+                        <th scope="row" class="align-middle"><%= pallet.pallet_number %></th>
+                        <td class="align-middle"><%= pallet.color_number %></td>
+                        <td class="align-middle"><%= pallet.customer %></td>
+                        <td class="align-middle"><%= pallet.status %></td>
+
+                        <td class="align-middle">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <%= link_to '', edit_pallet_path(pallet), class: "btn btn-outline-primary btn-sm bi bi-pencil-square m-1 rounded-pill " %>
+                                <%= link_to '', pallet_path(pallet), class: "btn btn-outline-primary btn-sm bi bi-eye-fill m-1 rounded-pill" %>
+                            </div>
+                        </td>
+                    </tr>
+                <% end %>
+            <% end %>
+        </tbody>
+
+
+        <% unless @pallets.any? %>
+            <tfoot>
+
+                <tr>
+                    <td colspan="4">
+                        <div class="alert alert-warning mb-0 text-center" role="alert">
+                            No pallets found.
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+
+        <% end %>
+    </table>
 </div>
-
-<%= link_to "New pallet", new_pallet_path %>

@@ -27,7 +27,7 @@ class PalletsTest < ApplicationSystemTestCase
     fill_in "Glossiness", with: @pallet.glossiness
     fill_in "Info", with: @pallet.info
     fill_in "Initial grammage", with: @pallet.initial_grammage
-    fill_in "Mf tank", with: @pallet.mf_tank
+    fill_in "MF tank", with: @pallet.mf_tank
     fill_in "Pallet number", with: @pallet.pallet_number
     fill_in "Production date", with: @pallet.production_date
     fill_in "Production time", with: @pallet.production_time
@@ -63,7 +63,7 @@ class PalletsTest < ApplicationSystemTestCase
     fill_in "Glossiness", with: @pallet.glossiness
     fill_in "Info", with: @pallet.info
     fill_in "Initial grammage", with: @pallet.initial_grammage
-    fill_in "Mf tank", with: @pallet.mf_tank
+    fill_in "MF tank", with: @pallet.mf_tank
     fill_in "Pallet number", with: @pallet.pallet_number
     fill_in "Production date", with: @pallet.production_date
     fill_in "Production time", with: @pallet.production_time

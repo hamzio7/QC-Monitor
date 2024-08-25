@@ -1,132 +1,335 @@
 <div id="<%= dom_id pallet %>">
-  <p>
-    <strong>Pallet number:</strong>
-    <%= pallet.pallet_number %>
-  </p>
+    <div class="container">
+        <div class="accordion" id="accordion-<%= pallet.id %>">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#<%= dom_id(pallet, :pallet_info) %>" aria-expanded="true" aria-controls="<%= dom_id(pallet, :pallet_info) %>">
+                        Pallet Info
+                    </button>
+                </h2>
+                <div id="<%= dom_id(pallet, :pallet_info) %>" class="accordion-collapse collapse show" data-bs-parent="#accordion-<%= pallet.id %>">
+                    <div class="accordion-body">
+                        <div class="row mt-2">
+                            <div class="col">
+                                Pallet number:
+                            </div>
+                            <div class="col text-end">
+                                <%= pallet.pallet_number %>
+                            </div>
+                        </div>
 
-  <p>
-    <strong>Production date:</strong>
-    <%= pallet.production_date %>
-  </p>
+                        <div class="row mt-2">
+                            <div class="col">
+                                Production date:
+                            </div>
+                            <div class="col text-end">
+                                <%= pallet.production_date %>
+                            </div>
+                        </div>
 
-  <p>
-    <strong>Production time:</strong>
-    <%= pallet.production_time %>
-  </p>
+                        <div class="row mt-2">
+                            <div class="col">
+                                Color number:
+                            </div>
+                            <div class="col text-end">
+                                <%= pallet.color_number %>
+                            </div>
+                        </div>
 
-  <p>
-    <strong>Color number:</strong>
-    <%= pallet.color_number %>
-  </p>
+                        <div class="row mt-2">
+                            <div class="col">
+                                Quantity:
+                            </div>
+                            <div class="col text-end">
+                                <%= pallet.quantity %>
+                            </div>
+                        </div>
 
-  <p>
-    <strong>Quantity:</strong>
-    <%= pallet.quantity %>
-  </p>
+                        <div class="row mt-2 mb-2">
+                            <div class="col">
+                                Customer:
+                            </div>
+                            <div class="col text-end">
+                                <%= pallet.customer %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<%= dom_id(pallet, :grammage) %>" aria-expanded="false" aria-controls="<%= dom_id(pallet, :grammage) %>">
+                        Grammage
+                    </button>
+                </h2>
+                <div id="<%= dom_id(pallet, :grammage) %>" class="accordion-collapse collapse" data-bs-parent="#accordion-<%= pallet.id %>">
+                    <div class="accordion-body">
 
-  <p>
-    <strong>Customer:</strong>
-    <%= pallet.customer %>
-  </p>
+                        <table class="table table-striped text-center">
+                            <thead class="table-dark table-bordered">
+                                <tr>
+                                    <th>Initial</th>
+                                    <th>Set Min</th>
+                                    <th>Min</th>
+                                    <th>Set Max</th>
+                                    <th>Max</th>
+                                </tr>
+                            </thead>
 
-  <p>
-    <strong>Initial grammage:</strong>
-    <%= pallet.initial_grammage %>
-  </p>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <%= pallet.initial_grammage %>
+                                    </td>
+                                    <td>
+                                        <%= pallet.grammage_max_set %>
+                                    </td>
 
-  <p>
-    <strong>Final grammage min:</strong>
-    <%= pallet.final_grammage_min %>
-  </p>
+                                    <td>
+                                        <%= pallet.final_grammage_max %>
+                                    </td>
+                                    <td>
+                                        <%= pallet.grammage_min_set %>
+                                    </td>
 
-  <p>
-    <strong>Final grammage max:</strong>
-    <%= pallet.final_grammage_max %>
-  </p>
+                                    <td>
+                                        <%= pallet.final_grammage_min %>
+                                    </td>
+                                </tr>
+                            </tbody>
 
-  <p>
-    <strong>Uf tank:</strong>
-    <%= pallet.uf_tank %>
-  </p>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<%= dom_id(pallet, :volatile_content) %>" aria-expanded="false" aria-controls="<%= dom_id(pallet, :volatile_content) %>">
+                        Volatile Content
+                    </button>
+                </h2>
+                <div id="<%= dom_id(pallet, :volatile_content) %>" class="accordion-collapse collapse" data-bs-parent="#accordion-<%= pallet.id %>">
+                    <div class="accordion-body">
+                        <div class="row mt-2">
+                            <div class="col">Volatile content set min:</div>
+                            <div class="col text-end">
+                                <%= pallet.volatile_content_set_min %>
+                            </div>
+                        </div>
 
-  <p>
-    <strong>Mf tank:</strong>
-    <%= pallet.mf_tank %>
-  </p>
+                        <div class="row mt-2">
+                            <div class="col">Volatile content set max:</div>
+                            <div class="col text-end">
+                                <%= pallet.volatile_content_set_max %>
+                            </div>
+                        </div>
 
-  <p>
-    <strong>Cloudy time:</strong>
-    <%= pallet.cloudy_time %>
-  </p>
+                        <div class="row mt-2">
+                            <div class="col">Volatile content min:</div>
+                            <div class="col text-end">
+                                <%= pallet.volatile_content_min %>
+                            </div>
+                        </div>
 
-  <p>
-    <strong>Gel time:</strong>
-    <%= pallet.gel_time %>
-  </p>
+                        <div class="row mt-2 mb-2">
+                            <div class="col">Volatile content max:</div>
+                            <div class="col text-end">
+                                <%= pallet.volatile_content_max %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<%= dom_id(pallet, :tanks) %>" aria-expanded="false" aria-controls="<%= dom_id(pallet, :tanks) %>">
+                        UF/MF Tanks
+                    </button>
+                </h2>
+                <div id="<%= dom_id(pallet, :tanks) %>" class="accordion-collapse collapse" data-bs-parent="#accordion-<%= pallet.id %>">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <table class=" table table-striped table-bordered table-sm text-center">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Num.</th>
+                                        <th scope="col">pH</th>
+                                        <th scope="col">Vis.</th>
+                                        <th scope="col">Den.</th>
+                                        <th scope="col">C.T/G.T</th>
+                                        <th scope="col">%Solid</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <%= pallet.uf_tank.date %>
+                                        </td>
+                                        <td>
+                                            <%= pallet.uf_tank.tank_number %>
+                                        </td>
+                                        <td>
+                                            <%= pallet.uf_tank.ph %>
+                                        </td>
+                                        <td>
+                                            <%= pallet.uf_tank.viscosity %>
+                                        </td>
+                                        <td>
+                                            <%= pallet.uf_tank.density %>
+                                        </td>
+                                        <td>
+                                            <%= pallet.uf_tank.reaction_time %>
+                                        </td>
+                                        <td>
+                                            <%= pallet.uf_tank.solid_content %>
+                                        </td>
+                                    </tr>
 
-  <p>
-    <strong>Volatile content set min:</strong>
-    <%= pallet.volatile_content_set_min %>
-  </p>
+                                    <tr>
+                                        <td>
+                                            <%= pallet.mf_tank.date %>
+                                        </td>
+                                        <td>
+                                            <%= pallet.mf_tank.tank_number %>
+                                        </td>
+                                        <td>
+                                            <%= pallet.mf_tank.ph %>
+                                        </td>
+                                        <td>
+                                            <%= pallet.mf_tank.viscosity %>
+                                        </td>
+                                        <td>
+                                            <%= pallet.mf_tank.density %>
+                                        </td>
+                                        <td>
+                                            <%= pallet.mf_tank.reaction_time %>
+                                        </td>
+                                        <td>
+                                            <%= pallet.mf_tank.solid_content %>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-  <p>
-    <strong>Volatile content set max:</strong>
-    <%= pallet.volatile_content_set_max %>
-  </p>
+                        <div class="row mt-2">
+                            <div class="col">Cloudy time:</div>
+                            <div class="col text-end">
+                                <%= pallet.cloudy_time %>
+                            </div>
+                        </div>
 
-  <p>
-    <strong>Volatile content min:</strong>
-    <%= pallet.volatile_content_min %>
-  </p>
+                        <div class="row mt-2">
+                            <div class="col">Gel time:</div>
+                            <div class="col text-end">
+                                <%= pallet.gel_time %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<%= dom_id(pallet, :pallet_status) %>" aria-expanded="false" aria-controls="<%= dom_id(pallet, :pallet_status) %>">
+                        Status
+                    </button>
+                </h2>
+                <div id="<%= dom_id(pallet, :pallet_status) %>" class="accordion-collapse collapse" data-bs-parent="#accordion-<%= pallet.id %>">
+                    <div class="accordion-body">
 
-  <p>
-    <strong>Volatile content max:</strong>
-    <%= pallet.volatile_content_max %>
-  </p>
+                        <div class="row mt-2">
+                            <div class="col">Glossiness:</div>
+                            <div class="col text-end">
+                                <%= pallet.glossiness %>
+                            </div>
+                        </div>
 
-  <p>
-    <strong>Glossiness:</strong>
-    <%= pallet.glossiness %>
-  </p>
+                        <div class="row mt-2">
+                            <div class="col">Supervisor:</div>
+                            <div class="col text-end">
+                                <%= pallet.supervisor %>
+                            </div>
+                        </div>
 
-  <p>
-    <strong>Supervisor:</strong>
-    <%= pallet.supervisor %>
-  </p>
+                        <div class="row mt-2">
+                            <div class="col">Status:</div>
+                            <div class="col text-end">
+                                <%= pallet.status %>
+                            </div>
+                        </div>
 
-  <p>
-    <strong>Status:</strong>
-    <%= pallet.status %>
-  </p>
+                        <% if pallet.status.downcase.include?("stop") || pallet.stop_reason.present? %>
+                            <div class="row mt-2">
+                                <div class="col">Stop reason:</div>
+                                <div class="col text-end">
+                                    <%= pallet.stop_reason %>
+                                </div>
+                            </div>
+                        <% end %>
 
-  <p>
-    <strong>Stop reason:</strong>
-    <%= pallet.stop_reason %>
-  </p>
+                        <% if pallet.info? %>
+                            <div class="row mt-2">
+                                <div class="col">Info:</div>
+                                <div class="col text-end">
+                                    <%= pallet.info %>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<%= dom_id(pallet, :final_status) %>" aria-expanded="false" aria-controls="<%= dom_id(pallet, :final_status) %>">
+                        Final Status
+                    </button>
+                </h2>
+                <div id="<%= dom_id(pallet, :final_status) %>" class="accordion-collapse collapse" data-bs-parent="#accordion-<%= pallet.id %>">
+                    <div class="accordion-body">
+                        <% if pallet.final_supervisor? %>
+                            <div class="row">
+                                <div class="col">Final supervisor:</div>
+                                <div class="col text-end">
+                                    <%= pallet.final_supervisor %>
+                                </div>
+                        <% end %>
 
-  <p>
-    <strong>Info:</strong>
-    <%= pallet.info %>
-  </p>
+                        <% if pallet.final_status? %>
+                            <div class="row mt-2">
+                                <div class="col">Final status:</div>
+                                <div class="col text-end">
+                                    <%= pallet.final_status %>
+                                </div>
+                            </div>
+                            </div>
+                        <% end %>
 
-  <p>
-    <strong>Final supervisor:</strong>
-    <%= pallet.final_supervisor %>
-  </p>
+                        <% if pallet.final_stop_reason? %>
+                            <div class="row mt-2">
+                                <div class="col">Final stop reason:</div>
+                                <div class="col text-end">
+                                    <%= pallet.final_stop_reason %>
+                                </div>
+                            </div>
+                        <% end %>
 
-  <p>
-    <strong>Final status:</strong>
-    <%= pallet.final_status %>
-  </p>
+                        <% if pallet.final_info? %>
+                            <div class="row mt-2">
+                                <div class="col">Final info:</div>
+                                <div class="col text-end">
+                                    <%= pallet.final_info %>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-  <p>
-    <strong>Final stop reason:</strong>
-    <%= pallet.final_stop_reason %>
-  </p>
-
-  <p>
-    <strong>Final info:</strong>
-    <%= pallet.final_info %>
-  </p>
-
+    </div>
 </div>
+
+
+
+

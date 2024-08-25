@@ -19,6 +19,7 @@ class UfTanksTest < ApplicationSystemTestCase
     fill_in "Initial temp", with: @uf_tank.initial_temp
     fill_in "Ph", with: @uf_tank.ph
     fill_in "Reaction time", with: @uf_tank.reaction_time
+    fill_in "Solid content", with: @uf_tank.solid_content
     fill_in "Tank number", with: @uf_tank.tank_number
     fill_in "Viscosity", with: @uf_tank.viscosity
     click_on "Create Uf tank"
@@ -36,6 +37,7 @@ class UfTanksTest < ApplicationSystemTestCase
     fill_in "Initial temp", with: @uf_tank.initial_temp
     fill_in "Ph", with: @uf_tank.ph
     fill_in "Reaction time", with: @uf_tank.reaction_time
+    fill_in "Solid content", with: @uf_tank.solid_content
     fill_in "Tank number", with: @uf_tank.tank_number
     fill_in "Viscosity", with: @uf_tank.viscosity
     click_on "Update Uf tank"

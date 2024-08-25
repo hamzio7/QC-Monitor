@@ -17,7 +17,7 @@ class UfTanksControllerTest < ActionDispatch::IntegrationTest
 
   test "should create uf_tank" do
     assert_difference("UfTank.count") do
-      post uf_tanks_url, params: { uf_tank: { date: @uf_tank.date, density: @uf_tank.density, initial_temp: @uf_tank.initial_temp, ph: @uf_tank.ph, reaction_time: @uf_tank.reaction_time, tank_number: @uf_tank.tank_number, viscosity: @uf_tank.viscosity } }
+      post uf_tanks_url, params: { uf_tank: { date: @uf_tank.date, density: @uf_tank.density, initial_temp: @uf_tank.initial_temp, ph: @uf_tank.ph, reaction_time: @uf_tank.reaction_time, solid_content: @uf_tank.solid_content, tank_number: @uf_tank.tank_number, viscosity: @uf_tank.viscosity } }
     end
 
     assert_redirected_to uf_tank_url(UfTank.last)
@@ -34,7 +34,7 @@ class UfTanksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update uf_tank" do
-    patch uf_tank_url(@uf_tank), params: { uf_tank: { date: @uf_tank.date, density: @uf_tank.density, initial_temp: @uf_tank.initial_temp, ph: @uf_tank.ph, reaction_time: @uf_tank.reaction_time, tank_number: @uf_tank.tank_number, viscosity: @uf_tank.viscosity } }
+    patch uf_tank_url(@uf_tank), params: { uf_tank: { date: @uf_tank.date, density: @uf_tank.density, initial_temp: @uf_tank.initial_temp, ph: @uf_tank.ph, reaction_time: @uf_tank.reaction_time, solid_content: @uf_tank.solid_content, tank_number: @uf_tank.tank_number, viscosity: @uf_tank.viscosity } }
     assert_redirected_to uf_tank_url(@uf_tank)
   end
 

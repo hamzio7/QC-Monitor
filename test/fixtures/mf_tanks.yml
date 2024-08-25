@@ -8,6 +8,7 @@ one:
   viscosity: 1.5
   density: 1.5
   reaction_time: 1
+  solid_content: 1.5
 
 two:
   date: MyString
@@ -17,3 +18,4 @@ two:
   viscosity: 1.5
   density: 1.5
   reaction_time: 1
+  solid_content: 1.5
