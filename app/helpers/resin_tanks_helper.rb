@@ -1,0 +1,2 @@
+module ResinTanksHelper
+end

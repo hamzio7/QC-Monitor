@@ -1,0 +1,52 @@
+<%= form_with(model: uf_tank) do |form| %>
+  <% if uf_tank.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(uf_tank.errors.count, "error") %> prohibited this uf_tank from being saved:</h2>
+
+      <ul>
+        <% uf_tank.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :date, style: "display: block" %>
+    <%= form.text_field :date %>
+  </div>
+
+  <div>
+    <%= form.label :initial_temp, style: "display: block" %>
+    <%= form.text_field :initial_temp %>
+  </div>
+
+  <div>
+    <%= form.label :tank_number, style: "display: block" %>
+    <%= form.number_field :tank_number %>
+  </div>
+
+  <div>
+    <%= form.label :ph, style: "display: block" %>
+    <%= form.text_field :ph %>
+  </div>
+
+  <div>
+    <%= form.label :viscosity, style: "display: block" %>
+    <%= form.text_field :viscosity %>
+  </div>
+
+  <div>
+    <%= form.label :density, style: "display: block" %>
+    <%= form.text_field :density %>
+  </div>
+
+  <div>
+    <%= form.label :reaction_time, style: "display: block" %>
+    <%= form.number_field :reaction_time %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @pallet %>
+
+<div>
+  <%= link_to "Edit this pallet", edit_pallet_path(@pallet) %> |
+  <%= link_to "Back to pallets", pallets_path %>
+
+  <%= button_to "Destroy this pallet", @pallet, method: :delete %>
+</div>

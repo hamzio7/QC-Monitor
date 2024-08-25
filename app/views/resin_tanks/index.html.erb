@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Resin tanks</h1>
+
+<div id="resin_tanks">
+  <% @resin_tanks.each do |resin_tank| %>
+    <%= render resin_tank %>
+    <p>
+      <%= link_to "Show this resin tank", resin_tank %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New resin tank", new_resin_tank_path %>

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Uf tanks</h1>
+
+<div id="uf_tanks">
+  <% @uf_tanks.each do |uf_tank| %>
+    <%= render uf_tank %>
+    <p>
+      <%= link_to "Show this uf tank", uf_tank %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New uf tank", new_uf_tank_path %>

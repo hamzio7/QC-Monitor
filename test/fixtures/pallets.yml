@@ -1,0 +1,57 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pallet_number: MyString
+  production_date: 2024-08-22
+  production_time: 2024-08-22 10:33:34
+  color_number: 1
+  quantity: 1
+  customer: MyString
+  initial_grammage: 1
+  final_grammage_min: 1.5
+  final_grammage_max: 1.5
+  uf_tank: 1
+  mf_tank: 1
+  cloudy_time: 2024-08-22 10:33:34
+  gel_time: 2024-08-22 10:33:34
+  volatile_content_set_min: 1.5
+  volatile_content_set_max: MyString
+  volatile_content_min: 1.5
+  volatile_content_max: 1.5
+  glossiness: 1
+  supervisor: MyString
+  status: MyString
+  stop_reason: MyString
+  info: MyText
+  final_supervisor: MyString
+  final_status: MyString
+  final_stop_reason: MyString
+  final_info: MyText
+
+two:
+  pallet_number: MyString
+  production_date: 2024-08-22
+  production_time: 2024-08-22 10:33:34
+  color_number: 1
+  quantity: 1
+  customer: MyString
+  initial_grammage: 1
+  final_grammage_min: 1.5
+  final_grammage_max: 1.5
+  uf_tank: 1
+  mf_tank: 1
+  cloudy_time: 2024-08-22 10:33:34
+  gel_time: 2024-08-22 10:33:34
+  volatile_content_set_min: 1.5
+  volatile_content_set_max: MyString
+  volatile_content_min: 1.5
+  volatile_content_max: 1.5
+  glossiness: 1
+  supervisor: MyString
+  status: MyString
+  stop_reason: MyString
+  info: MyText
+  final_supervisor: MyString
+  final_status: MyString
+  final_stop_reason: MyString
+  final_info: MyText

@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tank_number: 1
+  ph: 1.5
+  viscosity: 1.5
+  density: 1.5
+  initial_temp: 1.5
+  reaction_time: MyString
+  solid_content: 1.5
+
+two:
+  tank_number: 1
+  ph: 1.5
+  viscosity: 1.5
+  density: 1.5
+  initial_temp: 1.5
+  reaction_time: MyString
+  solid_content: 1.5

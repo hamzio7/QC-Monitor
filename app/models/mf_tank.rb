@@ -1,0 +1,2 @@
+class MfTank < ApplicationRecord
+end

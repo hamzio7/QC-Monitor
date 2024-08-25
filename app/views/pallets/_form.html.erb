@@ -1,0 +1,147 @@
+<%= form_with(model: pallet) do |form| %>
+  <% if pallet.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(pallet.errors.count, "error") %> prohibited this pallet from being saved:</h2>
+
+      <ul>
+        <% pallet.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :pallet_number, style: "display: block" %>
+    <%= form.text_field :pallet_number %>
+  </div>
+
+  <div>
+    <%= form.label :production_date, style: "display: block" %>
+    <%= form.date_field :production_date %>
+  </div>
+
+  <div>
+    <%= form.label :production_time, style: "display: block" %>
+    <%= form.time_field :production_time %>
+  </div>
+
+  <div>
+    <%= form.label :color_number, style: "display: block" %>
+    <%= form.number_field :color_number %>
+  </div>
+
+  <div>
+    <%= form.label :quantity, style: "display: block" %>
+    <%= form.number_field :quantity %>
+  </div>
+
+  <div>
+    <%= form.label :customer, style: "display: block" %>
+    <%= form.text_field :customer %>
+  </div>
+
+  <div>
+    <%= form.label :initial_grammage, style: "display: block" %>
+    <%= form.number_field :initial_grammage %>
+  </div>
+
+  <div>
+    <%= form.label :final_grammage_min, style: "display: block" %>
+    <%= form.text_field :final_grammage_min %>
+  </div>
+
+  <div>
+    <%= form.label :final_grammage_max, style: "display: block" %>
+    <%= form.text_field :final_grammage_max %>
+  </div>
+
+  <div>
+    <%= form.label :uf_tank, style: "display: block" %>
+    <%= form.number_field :uf_tank %>
+  </div>
+
+  <div>
+    <%= form.label :mf_tank, style: "display: block" %>
+    <%= form.number_field :mf_tank %>
+  </div>
+
+  <div>
+    <%= form.label :cloudy_time, style: "display: block" %>
+    <%= form.time_field :cloudy_time %>
+  </div>
+
+  <div>
+    <%= form.label :gel_time, style: "display: block" %>
+    <%= form.time_field :gel_time %>
+  </div>
+
+  <div>
+    <%= form.label :volatile_content_set_min, style: "display: block" %>
+    <%= form.text_field :volatile_content_set_min %>
+  </div>
+
+  <div>
+    <%= form.label :volatile_content_set_max, style: "display: block" %>
+    <%= form.text_field :volatile_content_set_max %>
+  </div>
+
+  <div>
+    <%= form.label :volatile_content_min, style: "display: block" %>
+    <%= form.text_field :volatile_content_min %>
+  </div>
+
+  <div>
+    <%= form.label :volatile_content_max, style: "display: block" %>
+    <%= form.text_field :volatile_content_max %>
+  </div>
+
+  <div>
+    <%= form.label :glossiness, style: "display: block" %>
+    <%= form.number_field :glossiness %>
+  </div>
+
+  <div>
+    <%= form.label :supervisor, style: "display: block" %>
+    <%= form.text_field :supervisor %>
+  </div>
+
+  <div>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.text_field :status %>
+  </div>
+
+  <div>
+    <%= form.label :stop_reason, style: "display: block" %>
+    <%= form.text_field :stop_reason %>
+  </div>
+
+  <div>
+    <%= form.label :info, style: "display: block" %>
+    <%= form.text_area :info %>
+  </div>
+
+  <div>
+    <%= form.label :final_supervisor, style: "display: block" %>
+    <%= form.text_field :final_supervisor %>
+  </div>
+
+  <div>
+    <%= form.label :final_status, style: "display: block" %>
+    <%= form.text_field :final_status %>
+  </div>
+
+  <div>
+    <%= form.label :final_stop_reason, style: "display: block" %>
+    <%= form.text_field :final_stop_reason %>
+  </div>
+
+  <div>
+    <%= form.label :final_info, style: "display: block" %>
+    <%= form.text_area :final_info %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

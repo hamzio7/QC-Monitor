@@ -1,0 +1,2 @@
+class UfTank < ApplicationRecord
+end

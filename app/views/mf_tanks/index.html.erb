@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Mf tanks</h1>
+
+<div id="mf_tanks">
+  <% @mf_tanks.each do |mf_tank| %>
+    <%= render mf_tank %>
+    <p>
+      <%= link_to "Show this mf tank", mf_tank %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New mf tank", new_mf_tank_path %>

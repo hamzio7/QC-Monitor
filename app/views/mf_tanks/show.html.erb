@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @mf_tank %>
+
+<div>
+  <%= link_to "Edit this mf tank", edit_mf_tank_path(@mf_tank) %> |
+  <%= link_to "Back to mf tanks", mf_tanks_path %>
+
+  <%= button_to "Destroy this mf tank", @mf_tank, method: :delete %>
+</div>
