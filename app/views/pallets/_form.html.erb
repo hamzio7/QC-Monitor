@@ -19,13 +19,7 @@
        ].sort
        status = [%w[Approved Approved], %w[Stopped Stopped]]
     %>
-    <div class="sticky-top bg-light">
-        <div>
-            <div class="align-content-center justify-content-center d-flex">
-                <%= form.submit "Save", class: "btn btn-primary m-2 flex-fill rounded-pill" %>
-            </div>
-        </div>
-    </div>
+
     <div class="container text-uppercase scrollable-content p-4 m-auto rounded-3" style="background: #ffffff ;">
         <div class="row mb-3">
             <div class="col">
@@ -284,6 +278,14 @@
             </div>
 
         <% end %>
+    </div>
+
+    <div class="container sticky-bottom bg-light p-0">
+        <div>
+            <div class="align-content-center justify-content-center d-flex">
+                <%= form.submit "Save", class: "btn btn-primary mt-2 mb-2 flex-fill rounded-pill" %>
+            </div>
+        </div>
     </div>
 <% end %>
 

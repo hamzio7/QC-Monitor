@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="container">
+
+        <% if notice.present? %>
+            <br>
+            <div class="alert alert-success"><%= notice %></div>
+        <% end %>
+        <br>
+
+    </div>
+
+    <div class="row align-middle">
+        <div class="col text-start">
+            <h1>Daily Reports</h1>
+        </div>
+    </div>
+
+    <br>
+    <div id="production_days">
+
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <th scope="col" class="align-middle ">Date</th>
+                    <th scope="col" class="align-middle">Stopped Pallets</th>
+                    <th scope="col" class="align-middle">Approved Pallets</th>
+                    <th scope="col" class="align-middle"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <% @production_days.each do |production_day| %>
+                    <tr style="cursor:pointer;">
+                        <td class="align-middle"><%= production_day.production_date %></td>
+                        <td class="align-middle"><%= production_day.stopped_pallets_count %></td>
+                        <td class="align-middle"><%= production_day.approved_pallets_count %></td>
+                        <td class="align-middle">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <%= link_to '', edit_production_day_path(production_day), class: "btn btn-outline-primary btn-sm bi bi-pencil-square m-1 rounded-pill " %>
+                                <%= link_to '', production_day_path(production_day), class: "btn btn-outline-primary btn-sm bi bi-eye-fill m-1 rounded-pill" %>
+                            </div>
+                        </td>
+                    </tr>
+                <% end %>
+
+            </tbody>
+
+
+        </table>
+
+
+    </div>
+
+
+</div>

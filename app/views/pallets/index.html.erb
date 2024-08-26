@@ -1,17 +1,26 @@
 <div class="container">
+    <div class="container">
+
+        <% if notice.present? %>
+            <br>
+            <div class="alert alert-success"><%= notice %></div>
+        <% end %>
+        <br>
+
+    </div>
     <div class="row align-middle">
         <div class="col text-start">
             <h1>Pallets</h1>
         </div>
         <div class="col text-end">
-            <%= link_to " New Pallet ", new_pallet_path, type: 'button', class: 'bi bi-plus-circle-fill btn btn-outline-primary btn-sm rounded-pill p-2' %>
+            <%= link_to " New ", new_pallet_path, type: 'button', class: 'bi bi-plus-circle-fill btn btn-outline-primary btn-sm rounded-pill p-2' %>
         </div>
     </div>
 
     <br>
-    <table style="overflow: hidden" class="table rounded-3">
-        <thead class="table">
-            <tr>
+    <table style="overflow: hidden" class="table" style="cursor:pointer;">
+        <thead>
+            <tr style="cursor:pointer;">
                 <th scope="col" class="align-middle">Pallet Num.</th>
                 <th scope="col" class="align-middle">Color Num.</th>
                 <th scope="col" class="align-middle">Customer</th>
@@ -23,9 +32,9 @@
         <tbody>
             <% if @pallets.any? %>
                 <% @pallets.each do |pallet| %>
-                    <tr style="cursor:pointer;">
+                    <tr style="cursor:pointer;" >
 
-                        <th scope="row" class="align-middle"><%= pallet.pallet_number %></th>
+                        <td class="align-middle"><%= pallet.pallet_number %></td>
                         <td class="align-middle"><%= pallet.color_number %></td>
                         <td class="align-middle"><%= pallet.customer %></td>
                         <td class="align-middle"><%= pallet.status %></td>

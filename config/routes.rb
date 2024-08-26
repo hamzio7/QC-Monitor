@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :production_days
   resources :mf_tanks
   resources :uf_tanks
 

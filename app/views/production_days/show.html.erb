@@ -1,0 +1,70 @@
+<div class="container">
+
+    <div class="container">
+
+        <% if notice.present? %>
+            <br>
+            <div class="alert alert-success"><%= notice %></div>
+        <% end %>
+
+
+    </div>
+
+    <div class=" text-center">
+        <div class="row align-items-start">
+            <div class="col text-start">
+                Production Day:
+            </div>
+            <div class="col text-end">
+                <%= @production_day.production_date %>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Pallet Number</th>
+                <th>Color Number</th>
+                <th>Customer</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @production_day.pallets.each do |pallet| %>
+                <tr>
+                    <td><%= pallet.pallet_number %></td>
+                    <td><%= pallet.color_number %></td>
+                    <td><%= pallet.customer %></td>
+                    <td><%= pallet.status %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+    <div>
+        <div class="row align-items-start">
+            <div class="col text-start">
+                Approved:
+            </div>
+            <div class="col text-end">
+                <%= @production_day.approved_pallets_count %>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div>
+        <div class="row align-items-start">
+            <div class="col text-start">
+                Stopped:
+            </div>
+            <div class="col text-end">
+                <%= @production_day.stopped_pallets_count %>
+            </div>
+        </div>
+    </div>
+    <br>
+    <p><strong>Info:</strong> <%= @production_day.info %></p>
+</div>

@@ -1,0 +1,37 @@
+<%= form_with(model: production_day) do |form| %>
+  <% if production_day.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(production_day.errors.count, "error") %> prohibited this production_day from being saved:</h2>
+
+      <ul>
+        <% production_day.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :production_date, style: "display: block" %>
+    <%= form.date_field :production_date %>
+  </div>
+
+  <div>
+    <%= form.label :info, style: "display: block" %>
+    <%= form.text_area :info %>
+  </div>
+
+  <div>
+    <%= form.label :stopped_pallets_count, style: "display: block" %>
+    <%= form.number_field :stopped_pallets_count %>
+  </div>
+
+  <div>
+    <%= form.label :approved_pallets_count, style: "display: block" %>
+    <%= form.number_field :approved_pallets_count %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

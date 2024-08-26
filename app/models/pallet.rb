@@ -1,6 +1,7 @@
 class Pallet < ApplicationRecord
 
   require 'parsi-date'
+  belongs_to :production_day
 
   belongs_to :uf_tank, class_name: 'UfTank', foreign_key: 'uf_tank_id'
   belongs_to :mf_tank, class_name: 'MfTank', foreign_key: 'mf_tank_id'
@@ -8,6 +9,15 @@ class Pallet < ApplicationRecord
   after_initialize :set_default_values , if: :new_record?
 
   private
+
+
+  after_save :update_production_day_counters
+  after_destroy :update_production_day_counters
+
+
+  def update_production_day_counters
+    production_day.update_pallet_counts
+  end
   def set_default_values
 
     persian_date = Parsi::Date.today.to_s

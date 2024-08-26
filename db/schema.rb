@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_25_182654) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_25_232520) do
   create_table "mf_tanks", force: :cascade do |t|
     t.string "date"
     t.float "initial_temp"
@@ -55,6 +55,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_25_182654) do
     t.integer "uf_tank_id"
     t.float "grammage_min_set", default: 185.0
     t.float "grammage_max_set", default: 190.0
+    t.integer "production_day_id", null: false
+    t.index ["production_day_id"], name: "index_pallets_on_production_day_id"
+  end
+
+  create_table "production_days", force: :cascade do |t|
+    t.date "production_date"
+    t.text "info"
+    t.integer "stopped_pallets_count"
+    t.integer "approved_pallets_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "uf_tanks", force: :cascade do |t|
@@ -79,4 +90,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_25_182654) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "pallets", "production_days"
 end

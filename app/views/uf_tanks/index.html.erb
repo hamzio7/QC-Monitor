@@ -19,7 +19,7 @@
         </div>
     </div>
     <br>
-    <table style="overflow: hidden" class="table rounded-3">
+    <table style="overflow: hidden" class="table">
         <thead>
             <tr>
                 <th scope="col" class="align-middle">Date</th>
@@ -46,7 +46,7 @@
                         <td class="align-middle">
                             <div class="d-flex justify-content-center align-items-center">
                                 <%= link_to '', edit_uf_tank_url(uf_tanks), class: "btn btn-outline-primary btn-sm bi bi-pencil-square m-1 rounded-pill " %>
-                                <%= link_to '', uf_tanks_path(uf_tanks), class: "btn btn-outline-primary btn-sm bi bi-eye-fill m-1 rounded-pill" %>
+                                <%= link_to '', uf_tank_path(uf_tanks), class: "btn btn-outline-primary btn-sm bi bi-eye-fill m-1 rounded-pill" %>
                             </div>
                         </td>
                     </tr>
@@ -54,7 +54,6 @@
             <% end %>
 
         </tbody>
-
 
         <% unless @uf_tanks.any? %>
             <tfoot>

@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  production_date: 2024-08-26
+  info: MyText
+  stopped_pallets_count: 1
+  approved_pallets_count: 1
+
+two:
+  production_date: 2024-08-26
+  info: MyText
+  stopped_pallets_count: 1
+  approved_pallets_count: 1
