@@ -1,9 +1,11 @@
-<h1>New UF tank</h1>
+<div class="container">
+
+    <div>
+        <%= link_to "Back", uf_tanks_path , class: "btn btn-primary bi bi-arrow-left-short" %>
+    </div>
+    <br>
+
+
+</div>
 
 <%= render "form", uf_tank: @uf_tank %>
-
-<br>
-
-<div>
-  <%= link_to "Back to UF tanks", uf_tanks_path %>
-</div>

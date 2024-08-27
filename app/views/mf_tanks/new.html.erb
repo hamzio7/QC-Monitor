@@ -1,9 +1,11 @@
-<h1>New mf tank</h1>
+<div class="container">
+
+    <div>
+        <%= link_to "Back", mf_tanks_path , class: "btn btn-primary bi bi-arrow-left-short" %>
+    </div>
+    <br>
+
+
+</div>
 
 <%= render "form", mf_tank: @mf_tank %>
-
-<br>
-
-<div>
-  <%= link_to "Back to mf tanks", mf_tanks_path %>
-</div>

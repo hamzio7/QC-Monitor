@@ -1,42 +1,55 @@
-<div id="<%= dom_id mf_tank %>">
-  <p>
-    <strong>Date:</strong>
-    <%= mf_tank.date %>
-  </p>
+<div class="container">
+    <% if notice.present? %>
+        <div class="alert alert-success mb-3">
+            <%= notice %>
+        </div>
+    <% end %>
+    <div class="card">
+        <div class="card-header">
+            <h4 class="mb-0">MF Tank Analysis</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
 
-  <p>
-    <strong>Initial temp:</strong>
-    <%= mf_tank.initial_temp %>
-  </p>
+                <div class="col">
+                    <dt class="col">Date:</dt>
+                    <dd class="col"><%= mf_tank.date %></dd>
 
-  <p>
-    <strong>Tank number:</strong>
-    <%= mf_tank.tank_number %>
-  </p>
+                    <dt class="col">Shift:</dt>
+                    <dd class="col"><%= mf_tank.shift %></dd>
 
-  <p>
-    <strong>Ph:</strong>
-    <%= mf_tank.ph %>
-  </p>
+                    <dt class="col">Initial Temp:</dt>
+                    <dd class="col"><%= mf_tank.initial_temp %> °C</dd>
 
-  <p>
-    <strong>Viscosity:</strong>
-    <%= mf_tank.viscosity %>
-  </p>
+                    <dt class="col">Tank Number:</dt>
+                    <dd class="col"><%= mf_tank.tank_number %></dd>
 
-  <p>
-    <strong>Density:</strong>
-    <%= mf_tank.density %>
-  </p>
+                    <dt class="col">Cloudy Time:</dt>
+                    <dd class="col"><%= mf_tank.reaction_time %> s</dd>
 
-  <p>
-    <strong>Reaction time:</strong>
-    <%= mf_tank.reaction_time %>
-  </p>
+                </div>
 
-  <p>
-    <strong>Solid content:</strong>
-    <%= mf_tank.solid_content %>
-  </p>
+                <div class="col tex">
 
+                    <dt class="col">Time:</dt>
+
+                    <dd class="col"><%= mf_tank.time %></dd>
+
+                    <dt class="col">pH:</dt>
+                    <dd class="col"><%= mf_tank.ph %></dd>
+
+                    <dt class="col">Viscosity:</dt>
+                    <dd class="col"><%= mf_tank.viscosity %> s</dd>
+
+                    <dt class="col">Density:</dt>
+                    <dd class="col"><%= mf_tank.density %> gr/ml</dd>
+
+                    <dt class="col">Solid Content:</dt>
+                    <dd class="col">% <%= mf_tank.solid_content %></dd>
+                </div>
+
+
+            </dl>
+        </div>
+    </div>
 </div>

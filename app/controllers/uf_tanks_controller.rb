@@ -58,13 +58,14 @@ class UfTanksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_uf_tank
-      @uf_tank = UfTank.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def uf_tank_params
-      params.require(:uf_tank).permit(:date, :initial_temp, :tank_number, :ph, :viscosity, :density, :reaction_time, :solid_content)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_uf_tank
+    @uf_tank = UfTank.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def uf_tank_params
+    params.require(:uf_tank).permit(:time, :shift, :date, :initial_temp, :tank_number, :ph, :viscosity, :density, :reaction_time, :solid_content)
+  end
 end

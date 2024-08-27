@@ -24,8 +24,7 @@ class Pallet < ApplicationRecord
 
     year, month = separate_jalali_date(persian_date)
 
-
-    self.production_date ||= persian_date
+    self.production_date ||= persian_date.to_s.gsub("-", "/")
     self.pallet_number ||= year.to_s + month.to_s
     self.color_number ||= 1014
     self.quantity ||= 1200

@@ -69,7 +69,6 @@ end
 gem 'jquery-rails'
 gem 'bootstrap'
 gem 'sass-rails'
-gem 'sassc-rails'
 
 gem 'flatpickr'
 gem 'parsi-date'

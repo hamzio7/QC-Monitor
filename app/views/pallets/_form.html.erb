@@ -4,8 +4,8 @@
             <h4 class="alert-heading"><%= pluralize(@pallet.errors.count, "error") %> prohibited this pallet from being
                 saved:</h4>
             <ul>
-                <% @pallet.errors.each do |error| %>
-                    <li><%= error.full_message %></li>
+                <% @pallet.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
                 <% end %>
             </ul>
         </div>
@@ -16,276 +16,239 @@
                       ['Saeed Yousefi', 'Saeed Yousefi'],
                       ['Ahmad Jandane', 'Ahmad Jandane'],
                       ['Navid Mombeiny', 'Navid Mombeiny']
-       ].sort
+    ].sort
        status = [%w[Approved Approved], %w[Stopped Stopped]]
     %>
 
-    <div class="container text-uppercase scrollable-content p-4 m-auto rounded-3" style="background: #ffffff ;">
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label :pallet_number, class: "form-label" %>
+    <div class="container">
+
+        <!-- General Information Card -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5 class="card-title">General Information</h5>
             </div>
-            <div class="col-7">
-                <%= form.text_field :pallet_number, class: "form-control", required: true %>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <%= form.label :pallet_number, class: "form-label" %>
+                        <%= form.text_field :pallet_number, class: "form-control", required: true %>
+                    </div>
+
+                    <div class="col-md-6">
+                        <%= form.label :color_number, class: "form-label" %>
+                        <%= form.number_field :color_number, class: "form-control", required: true %>
+                    </div>
+
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <%= form.label :line_speed, class: "form-label" %>
+                        <%= form.number_field :line_speed, class: "form-control", required: true %>
+                    </div>
+                    <div class="col-md-6">
+                        <%= form.label :shift, class: "form-label" %>
+                        <%= form.text_field :shift, class: "form-control", required: true %>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+
+                    <div class="col-md-6">
+                        <%= form.label :production_date, class: "form-label" %>
+                        <%= form.text_field :production_date, class: "form-control", required: true %>
+                    </div>
+
+                    <div class="col-md-6">
+                        <%= form.label :production_time, class: "form-label" %>
+                        <%= form.text_field :production_time, class: "form-control", required: true %>
+                    </div>
+
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <%= form.label :quantity, class: "form-label" %>
+                        <%= form.number_field :quantity, class: "form-control", required: true %>
+                    </div>
+                    <div class="col-md-6">
+                        <%= form.label :customer, class: "form-label" %>
+                        <%= form.text_field :customer, class: "form-control", required: true %>
+                    </div>
+                </div>
+
             </div>
         </div>
 
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label :production_date, class: "form-label" %>
+        <!-- Grammage Card -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5 class="card-title">Grammage</h5>
             </div>
-            <div class="col-7">
-                <%= form.text_field :production_date, id: "production_date", class: "form-control", required: true %>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <%= form.label :initial_grammage, class: "form-label" %>
+                        <%= form.number_field :initial_grammage, class: "form-control", required: true %>
+                    </div>
+                    <div class="col-md-6">
+                        <%= form.label "Grammage Min", class: "form-label" %>
+                        <%= form.number_field :grammage_min_set, class: "form-control", required: true %>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <%= form.label "Grammage Max", class: "form-label" %>
+                        <%= form.number_field :grammage_max_set, class: "form-control", required: true %>
+                    </div>
+                    <div class="col-md-6">
+                        <%= form.label :final_grammage_min, class: "form-label" %>
+                        <%= form.text_field :final_grammage_min, class: "form-control", required: true %>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <%= form.label :final_grammage_max, class: "form-label" %>
+                        <%= form.text_field :final_grammage_max, class: "form-control", required: true %>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label :production_time, class: "form-label" %>
+        <!-- Tank and Times Card -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5 class="card-title">Tank and Times</h5>
             </div>
-            <div class="col-7">
-                <%= form.text_field :production_time, id: "production_time", class: "form-control", required: true %>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <%= form.label :uf_tank_id, class: "form-label" %>
+                        <%= form.select :uf_tank_id, options_from_collection_for_select(@uf_tanks, :id, :display_info, @pallet.uf_tank_id), { prompt: "Select a UF Tank" }, class: "form-control", required: true %>
+                    </div>
+                    <div class="col-md-6">
+                        <%= form.label :mf_tank_id, class: "form-label" %>
+                        <%= form.select :mf_tank_id, options_from_collection_for_select(@mf_tanks, :id, :display_info, @pallet.mf_tank_id), { prompt: "Select a MF Tank" }, class: "form-control", required: true %>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <%= form.label :cloudy_time, class: "form-label" %>
+                        <%= form.text_field :cloudy_time, class: "form-control", placeholder: "mm:ss" %>
+                    </div>
+                    <div class="col-md-6">
+                        <%= form.label :gel_time, class: "form-label" %>
+                        <%= form.text_field :gel_time, class: "form-control", placeholder: "mm:ss" %>
+                    </div>
+                </div>
             </div>
         </div>
 
-
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label :color_number, class: "form-label" %>
+        <!-- Volatile Content Card -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5 class="card-title">Volatile Content</h5>
             </div>
-            <div class="col-7">
-                <%= form.number_field :color_number, class: "form-control", required: true %>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <%= form.label :volatile_content_set_min, class: "form-label" %>
+                        <%= form.text_field :volatile_content_set_min, class: "form-control" %>
+                    </div>
+                    <div class="col-md-6">
+                        <%= form.label :volatile_content_set_max, class: "form-label" %>
+                        <%= form.text_field :volatile_content_set_max, class: "form-control" %>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <%= form.label :volatile_content_min, class: "form-label" %>
+                        <%= form.text_field :volatile_content_min, class: "form-control", required: true %>
+                    </div>
+                    <div class="col-md-6">
+                        <%= form.label :volatile_content_max, class: "form-label" %>
+                        <%= form.text_field :volatile_content_max, class: "form-control", required: true %>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label :quantity, class: "form-label" %>
+        <!-- Additional Information Card -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5 class="card-title">Additional Information</h5>
             </div>
-            <div class="col-7">
-                <%= form.number_field :quantity, class: "form-control", required: true %>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <%= form.label :glossiness, class: "form-label" %>
+                        <%= form.number_field :glossiness, class: "form-control", required: true %>
+                    </div>
+                    <div class="col-md-6">
+                        <%= form.label :supervisor, class: "form-label" %>
+                        <%= form.select :supervisor, options_for_select(supervisors), { prompt: :supervisor }, class: "form-control", required: true %>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <%= form.label :status, class: "form-label" %>
+                        <%= form.select :status, options_for_select(status, @pallet.status), { prompt: :status }, class: "form-control", required: true %>
+                    </div>
+                    <div class="col-md-6">
+                        <%= form.label :stop_reason, class: "form-label" %>
+                        <%= form.text_field :stop_reason, class: "form-control" %>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <%= form.label :info, class: "form-label" %>
+                        <%= form.text_area :info, class: "form-control", rows: 3 %>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label :customer, class: "form-label" %>
-            </div>
-            <div class="col-7">
-                <%= form.text_field :customer, class: "form-control", required: true %>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label :initial_grammage, class: "form-label" %>
-            </div>
-            <div class="col-7">
-                <%= form.number_field :initial_grammage, class: "form-control", required: true %>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label "Grammage Min", class: "form-label" %>
-            </div>
-            <div class="col-7">
-                <%= form.number_field :grammage_min_set, class: "form-control", required: true %>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label "Grammage Max", class: "form-label" %>
-            </div>
-            <div class="col-7">
-                <%= form.number_field :grammage_max_set, class: "form-control", required: true %>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label :final_grammage_min, class: "form-label" %>
-            </div>
-            <div class="col-7">
-                <%= form.text_field :final_grammage_min, class: "form-control", required: true %>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label :final_grammage_max, class: "form-label" %>
-            </div>
-            <div class="col-7">
-                <%= form.text_field :final_grammage_max, class: "form-control", required: true %>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label :uf_tank_id, class: "form-label" %>
-            </div>
-            <div class="col-7">
-                <%= form.select :uf_tank_id, options_from_collection_for_select(@uf_tanks, :id, :display_info, @pallet.uf_tank_id), { prompt: "Select a UF Tank" }, class: "form-control", required: true %>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label :mf_tank_id, class: "form-label" %>
-            </div>
-            <div class="col-7">
-
-                <%= form.select :mf_tank_id, options_from_collection_for_select(@mf_tanks, :id, :display_info, @pallet.mf_tank_id), { prompt: "Select a MF Tank" }, class: "form-control", required: true %>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label :cloudy_time, class: "form-label" %>
-            </div>
-            <div class="col-7">
-                <%= form.text_field :cloudy_time, id: "cloudy_time", class: "form-control", required: true, placeholder: "mm:ss" %>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label :gel_time, class: "form-label" %>
-            </div>
-            <div class="col-7">
-                <%= form.text_field :gel_time, id: "gel_time", class: "form-control", required: true, placeholder: "mm:ss" %>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label :volatile_content_set_min, class: "form-label" %>
-            </div>
-            <div class="col-7">
-                <%= form.text_field :volatile_content_set_min, class: "form-control" %>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label :volatile_content_set_max, class: "form-label" %>
-            </div>
-            <div class="col-7">
-                <%= form.text_field :volatile_content_set_max, class: "form-control" %>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label :volatile_content_min, class: "form-label" %>
-            </div>
-            <div class="col-7">
-                <%= form.text_field :volatile_content_min, class: "form-control", required: true %>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label :volatile_content_max, class: "form-label" %>
-            </div>
-            <div class="col-7">
-                <%= form.text_field :volatile_content_max, class: "form-control", required: true %>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label :glossiness, class: "form-label" %>
-            </div>
-            <div class="col-7">
-                <%= form.number_field :glossiness, class: "form-control", required: true %>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label :supervisor, class: "form-label" %>
-            </div>
-            <div class="col-7">
-                <%= form.select :supervisor, options_for_select(supervisors), { prompt: :supervisor }, class: "form-control", required: true %>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label :status, class: "form-label" %>
-            </div>
-            <div class="col-7">
-                <%= form.select :status, options_for_select(status, @pallet.status), { prompt: :status }, class: "form-control", required: true %>
-            </div>
-        </div>
-
-
-
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label :stop_reason, class: "form-label" %>
-            </div>
-            <div class="col-7">
-                <%= form.text_field :stop_reason, class: "form-control" %>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col">
-                <%= form.label :info, class: "form-label" %>
-            </div>
-            <div class="col-7">
-                <%= form.text_area :info, class: "form-control", rows: 3 %>
-            </div>
-        </div>
-
+        <!-- Final Information Card -->
         <% if @pallet.persisted? %>
-
-            <div class="row mb-3">
-                <div class="col">
-                    <%= form.label :final_supervisor, class: "form-label" %>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="card-title">Final Information</h5>
                 </div>
-                <div class="col-7">
-                    <%= form.select :final_supervisor, options_for_select(supervisors , @pallet.final_supervisor), { prompt: :supervisor }, class: "form-control" %>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <%= form.label :final_supervisor, class: "form-label" %>
+                            <%= form.select :final_supervisor, options_for_select(supervisors, @pallet.final_supervisor), { prompt: :supervisor }, class: "form-control" %>
+                        </div>
+                        <div class="col-md-6">
+                            <%= form.label :final_status, class: "form-label" %>
+                            <%= form.select :final_status, options_for_select(status, @pallet.final_status), { prompt: :status }, class: "form-control" %>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <%= form.label :final_stop_reason, class: "form-label" %>
+                            <%= form.text_field :final_stop_reason, class: "form-control" %>
+                        </div>
+                        <div class="col-md-6">
+                            <%= form.label :final_info, class: "form-label" %>
+                            <%= form.text_field :final_info, class: "form-control" %>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <div class="row mb-3">
-                <div class="col">
-                    <%= form.label :final_status, class: "form-label" %>
-                </div>
-                <div class="col-7">
-                    <%= form.select :final_status, options_for_select(status , @pallet.final_status), { prompt: :status }, class: "form-control" %>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col">
-                    <%= form.label :final_stop_reason, class: "form-label" %>
-                </div>
-                <div class="col-7">
-                    <%= form.text_field :final_stop_reason, class: "form-control" %>
-                </div>
-            </div>
-
-            <div class="row mb-5">
-                <div class="col">
-                    <%= form.label :final_info, class: "form-label" %>
-                </div>
-                <div class="col-7">
-                    <%= form.text_field :final_info, class: "form-control" %>
-                </div>
-            </div>
-
         <% end %>
-    </div>
 
-    <div class="container sticky-bottom bg-light p-0">
-        <div>
-            <div class="align-content-center justify-content-center d-flex">
-                <%= form.submit "Save", class: "btn btn-primary mt-2 mb-2 flex-fill rounded-pill" %>
-            </div>
+        <!-- Submit Button -->
+        <div class="d-flex mt-3 sticky-bottom bg-light pt-2 pb-2">
+            <%= form.submit "Save", class: "btn btn-primary flex-fill" %>
         </div>
     </div>
 <% end %>
-

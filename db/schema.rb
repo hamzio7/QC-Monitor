@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_25_232520) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_27_212707) do
   create_table "mf_tanks", force: :cascade do |t|
     t.string "date"
     t.float "initial_temp"
@@ -22,6 +22,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_25_232520) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "solid_content"
+    t.string "shift"
+    t.string "time"
   end
 
   create_table "pallets", force: :cascade do |t|
@@ -56,6 +58,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_25_232520) do
     t.float "grammage_min_set", default: 185.0
     t.float "grammage_max_set", default: 190.0
     t.integer "production_day_id", null: false
+    t.integer "line_speed", default: 40
+    t.string "final_date"
+    t.string "actions_taken"
+    t.string "dimensions", default: "368x186"
+    t.string "shift"
     t.index ["production_day_id"], name: "index_pallets_on_production_day_id"
   end
 
@@ -66,6 +73,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_25_232520) do
     t.integer "approved_pallets_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "shift"
   end
 
   create_table "uf_tanks", force: :cascade do |t|
@@ -79,6 +87,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_25_232520) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "solid_content"
+    t.string "time"
+    t.string "shift"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,10 +1,18 @@
-<h1>Editing mf tank</h1>
+<div class="container">
 
-<%= render "form", mf_tank: @mf_tank %>
+    <div class="row">
+        <div class="col text-start">
+            <%= link_to "Back", mf_tanks_path, class: "btn btn-primary bi bi-arrow-left-short" %>
+        </div>
 
-<br>
+        <div class="col text-end">
+            <%= link_to "", @mf_tank, class: "btn btn-primary bi bi-eye-fill" %>
+        </div>
 
-<div>
-  <%= link_to "Show this mf tank", @mf_tank %> |
-  <%= link_to "Back to mf tanks", mf_tanks_path %>
+    </div>
+
+    <br>
+    <%= render "form", mf_tank: @mf_tank %>
+    <br>
+
 </div>

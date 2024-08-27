@@ -65,6 +65,6 @@ class ProductionDaysController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def production_day_params
-      params.require(:production_day).permit(:production_date, :info, :stopped_pallets_count, :approved_pallets_count)
+      params.require(:production_day).permit(:production_date,:shift, :info, :stopped_pallets_count, :approved_pallets_count)
     end
 end

@@ -15,11 +15,11 @@ class MfTanksController < ApplicationController
     @mf_tank = MfTank.new
   end
 
-  # GET /mf_tanks/1/edit
+
   def edit
   end
 
-  # POST /mf_tanks or /mf_tanks.json
+
   def create
     @mf_tank = MfTank.new(mf_tank_params)
 
@@ -34,7 +34,7 @@ class MfTanksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /mf_tanks/1 or /mf_tanks/1.json
+
   def update
     respond_to do |format|
       if @mf_tank.update(mf_tank_params)
@@ -47,7 +47,7 @@ class MfTanksController < ApplicationController
     end
   end
 
-  # DELETE /mf_tanks/1 or /mf_tanks/1.json
+
   def destroy
     @mf_tank.destroy!
 
@@ -58,13 +58,14 @@ class MfTanksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_mf_tank
-      @mf_tank = MfTank.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def mf_tank_params
-      params.require(:mf_tank).permit(:date, :initial_temp, :tank_number, :ph, :viscosity, :density, :reaction_time, :solid_content)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_mf_tank
+    @mf_tank = MfTank.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def mf_tank_params
+    params.require(:mf_tank).permit(:time, :shift, :date, :initial_temp, :tank_number, :ph, :viscosity, :density, :reaction_time, :solid_content)
+  end
 end

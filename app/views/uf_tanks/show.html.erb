@@ -1,17 +1,17 @@
 <div class="container">
 
-    <% if notice.present? %>
-        <br>
-        <div class="alert alert-success"><%= notice %></div>
-    <% end %>
-    <br>
+    <div class="row">
+        <div class="col text-start">
+            <%= link_to "Back", uf_tanks_path, class: "btn btn-primary bi bi-arrow-left-short" %>
+        </div>
 
+        <div class="col text-end">
+            <%= link_to "", edit_uf_tank_path, class: "btn btn-primary bi bi-pencil-square" %>
+        </div>
+
+    </div>
 </div>
+
+<br>
 <%= render @uf_tank %>
-
-<div>
-  <%= link_to "Edit this UF tank", edit_uf_tank_path(@uf_tank) %> |
-  <%= link_to "Back to UF tanks", uf_tanks_path %>
-
-  <%= button_to "Destroy this UF tank", @uf_tank, method: :delete %>
-</div>
+<br>
