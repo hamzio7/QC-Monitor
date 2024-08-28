@@ -1,4 +1,5 @@
 class PalletsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_pallet, only: %i[ show edit update destroy print]
   before_action :get_tanks, only: %i[ edit new show create ]
 
@@ -20,7 +21,6 @@ class PalletsController < ApplicationController
   def new
     @pallet = Pallet.new
   end
-
 
   def print
     render :print
@@ -90,6 +90,6 @@ class PalletsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def pallet_params
-    params.require(:pallet).permit(:final_date,:actions_taken,:dimensions,:shift,:pallet_number,:line_speed, :production_date, :production_day, :production_time, :color_number, :quantity, :customer, :initial_grammage, :final_grammage_min, :final_grammage_max, :cloudy_time, :gel_time, :grammage_min_set, :grammage_max_set, :uf_tank_id, :mf_tank_id, :volatile_content_set_min, :volatile_content_set_max, :volatile_content_min, :volatile_content_max, :glossiness, :supervisor, :status, :stop_reason, :info, :final_supervisor, :final_status, :final_stop_reason, :final_info)
+    params.require(:pallet).permit(:final_date, :actions_taken, :dimensions, :shift, :pallet_number, :line_speed, :production_date, :production_day, :production_time, :color_number, :quantity, :customer, :initial_grammage, :final_grammage_min, :final_grammage_max, :cloudy_time, :gel_time, :grammage_min_set, :grammage_max_set, :uf_tank_id, :mf_tank_id, :volatile_content_set_min, :volatile_content_set_max, :volatile_content_min, :volatile_content_max, :glossiness, :supervisor, :status, :stop_reason, :info, :final_supervisor, :final_status, :final_stop_reason, :final_info)
   end
 end

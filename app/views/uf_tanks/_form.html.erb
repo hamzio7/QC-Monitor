@@ -1,7 +1,7 @@
 <%= form_with(model: @uf_tank, local: true, class: "needs-validation", novalidate: true) do |form| %>
     <% if @uf_tank.errors.any? %>
         <div class="alert alert-danger">
-            <h4 class="alert-heading"><%= pluralize(@uf_tank.errors.count, "error") %> prohibited this UF tank from
+            <h4 class="alert-heading"><%= pluralize(@uf_tank.errors.count, "error") %> prohibited this UF Tank from
                 being saved:</h4>
             <ul>
                 <% @uf_tank.errors.full_messages.each do |message| %>
@@ -11,12 +11,15 @@
         </div>
     <% end %>
 
+    <% tanks = [%w[3 3], %w[4 4]]
+       shifts = [%w[A A], %w[B B], %w[C C]] %>
+
     <div class="container">
 
         <!-- General Information Card -->
         <div class="card mb-3">
             <div class="card-header">
-                <h5 class="card-title">UF Tank Analysis</h5>
+                <h5 class="card-title">MF Tank Analysis</h5>
             </div>
             <div class="card-body">
                 <div class="row mb-3">
@@ -29,6 +32,7 @@
                         <%= form.text_field :initial_temp, class: "form-control" %>
                     </div>
                 </div>
+
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <%= form.label :time, class: "form-label" %>
@@ -36,14 +40,14 @@
                     </div>
                     <div class="col-md-6">
                         <%= form.label :shift, class: "form-label" %>
-                        <%= form.text_field :shift, class: "form-control" %>
+                        <%= form.select :shift, options_for_select(shifts, @uf_tank.shift) , { prompt: :shift }, class: "form-control" %>
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <%= form.label :tank_number, class: "form-label" %>
-                        <%= form.number_field :tank_number, class: "form-control" %>
+                        <%= form.select :tank_number, options_for_select(tanks, @uf_tank.tank_number) , { prompt: :tank_number }, class: "form-control" %>
                     </div>
                     <div class="col-md-6">
                         <%= form.label :ph, class: "form-label" %>
@@ -65,7 +69,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <%= form.label 'Gel Time', class: "form-label" %>
-                        <%= form.number_field :reaction_time, class: "form-control" %>
+                        <%= form.text_field :reaction_time, class: "form-control" %>
                     </div>
                     <div class="col-md-6">
                         <%= form.label :solid_content, class: "form-label" %>
@@ -75,7 +79,7 @@
             </div>
         </div>
         <!-- Submit Button -->
-        <div class="d-flex mt-3 sticky-bottom bg-light pt-2 pb-2">
+        <div class="d-flex mt-3 sticky-bottom pt-2 pb-2">
             <%= form.submit "Save", class: "btn btn-primary flex-fill" %>
         </div>
     </div>

@@ -3,9 +3,13 @@ Rails.application.routes.draw do
   resources :mf_tanks
   resources :uf_tanks
 
+  # Devise routes for users
+  devise_for :users
 
-
-  root "pallets#index"
+  # Ensure correct mapping for root route
+  devise_scope :user do
+    root to: "devise/sessions#new"  # Redirect to login page when not authenticated
+  end
 
   resources :pallets do
     collection do
@@ -15,9 +19,5 @@ Rails.application.routes.draw do
     member do
       get :print
     end
-
   end
 end
-
-
-

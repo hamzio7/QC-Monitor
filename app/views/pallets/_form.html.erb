@@ -17,6 +17,9 @@
                       ['Ahmad Jandane', 'Ahmad Jandane'],
                       ['Navid Mombeiny', 'Navid Mombeiny']
     ].sort
+
+       shifts = [%w[A A], %w[B B], %w[C C]]
+
        status = [%w[Approved Approved], %w[Stopped Stopped]]
     %>
 
@@ -48,7 +51,7 @@
                     </div>
                     <div class="col-md-6">
                         <%= form.label :shift, class: "form-label" %>
-                        <%= form.text_field :shift, class: "form-control", required: true %>
+                        <%= form.select :shift, options_for_select(shifts, @pallet.shift), { prompt: :shift }, class: "form-control", required: true %>
                     </div>
                 </div>
 

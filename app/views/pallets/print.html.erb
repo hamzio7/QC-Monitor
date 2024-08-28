@@ -1,68 +1,63 @@
-<div  class="d-flex justify-content-center">
-    <div class="container-fluid printable-area">
-        <div class="row mb-1">
-            <div class="col-4">
-                <p class="fw-bold">Pallet Number:</p>
-            </div>
-            <div class="col-8">
-                <p><%= @pallet.pallet_number %></p>
-            </div>
+<div class="container">
+
+    <div class="printable-area">
+
+        <!-- Top section: Logo -->
+        <div>
+            <%= image_tag 'logo.png', style: 'height: 40px;', alt: 'MyApp Logo', class: 'img' %>
         </div>
 
-        <div class="row mb-1">
-            <div class="col-4">
-                <p class="fw-bold">Production Date:</p>
-            </div>
-            <div class="col-8">
-                <p><%= @pallet.production_date %></p>
-            </div>
-        </div>
+        <div >
+            <div class="row-cols-2">
+                <div class="col">
+                    <p class="fw-bold">Pallet Number: <%= @pallet.pallet_number %></p>
+                </div>
 
-        <div class="row mb-1">
-            <div class="col-4">
-                <p class="fw-bold">Color Number:</p>
-            </div>
-            <div class="col-8">
-                <p><%= @pallet.color_number %></p>
-            </div>
-        </div>
+                <div class="col">
+                    <p class="fw-bold">Production Date: <%= @pallet.production_date %></p>
+                </div>
 
-        <div class="row mb-1">
-            <div class="col-4">
-                <p class="fw-bold">Quantity:</p>
-            </div>
-            <div class="col-8">
-                <p><%= @pallet.quantity %></p>
-            </div>
-        </div>
+                <div class="col">
+                    <p class="fw-bold">Color Number: <%= @pallet.color_number %></p>
+                </div>
 
-        <div class="row mb-1">
-            <div class="col-4">
-                <p class="fw-bold">Customer:</p>
-            </div>
-            <div class="col-8">
-                <p><%= @pallet.customer %></p>
-            </div>
-        </div>
-    </div>
+                <div class="col">
+                    <p class="fw-bold">Quantity: <%= @pallet.quantity %></p>
+                </div>
 
-    <div class="m-4 fixed-bottom">
-        <div class="row">
-            <div class="col-12">
-                <div>
-                    <hr>
-
-                    <p class="mt-2" style="text-align: justify; font-size: 10pt" dir="rtl"><strong>دستور العمل های نگهداری:</strong>
-                        لطفاً پالت را در محیط خشک و به دور از نور مستقیم خورشید و در دمای اتاق نگهداری کنید.
-                        در صورتی که از باقی مانده پالت استفاده نخواهید کرد، لطفاً از پوشش نایلونی برای نگهداری استفاده
-                        کرده و آن را طبق شرایط ذکر شده نگهداری کنید.
-                        لطفاً این برچسب را تا پایان استفاده از پالت نگهداری نمایید.</p>
-
-                    <p style="text-align: justify; font-size: 10pt"><strong>Storage Instructions:</strong> Please store the pallet in a dry environment, away from direct sunlight, and maintain room temperature.
-                        If the pallet will not be used immediately, cover it with nylon and continue to store it under these conditions.
-                        Keep this label attached until the pallet is fully used.</p>
+                <div class="col">
+                    <p class="fw-bold">Customer: <%= @pallet.customer %></p>
                 </div>
             </div>
         </div>
+
+
     </div>
+
+    <div class=" container mt-4 fixed-bottom">
+
+
+        <hr class="m-0">
+        <p class="mb-1" style="text-align: justify; font-size: 9pt" dir="rtl">
+            <strong>دستور العمل نگهداری:</strong>
+            لطفاً پالت را در محیط خشک و به دور از نور مستقیم خورشید و در دمای اتاق نگهداری کنید.
+            در صورتی که از باقی مانده پالت استفاده نخواهید کرد، لطفاً از پوشش نایلونی برای نگهداری
+            استفاده کرده و آن را طبق شرایط ذکر شده نگهداری کنید.
+            لطفاً این برچسب را تا پایان استفاده از پالت نگهداری نمایید.
+        </p>
+        <hr class="m-0 mb-2">
+
+        <p style="text-align: justify; font-size: 10pt" class="m-0">
+            <strong>Storage Instructions:</strong>
+            Please store the pallet in a dry environment, away from direct sunlight, and maintain room
+            temperature.
+            If the pallet will not be used immediately, cover it with nylon and continue to store it under these
+            conditions.
+            Keep this label attached until the pallet is fully used.
+        </p>
+
+
+    </div>
+
+
 </div>

@@ -1,7 +1,8 @@
 <%= form_with(model: @mf_tank, local: true, class: "needs-validation", novalidate: true) do |form| %>
     <% if @mf_tank.errors.any? %>
         <div class="alert alert-danger">
-            <h4 class="alert-heading"><%= pluralize(@mf_tank.errors.count, "error") %> prohibited this MF tank from being saved:</h4>
+            <h4 class="alert-heading"><%= pluralize(@mf_tank.errors.count, "error") %> prohibited this MF tank from
+                being saved:</h4>
             <ul>
                 <% @mf_tank.errors.full_messages.each do |message| %>
                     <li><%= message %></li>
@@ -9,6 +10,9 @@
             </ul>
         </div>
     <% end %>
+
+    <% tanks = [%w[3 3], %w[4 4]]
+       shifts = [%w[A A], %w[B B], %w[C C]] %>
 
     <div class="container">
 
@@ -36,14 +40,14 @@
                     </div>
                     <div class="col-md-6">
                         <%= form.label :shift, class: "form-label" %>
-                        <%= form.text_field :shift, class: "form-control" %>
+                        <%= form.select :shift, options_for_select(shifts, @mf_tank.shift) , { prompt: :shift }, class: "form-control" %>
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <%= form.label :tank_number, class: "form-label" %>
-                        <%= form.number_field :tank_number, class: "form-control" %>
+                        <%= form.select :tank_number, options_for_select(tanks, @mf_tank.tank_number) , { prompt: :tank_number }, class: "form-control" %>
                     </div>
                     <div class="col-md-6">
                         <%= form.label :ph, class: "form-label" %>
@@ -65,7 +69,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <%= form.label 'Cloudy Time', class: "form-label" %>
-                        <%= form.number_field :reaction_time, class: "form-control" %>
+                        <%= form.text_field :reaction_time, class: "form-control" %>
                     </div>
                     <div class="col-md-6">
                         <%= form.label :solid_content, class: "form-label" %>
@@ -75,7 +79,7 @@
             </div>
         </div>
         <!-- Submit Button -->
-        <div class="d-flex mt-3 sticky-bottom bg-light pt-2 pb-2">
+        <div class="d-flex mt-3 sticky-bottom pt-2 pb-2">
             <%= form.submit "Save", class: "btn btn-primary flex-fill" %>
         </div>
     </div>

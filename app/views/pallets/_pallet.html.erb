@@ -7,7 +7,12 @@
             <div class="col">
                 <%= link_to edit_pallet_path, class: "btn btn-primary align-items-center" do %>
                     <i class=" bi bi-pencil-square"></i>
+                    <% end %>
+
+                <%= link_to print_pallet_path, class: "btn btn-primary align-items-center" do %>
+                    <i class=" bi bi-printer-fill"></i>
                 <% end %>
+
                 <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger bi bi-trash"></button>
             </div>
         </div>

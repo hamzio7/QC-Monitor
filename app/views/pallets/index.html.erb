@@ -1,11 +1,5 @@
 <div class="container">
 
-    <% if notice.present? %>
-        <div class="alert alert-success mb-3">
-            <%= notice %>
-        </div>
-    <% end %>
-
     <div class="row mb-3">
         <div class="col-md-6">
             <h3>Pallets</h3>
@@ -45,8 +39,8 @@
                                         <%= link_to edit_pallet_path(pallet), class: "btn btn-primary btn-sm rounded-pill me-2" do %>
                                             <i class="bi bi-pencil-square"></i>
                                         <% end %>
-                                        <%= link_to print_pallet_path(pallet), class: "btn btn-primary btn-sm rounded-pill", target: "_blank" do %>
-                                            <i class="bi bi-printer"></i>
+                                        <%= link_to print_pallet_path(pallet), class: "btn btn-primary btn-sm rounded-pill" do %>
+                                            <i class="bi bi-printer-fill"></i>
                                         <% end %>
                                     </div>
                                 </td>
