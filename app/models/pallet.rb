@@ -21,11 +21,15 @@ class Pallet < ApplicationRecord
 
     persian_date = Parsi::Date.today.to_s
     year, month = separate_jalali_date(persian_date)
-    time = Time.now.hour.to_s + ":" + Time.now.min.to_s
+    hours = Time.now.hour.to_s
+    minutes = Time.now.min.to_s
 
-    self.production_date ||= persian_date.to_s.gsub("-", "/")
+    time = add_zero(hours) + ":" + add_zero(minutes)
+
+    self.production_date ||= persian_date.to_s
     self.pallet_number ||= year.to_s + month.to_s
     self.color_number ||= 1014
+    self.line_speed ||= 40
     self.production_time ||= time
     self.quantity ||= 1200
     self.initial_grammage ||= 81
@@ -33,6 +37,15 @@ class Pallet < ApplicationRecord
     self.volatile_content_set_max ||= 5.3
     self.grammage_min_set ||= 185.0
     self.grammage_max_set ||= 190.0
+  end
+
+  def add_zero(str)
+
+    if str.length == 1
+      str = "0" + str
+    end
+
+    str
   end
 
   def separate_jalali_date(jalali_date_str)

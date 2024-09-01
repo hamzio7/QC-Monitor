@@ -38,20 +38,24 @@
                     </div>
 
                     <div class="col-md-6">
-                        <%= form.label :color_number, class: "form-label" %>
-                        <%= form.number_field :color_number, class: "form-control", required: true %>
+                        <%= form.label :line_speed, class: "form-label" %>
+                        <%= form.text_field :line_speed, class: "form-control", required: true %>
                     </div>
+
 
                 </div>
 
                 <div class="row mb-3">
+                    
                     <div class="col-md-6">
-                        <%= form.label :line_speed, class: "form-label" %>
-                        <%= form.number_field :line_speed, class: "form-control", required: true %>
+
+                        <%= form.label :color_number, class: "form-label" %>
+                        <%= form.text_field :color_number, class: "form-control", required: true %>
                     </div>
+
                     <div class="col-md-6">
-                        <%= form.label :shift, class: "form-label" %>
-                        <%= form.select :shift, options_for_select(shifts, @pallet.shift), { prompt: :shift }, class: "form-control", required: true %>
+                        <%= form.label :quantity, class: "form-label" %>
+                        <%= form.text_field :quantity, class: "form-control", required: true %>
                     </div>
                 </div>
 
@@ -71,9 +75,10 @@
 
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <%= form.label :quantity, class: "form-label" %>
-                        <%= form.number_field :quantity, class: "form-control", required: true %>
+                        <%= form.label :shift, class: "form-label" %>
+                        <%= form.select :shift, options_for_select(shifts, @pallet.shift), { prompt: :shift }, class: "form-control", required: true %>
                     </div>
+
                     <div class="col-md-6">
                         <%= form.label :customer, class: "form-label" %>
                         <%= form.text_field :customer, class: "form-control", required: true %>
@@ -92,18 +97,18 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <%= form.label :initial_grammage, class: "form-label" %>
-                        <%= form.number_field :initial_grammage, class: "form-control", required: true %>
+                        <%= form.text_field :initial_grammage, class: "form-control", required: true %>
                     </div>
                     <div class="col-md-6">
                         <%= form.label "Grammage Min", class: "form-label" %>
-                        <%= form.number_field :grammage_min_set, class: "form-control", required: true %>
+                        <%= form.text_field :grammage_min_set, class: "form-control", required: true %>
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <%= form.label "Grammage Max", class: "form-label" %>
-                        <%= form.number_field :grammage_max_set, class: "form-control", required: true %>
+                        <%= form.text_field :grammage_max_set, class: "form-control", required: true %>
                     </div>
                     <div class="col-md-6">
                         <%= form.label :final_grammage_min, class: "form-label" %>
@@ -189,7 +194,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <%= form.label :glossiness, class: "form-label" %>
-                        <%= form.number_field :glossiness, class: "form-control", required: true %>
+                        <%= form.text_field :glossiness, class: "form-control", required: true %>
                     </div>
                     <div class="col-md-6">
                         <%= form.label :supervisor, class: "form-label" %>

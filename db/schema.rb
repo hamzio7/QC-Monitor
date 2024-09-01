@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_28_130052) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_31_112551) do
   create_table "mf_tanks", force: :cascade do |t|
     t.string "date"
     t.float "initial_temp"
@@ -30,19 +30,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_28_130052) do
     t.string "pallet_number", null: false
     t.string "production_date"
     t.string "production_time"
-    t.integer "color_number", default: 1014
-    t.integer "quantity", default: 1200
+    t.string "color_number"
+    t.string "quantity"
     t.string "customer", null: false
-    t.integer "initial_grammage", default: 81
-    t.float "final_grammage_min", null: false
-    t.float "final_grammage_max", null: false
+    t.string "initial_grammage"
+    t.string "final_grammage_min"
+    t.string "final_grammage_max"
     t.string "cloudy_time"
     t.string "gel_time"
-    t.float "volatile_content_set_min", default: 5.0
-    t.float "volatile_content_set_max", default: 5.3
-    t.float "volatile_content_min", null: false
-    t.float "volatile_content_max", null: false
-    t.integer "glossiness", null: false
+    t.string "volatile_content_set_min"
+    t.string "volatile_content_set_max"
+    t.string "volatile_content_min"
+    t.string "volatile_content_max"
+    t.string "glossiness"
     t.string "supervisor", null: false
     t.string "status", null: false
     t.string "stop_reason"
@@ -55,10 +55,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_28_130052) do
     t.datetime "updated_at", null: false
     t.integer "mf_tank_id"
     t.integer "uf_tank_id"
-    t.float "grammage_min_set", default: 185.0
-    t.float "grammage_max_set", default: 190.0
+    t.string "grammage_min_set"
+    t.string "grammage_max_set"
     t.integer "production_day_id", null: false
-    t.integer "line_speed", default: 40
+    t.string "line_speed"
     t.string "final_date"
     t.string "actions_taken"
     t.string "dimensions", default: "368x186"

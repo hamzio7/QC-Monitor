@@ -13,7 +13,7 @@ class MfTank < ApplicationRecord
     persian_date = Parsi::Date.today.to_s
     time = Time.now.hour.to_s + ":" + Time.now.min.to_s
 
-    self.date ||= persian_date.to_s.gsub("-", "/")
+    self.date ||= persian_date.to_s
     self.time ||= time
   end
 
