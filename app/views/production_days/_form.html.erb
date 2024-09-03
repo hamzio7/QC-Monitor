@@ -1,37 +1,36 @@
-<%= form_with(model: production_day) do |form| %>
-  <% if production_day.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(production_day.errors.count, "error") %> prohibited this production_day from being saved:</h2>
+<%= form_with(model: production_day, local: true, class: "needs-validation", novalidate: true) do |form| %>
+    <% if production_day.errors.any? %>
+        <div class="alert alert-danger">
+            <h4 class="alert-heading"><%= pluralize(production_day.errors.count, "error") %> prohibited this production day from being saved:</h4>
+            <ul>
+                <% production_day.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
 
-      <ul>
-        <% production_day.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+    <div class="container">
+
+        <!-- General Information Card -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5 class="card-title">Production Day Information</h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <%= form.label :info, class: "form-label" %>
+
+                    <div class="col-md-12" dir="rtl">
+                        <%= form.text_area :info, class: "form-control", rows: 3 %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex mt-3 sticky-bottom bg-white pt-2 pb-2">
+            <%= form.submit "Save", class: "btn btn-primary flex-fill" %>
+        </div>
+
     </div>
-  <% end %>
-
-  <div>
-    <%= form.label :production_date, style: "display: block" %>
-    <%= form.date_field :production_date %>
-  </div>
-
-  <div>
-    <%= form.label :info, style: "display: block" %>
-    <%= form.text_area :info %>
-  </div>
-
-  <div>
-    <%= form.label :stopped_pallets_count, style: "display: block" %>
-    <%= form.number_field :stopped_pallets_count %>
-  </div>
-
-  <div>
-    <%= form.label :approved_pallets_count, style: "display: block" %>
-    <%= form.number_field :approved_pallets_count %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
 <% end %>

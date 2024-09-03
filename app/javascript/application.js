@@ -37,5 +37,25 @@ import "flatpickr"
 // });
 
 
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('[data-action="print-pallet"]').forEach(function (element) {
+        element.addEventListener("click", function (event) {
+            event.preventDefault();  // Prevent the default link action
+
+            const printUrl = this.getAttribute("data-url");  // Get the print URL from the data attribute
+            const printWindow = window.open(printUrl, "_blank");  // Open the print view in a new tab
+
+            // Wait for the new tab to load, then trigger the print dialog
+            printWindow.onload = function () {
+                printWindow.print();
+
+                // Optional: Close the tab after printing
+                printWindow.onafterprint = function () {
+                    printWindow.close();
+                };
+            };
+        });
+    });
+});
 
 

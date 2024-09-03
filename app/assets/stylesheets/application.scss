@@ -26,4 +26,13 @@
   }
 }
 
+.circled-btn {
+  width: 48px; /* Set to desired width */
+  height: 48px; /* Set to same as width */
+  padding: 0; /* Remove default padding */
+  display: flex; /* Enable flexbox for alignment */
+  justify-content: end; /* Center content horizontally */
+  align-items: end; /* Center content vertically */
+}
+
 

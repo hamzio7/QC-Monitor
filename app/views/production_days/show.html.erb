@@ -35,27 +35,39 @@
         </tbody>
     </table>
 
-    <div>
-        <div class="row align-items-start">
-            <div class="col text-start">
-                Approved:
+    <div class="row">
+        <div class="col-2">
+            <div class="row align-items-start text-success">
+                <div class="col text-start">
+                    Approved:
+                </div>
+                <div class="col text-end">
+                    <%= @production_day.approved_pallets_count %>
+                </div>
             </div>
-            <div class="col text-end">
-                <%= @production_day.approved_pallets_count %>
+        </div>
+
+        <div class="col">
+
+        </div>
+
+        <div class="col-2">
+            <div class="row align-items-start text-danger">
+                <div class="col text-start">
+                    Stopped:
+                </div>
+                <div class="col text-end">
+                    <%= @production_day.stopped_pallets_count %>
+                </div>
             </div>
         </div>
     </div>
     <br>
-    <div>
-        <div class="row align-items-start">
-            <div class="col text-start">
-                Stopped:
-            </div>
-            <div class="col text-end">
-                <%= @production_day.stopped_pallets_count %>
-            </div>
+    <div><strong>Info:</strong>
+        <div dir="rtl">
+            <%= @production_day.info %>
         </div>
+
     </div>
-    <br>
-    <p><strong>Info:</strong> <%= @production_day.info %></p>
+
 </div>

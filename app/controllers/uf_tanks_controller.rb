@@ -21,7 +21,14 @@ class UfTanksController < ApplicationController
 
   # POST /uf_tanks or /uf_tanks.json
   def create
+
+    production_day = ProductionDay.find_or_create_by(production_date: uf_tank_params[:date]) do |pd|
+      pd.info = ""
+    end
+
     @uf_tank = UfTank.new(uf_tank_params)
+    @uf_tank.production_day = production_day
+
 
     respond_to do |format|
       if @uf_tank.save

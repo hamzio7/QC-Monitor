@@ -1,10 +1,10 @@
 class MfTank < ApplicationRecord
   has_one :pallet, foreign_key: 'mf_tank_id'
-  after_initialize :set_default_values , if: :new_record?
-
+  belongs_to :production_day
+  after_initialize :set_default_values, if: :new_record?
 
   def display_info
-    "Tank: #{tank_number} - Date: #{date.gsub("-","/")}"
+    "Tank: #{tank_number} - Date: #{date.gsub("-", "/")}"
   end
 
   private

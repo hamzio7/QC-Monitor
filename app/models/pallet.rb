@@ -1,8 +1,8 @@
 class Pallet < ApplicationRecord
 
   require 'parsi-date'
-  belongs_to :production_day
 
+  belongs_to :production_day
   belongs_to :uf_tank, class_name: 'UfTank', foreign_key: 'uf_tank_id'
   belongs_to :mf_tank, class_name: 'MfTank', foreign_key: 'mf_tank_id'
 

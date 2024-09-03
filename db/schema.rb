@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_31_112551) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_03_031442) do
   create_table "mf_tanks", force: :cascade do |t|
     t.string "date"
     t.float "initial_temp"
@@ -24,6 +24,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_31_112551) do
     t.float "solid_content"
     t.string "shift"
     t.string "time"
+    t.integer "production_day_id"
   end
 
   create_table "pallets", force: :cascade do |t|
@@ -61,8 +62,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_31_112551) do
     t.string "line_speed"
     t.string "final_date"
     t.string "actions_taken"
-    t.string "dimensions", default: "368x186"
     t.string "shift"
+    t.string "dimensions"
+    t.string "finish"
     t.index ["production_day_id"], name: "index_pallets_on_production_day_id"
   end
 
@@ -89,6 +91,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_31_112551) do
     t.float "solid_content"
     t.string "time"
     t.string "shift"
+    t.integer "production_day_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,10 +1,20 @@
-<h3>Editing production day</h3>
+<div class="container">
 
-<%= render "form", production_day: @production_day %>
+    <div class="row">
+        <div class="col text-start">
+            <%= link_to "Back", production_days_path, class: "btn btn-primary bi bi-arrow-left-short" %>
+        </div>
+
+        <div class="col text-end">
+            <%= link_to "",  @production_day, class: "btn btn-primary bi bi-eye-fill" %>
+        </div>
+
+    </div>
+
+</div>
 
 <br>
 
-<div>
-  <%= link_to "Show this production day", @production_day %> |
-  <%= link_to "Back to production days", production_days_path %>
-</div>
+<%= render "form", production_day: @production_day %>
+
+

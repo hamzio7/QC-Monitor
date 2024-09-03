@@ -1,5 +1,6 @@
 class UfTank < ApplicationRecord
   has_one :pallet, foreign_key: 'uf_tank_id'
+  belongs_to :production_day
   after_initialize :set_default_values , if: :new_record?
 
 

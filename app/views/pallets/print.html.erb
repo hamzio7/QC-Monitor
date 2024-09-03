@@ -1,63 +1,116 @@
-<div class="container">
+<div class="d-flex justify-content-center">
+    <!-- app/views/your_controller/your_action.html.erb -->
+    <div class="printable-area p-4" style="height: 210mm; width: 297mm">
+        <div class="row h-100">
+            <!-- Left section: col-8 -->
+            <div class="col-8 d-flex flex-column">
+                <!-- Top section: Logo and Title -->
+                <div class="mb-auto d-flex justify-content-start">
 
-    <div class="printable-area">
+                    <div class="row w-100">
 
-        <!-- Top section: Logo -->
-        <div>
-            <%= image_tag 'logo.png', style: 'height: 40px;', alt: 'MyApp Logo', class: 'img' %>
-        </div>
+                        <div class="col">
+                            <%= image_tag 'logo.png', style: 'height: 40px;', alt: 'MyApp Logo' %>
+                            <div class="mt-4 mb-4">
+                                Pakdecor Pallet Specifications:
+                            </div>
 
-        <div >
-            <div class="row-cols-2">
-                <div class="col">
-                    <p class="fw-bold">Pallet Number: <%= @pallet.pallet_number %></p>
+                        </div>
+
+                        <div class="col d-flex align-items-center ">
+                            <div class="row w-100">
+                                <div class="col d-flex align-items-center">
+                                    <span>Package Shift:</span>
+                                </div>
+                                <div class="col">
+                                    <div class="d-flex flex-column justify-content-between">
+                                        <!-- Shift A -->
+                                        <div class="div">
+                                            <label class="form-check-label me-2 " for="shiftA">A</label>
+                                            <input class="form-check-input border-black" type="checkbox" id="shiftA">
+                                        </div>
+
+                                        <div>
+                                            <label class="form-check-label me-2" for="shiftB">B</label>
+                                            <input class="form-check-input border-black" type="checkbox" id="shiftB">
+
+
+                                        </div>
+                                        <div>
+                                            <label class="form-check-label me-2" for="shiftC">C</label>
+                                            <input class="form-check-input border-black" type="checkbox" id="shiftC">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <div class="col">
-                    <p class="fw-bold">Production Date: <%= @pallet.production_date %></p>
+                <div class="flex-grow-1 d-flex flex-column justify-content-center" style="font-size: x-large">
+                    <div class="row h-100">
+                        <div class="col d-flex flex-column justify-content-evenly">
+                            <% ['Pallet Number', 'Finish', 'Color Number', 'Customer', 'Date', 'Shift', 'Dimensions', 'Quantity', 'Volatile Content', 'Grammage'].each_with_index do |label, _| %>
+                                <div class="row flex-fill">
+                                    <div class="col"><%= label %>:</div>
+                                    <div class="col">
+                                        <%= case label
+                                            when 'Pallet Number' then @pallet.pallet_number
+                                            when 'Finish' then @pallet.finish
+                                            when 'Color Number' then @pallet.color_number
+                                            when 'Customer' then @pallet.customer
+                                            when 'Volatile Content' then " #{@pallet.volatile_content_set_min} - #{@pallet.volatile_content_set_max}"
+                                            when 'Date' then @pallet.production_date
+                                            when 'Shift' then @pallet.shift
+                                            when 'Dimensions' then @pallet.dimensions
+                                            when 'Grammage' then "#{@pallet.grammage_min_set} - #{@pallet.grammage_max_set}"
+                                            when 'Quantity' then @pallet.quantity
+                                            else
+                                                # type code here
+                                            end %>
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="col">
-                    <p class="fw-bold">Color Number: <%= @pallet.color_number %></p>
+                <div class="mt-auto">
+                    <hr class="m-0">
+                    <p class="mb-1" style="text-align: justify; font-size: 9pt" dir="rtl">
+                        <strong>شرایط نگهداری:</strong>
+                        لطفاً پالت را در محیط خشک و به دور از نور مستقیم خورشید و در دمای اتاق نگهداری کنید.
+                        در صورتی که از باقی مانده پالت استفاده نخواهید کرد، لطفاً از پوشش نایلونی برای نگهداری
+                        استفاده کرده و آن را طبق شرایط ذکر شده نگهداری کنید.
+                        لطفاً این برچسب را تا پایان استفاده از پالت نگهداری نمایید.
+                    </p>
+                    <hr class="m-0 mb-2">
+                    <p style="text-align: justify; font-size: 10pt" class="m-0">
+                        <strong>Storage Instructions:</strong>
+                        Please store the pallet in a dry environment, away from direct sunlight, and maintain room
+                        temperature.
+                        If the pallet will not be used immediately, cover it with nylon and continue to store it under
+                        these
+                        conditions. Keep this label attached until the pallet is fully used.
+                    </p>
+                    <hr class="m-0 mb-2">
+                    <div class="d-flex justify-content-between">
+                        <div>Email: info@packchoob.ir</div>
+                        <div>www.packchoob.ir</div>
+                    </div>
                 </div>
-
-                <div class="col">
-                    <p class="fw-bold">Quantity: <%= @pallet.quantity %></p>
+            </div>
+            <div class="col-4 d-flex justify-content-evenly align-items-center flex-column">
+                <div class="border rounded-pill d-flex justify-content-center align-items-center" style="width: 350px; height: 350px">
+                    Sample
                 </div>
-
-                <div class="col">
-                    <p class="fw-bold">Customer: <%= @pallet.customer %></p>
+                <div class="border rounded-pill d-flex justify-content-center align-items-center" style="width: 150px; height: 150px">
+                    QC
                 </div>
             </div>
         </div>
-
-
     </div>
-
-    <div class=" container mt-4 fixed-bottom">
-
-
-        <hr class="m-0">
-        <p class="mb-1" style="text-align: justify; font-size: 9pt" dir="rtl">
-            <strong>دستور العمل نگهداری:</strong>
-            لطفاً پالت را در محیط خشک و به دور از نور مستقیم خورشید و در دمای اتاق نگهداری کنید.
-            در صورتی که از باقی مانده پالت استفاده نخواهید کرد، لطفاً از پوشش نایلونی برای نگهداری
-            استفاده کرده و آن را طبق شرایط ذکر شده نگهداری کنید.
-            لطفاً این برچسب را تا پایان استفاده از پالت نگهداری نمایید.
-        </p>
-        <hr class="m-0 mb-2">
-
-        <p style="text-align: justify; font-size: 10pt" class="m-0">
-            <strong>Storage Instructions:</strong>
-            Please store the pallet in a dry environment, away from direct sunlight, and maintain room
-            temperature.
-            If the pallet will not be used immediately, cover it with nylon and continue to store it under these
-            conditions.
-            Keep this label attached until the pallet is fully used.
-        </p>
-
-
-    </div>
-
-
 </div>

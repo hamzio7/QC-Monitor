@@ -19,6 +19,7 @@
     ].sort
 
        shifts = [%w[A A], %w[B B], %w[C C]]
+       finishes = [%w[Glossy Glossy], %w[Matte Matte], %w[Fancy Fancy]]
 
        status = [%w[Approved Approved], %w[Stopped Stopped]]
     %>
@@ -46,9 +47,8 @@
                 </div>
 
                 <div class="row mb-3">
-                    
-                    <div class="col-md-6">
 
+                    <div class="col-md-6">
                         <%= form.label :color_number, class: "form-label" %>
                         <%= form.text_field :color_number, class: "form-control", required: true %>
                     </div>
@@ -82,6 +82,17 @@
                     <div class="col-md-6">
                         <%= form.label :customer, class: "form-label" %>
                         <%= form.text_field :customer, class: "form-control", required: true %>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <%= form.label :finish, class: "form-label" %>
+                        <%= form.select :finish, options_for_select(finishes, @pallet.finish), { prompt: :finish }, class: "form-control", required: true %>
+                    </div>
+
+                    <div class="col-md-6">
+                        <%= form.label :dimensions, class: "form-label" %>
+                        <%= form.text_field :dimensions, class: "form-control", required: true %>
                     </div>
                 </div>
 
