@@ -35,4 +35,13 @@
   align-items: end; /* Center content vertically */
 }
 
+.circled-btn-sm {
+  width: 32px; /* Set to desired width */
+  height: 32px; /* Set to same as width */
+  padding: 0; /* Remove default padding */
+  display: flex; /* Enable flexbox for alignment */
+  justify-content: end; /* Center content horizontally */
+  align-items: end; /* Center content vertically */
+}
+
 

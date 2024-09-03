@@ -4,6 +4,8 @@ class ProductionDaysController < ApplicationController
   # GET /production_days or /production_days.json
   def index
     @production_days = ProductionDay.all
+    @resin_programs = ResinProgram.all
+    @line_stops = LineStop.all
   end
 
   # GET /production_days/1 or /production_days/1.json

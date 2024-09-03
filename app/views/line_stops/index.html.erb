@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Line stops</h1>
+
+<div id="line_stops">
+  <% @line_stops.each do |line_stop| %>
+    <%= render line_stop %>
+    <p>
+      <%= link_to "Show this line stop", line_stop %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New line stop", new_line_stop_path %>

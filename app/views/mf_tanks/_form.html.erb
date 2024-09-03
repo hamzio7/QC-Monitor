@@ -40,14 +40,16 @@
                     </div>
                     <div class="col-md-6">
                         <%= form.label :shift, class: "form-label" %>
-                        <%= form.select :shift, options_for_select(shifts, @mf_tank.shift) , { prompt: :shift }, class: "form-control" %>
+                        <%= form.select :shift, options_for_select(shifts, @mf_tank.shift) ,
+                                        { prompt: :shift }, class: "form-control" %>
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <%= form.label :tank_number, class: "form-label" %>
-                        <%= form.select :tank_number, options_for_select(tanks, @mf_tank.tank_number) , { prompt: :tank_number }, class: "form-control" %>
+                        <%= form.select :tank_number, options_for_select(tanks, @mf_tank.tank_number) ,
+                                        { prompt: :tank_number }, class: "form-control" %>
                     </div>
                     <div class="col-md-6">
                         <%= form.label :ph, class: "form-label" %>

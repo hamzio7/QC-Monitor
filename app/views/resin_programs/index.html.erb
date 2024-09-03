@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Resin programs</h1>
+
+<div id="resin_programs">
+  <% @resin_programs.each do |resin_program| %>
+    <%= render resin_program %>
+    <p>
+      <%= link_to "Show this resin program", resin_program %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New resin program", new_resin_program_path %>

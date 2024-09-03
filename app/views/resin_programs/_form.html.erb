@@ -1,0 +1,97 @@
+<%= form_with(model: resin_program) do |form| %>
+  <% if resin_program.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(resin_program.errors.count, "error") %> prohibited this resin_program from being saved:</h2>
+
+      <ul>
+        <% resin_program.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :date, style: "display: block" %>
+    <%= form.text_field :date %>
+  </div>
+
+  <div>
+    <%= form.label :time, style: "display: block" %>
+    <%= form.text_field :time %>
+  </div>
+
+  <div>
+    <%= form.label :uf_wlf, style: "display: block" %>
+    <%= form.text_field :uf_wlf %>
+  </div>
+
+  <div>
+    <%= form.label :uf_837, style: "display: block" %>
+    <%= form.text_field :uf_837 %>
+  </div>
+
+  <div>
+    <%= form.label :uf_1448, style: "display: block" %>
+    <%= form.text_field :uf_1448 %>
+  </div>
+
+  <div>
+    <%= form.label :mf_es700, style: "display: block" %>
+    <%= form.text_field :mf_es700 %>
+  </div>
+
+  <div>
+    <%= form.label :mf_es501, style: "display: block" %>
+    <%= form.text_field :mf_es501 %>
+  </div>
+
+  <div>
+    <%= form.label :mf_1010, style: "display: block" %>
+    <%= form.text_field :mf_1010 %>
+  </div>
+
+  <div>
+    <%= form.label :mf_837, style: "display: block" %>
+    <%= form.text_field :mf_837 %>
+  </div>
+
+  <div>
+    <%= form.label :mf_1014, style: "display: block" %>
+    <%= form.text_field :mf_1014 %>
+  </div>
+
+  <div>
+    <%= form.label :uf_tank_num, style: "display: block" %>
+    <%= form.text_field :uf_tank_num %>
+  </div>
+
+  <div>
+    <%= form.label :mf_tank_num, style: "display: block" %>
+    <%= form.text_field :mf_tank_num %>
+  </div>
+
+  <div>
+    <%= form.label :mixing_1, style: "display: block" %>
+    <%= form.text_field :mixing_1 %>
+  </div>
+
+  <div>
+    <%= form.label :mixing_2, style: "display: block" %>
+    <%= form.text_field :mixing_2 %>
+  </div>
+
+  <div>
+    <%= form.label :shift, style: "display: block" %>
+    <%= form.text_field :shift %>
+  </div>
+
+  <div>
+    <%= form.label :line, style: "display: block" %>
+    <%= form.text_field :line %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

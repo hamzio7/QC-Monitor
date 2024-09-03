@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @resin_program %>
+
+<div>
+  <%= link_to "Edit this resin program", edit_resin_program_path(@resin_program) %> |
+  <%= link_to "Back to resin programs", resin_programs_path %>
+
+  <%= button_to "Destroy this resin program", @resin_program, method: :delete %>
+</div>

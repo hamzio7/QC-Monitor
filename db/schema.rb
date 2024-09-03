@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_03_031442) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_03_170053) do
+  create_table "line_stops", force: :cascade do |t|
+    t.string "date"
+    t.string "line_number"
+    t.string "time_stopped"
+    t.string "time_restarted"
+    t.string "reason"
+    t.string "shift"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "production_day_id"
+  end
+
   create_table "mf_tanks", force: :cascade do |t|
     t.string "date"
     t.float "initial_temp"
@@ -65,6 +77,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_031442) do
     t.string "shift"
     t.string "dimensions"
     t.string "finish"
+    t.string "press_quality"
+    t.string "pallet_quality"
     t.index ["production_day_id"], name: "index_pallets_on_production_day_id"
   end
 
@@ -76,6 +90,28 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_031442) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "shift"
+  end
+
+  create_table "resin_programs", force: :cascade do |t|
+    t.string "date"
+    t.string "time"
+    t.string "uf_wlf"
+    t.string "uf_837"
+    t.string "uf_1448"
+    t.string "mf_es700"
+    t.string "mf_es501"
+    t.string "mf_1010"
+    t.string "mf_837"
+    t.string "mf_1014"
+    t.string "uf_tank_num"
+    t.string "mf_tank_num"
+    t.string "mixing_1"
+    t.string "mixing_2"
+    t.string "shift"
+    t.string "line"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "production_day_id"
   end
 
   create_table "uf_tanks", force: :cascade do |t|

@@ -23,59 +23,48 @@
             </div>
             <div class="card-body">
                 <div class="row mb-3">
-                    <div class="col-md-6">
-                        <%= form.label :date, class: "form-label" %>
-                        <%= form.text_field :date, class: "form-control" %>
-                    </div>
-                    <div class="col-md-6">
-                        <%= form.label :initial_temp, class: "form-label" %>
-                        <%= form.text_field :initial_temp, class: "form-control" %>
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <%= form.label :time, class: "form-label" %>
-                        <%= form.text_field :time, class: "form-control" %>
-                    </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3 mb-3">
                         <%= form.label :shift, class: "form-label" %>
                         <%= form.select :shift, options_for_select(shifts, @uf_tank.shift) , { prompt: :shift }, class: "form-control" %>
                     </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-md-3 mb-3">
                         <%= form.label :tank_number, class: "form-label" %>
                         <%= form.select :tank_number, options_for_select(tanks, @uf_tank.tank_number) , { prompt: :tank_number }, class: "form-control" %>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3 mb-3">
+                        <%= form.label :date, class: "form-label" %>
+                        <%= form.text_field :date, class: "form-control" %>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <%= form.label :initial_temp, class: "form-label" %>
+                        <%= form.text_field :initial_temp, class: "form-control" %>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <%= form.label :time, class: "form-label" %>
+                        <%= form.text_field :time, class: "form-control" %>
+                    </div>
+                    <div class="col-md-3 mb-3">
                         <%= form.label :ph, class: "form-label" %>
                         <%= form.text_field :ph, class: "form-control" %>
                     </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <%= form.label :viscosity, class: "form-label" %>
-                        <%= form.text_field :viscosity, class: "form-control" %>
-                    </div>
-                    <div class="col-md-6">
-                        <%= form.label :density, class: "form-label" %>
-                        <%= form.text_field :density, class: "form-control" %>
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-md-3 mb-3">
                         <%= form.label 'Gel Time', class: "form-label" %>
                         <%= form.text_field :reaction_time, class: "form-control" %>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3 mb-3">
+                        <%= form.label :viscosity, class: "form-label" %>
+                        <%= form.text_field :viscosity, class: "form-control" %>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <%= form.label :density, class: "form-label" %>
+                        <%= form.text_field :density, class: "form-control" %>
+                    </div>
+                    <div class="col-md-3 mb-3">
                         <%= form.label :solid_content, class: "form-label" %>
                         <%= form.text_field :solid_content, class: "form-control" %>
                     </div>
                 </div>
+
             </div>
         </div>
         <!-- Submit Button -->

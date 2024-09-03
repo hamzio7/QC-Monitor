@@ -1,5 +1,4 @@
 class Pallet < ApplicationRecord
-
   require 'parsi-date'
 
   belongs_to :production_day
@@ -8,69 +7,29 @@ class Pallet < ApplicationRecord
 
   after_initialize :set_default_values, if: :new_record?
 
-  private
-
   after_save :update_production_day_counters
   after_destroy :update_production_day_counters
+
+  private
 
   def update_production_day_counters
     production_day.update_pallet_counts
   end
 
   def set_default_values
+    today = Parsi::Date.today
+    time_now = Time.now
 
-    persian_date = Parsi::Date.today.to_s
-    year, month = separate_jalali_date(persian_date)
-    hours = Time.now.hour.to_s
-    minutes = Time.now.min.to_s
-
-    time = add_zero(hours) + ":" + add_zero(minutes)
-
-    self.production_date ||= persian_date.to_s
-    self.pallet_number ||= year.to_s + month.to_s
+    self.production_date ||= today.to_s
+    self.pallet_number ||= format("%02d%d", today.year % 100, today.month)
     self.color_number ||= 1014
     self.line_speed ||= 40
-    self.production_time ||= time
+    self.production_time ||= format("%02d:%02d", time_now.hour, time_now.min)
     self.quantity ||= 1200
     self.initial_grammage ||= 81
     self.volatile_content_set_min ||= 5.0
     self.volatile_content_set_max ||= 5.3
-    self.grammage_min_set ||= 185.0
-    self.grammage_max_set ||= 190.0
+    self.grammage_min_set ||= self.initial_grammage.to_f + 104
+    self.grammage_max_set ||= self.initial_grammage.to_f + 110
   end
-
-  def add_zero(str)
-
-    if str.length == 1
-      str = "0" + str
-    end
-
-    str
-  end
-
-  def separate_jalali_date(jalali_date_str)
-    # Split the date string by the dash ('-') character
-    year, month = jalali_date_str.split('-')
-
-    # Convert them to integers if needed
-    year = last_two_characters(year)
-    month = month.to_i
-
-    [year, month]
-  end
-
-  def last_two_characters(str)
-    # Ensure the string is long enough
-    if str.length >= 2
-      last_two = str[-2..-1]
-    else
-      last_two = str # or handle the case as needed
-    end
-
-    # Output the result
-    puts last_two
-    # Return the result if needed
-    last_two
-  end
-
 end

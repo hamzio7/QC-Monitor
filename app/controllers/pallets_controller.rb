@@ -6,7 +6,9 @@ class PalletsController < ApplicationController
   # GET /pallets or /pallets.json
   def index
     if params[:query].present?
-      @pallets = Pallet.where("pallet_number LIKE ? OR supervisor LIKE ? OR customer LIKE ? OR status LIKE ? OR color_number LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%")
+      @pallets = Pallet.where("pallet_number LIKE ? OR supervisor LIKE ? OR production_date LIKE ? OR customer LIKE ? OR status LIKE ? OR color_number LIKE ?",
+
+                              "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%")
     else
       @pallets = Pallet.all.sort_by(&:production_date).reverse
     end
@@ -90,6 +92,6 @@ class PalletsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def pallet_params
-    params.require(:pallet).permit(:final_date, :finish, :actions_taken, :dimensions, :shift, :pallet_number, :line_speed, :production_date, :production_day, :production_time, :color_number, :quantity, :customer, :initial_grammage, :final_grammage_min, :final_grammage_max, :cloudy_time, :gel_time, :grammage_min_set, :grammage_max_set, :uf_tank_id, :mf_tank_id, :volatile_content_set_min, :volatile_content_set_max, :volatile_content_min, :volatile_content_max, :glossiness, :supervisor, :status, :stop_reason, :info, :final_supervisor, :final_status, :final_stop_reason, :final_info)
+    params.require(:pallet).permit(:final_date, :press_quality,:pallet_quality, :finish, :actions_taken, :dimensions, :shift, :pallet_number, :line_speed, :production_date, :production_day, :production_time, :color_number, :quantity, :customer, :initial_grammage, :final_grammage_min, :final_grammage_max, :cloudy_time, :gel_time, :grammage_min_set, :grammage_max_set, :uf_tank_id, :mf_tank_id, :volatile_content_set_min, :volatile_content_set_max, :volatile_content_min, :volatile_content_max, :glossiness, :supervisor, :status, :stop_reason, :info, :final_supervisor, :final_status, :final_stop_reason, :final_info)
   end
 end
