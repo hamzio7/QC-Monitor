@@ -1,0 +1,2 @@
+class VolatileContent < ApplicationRecord
+end

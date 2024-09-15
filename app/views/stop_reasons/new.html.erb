@@ -1,0 +1,32 @@
+<%= form_with model: @stop_reason, local: true, class: "needs-validation" do |form| %>
+
+
+    <div class="container">
+
+
+    <div class="row">
+        <div class="col"><h1 class="mb-4">New Stop Reason</h1></div>
+        <div class="col d-flex justify-content-end">
+            <%= button_tag type: 'submit', class: 'circled-btn btn btn-dark d-flex justify-content-center align-items-center rounded-circle' do %>
+                <i class="bi bi-plus"></i>
+            <% end %>
+        </div>
+    </div>
+
+        <div class="mb-3">
+            <%= form.label :reason, "Stop Reason (English)", class: "form-label" %>
+            <%= form.text_field :reason, class: "form-control", placeholder: "Enter English reason", required: true %>
+        </div>
+
+        <div class="mb-3">
+            <%= form.label :persian_reason, "Stop Reason (Persian)", class: "form-label" %>
+            <%= form.text_field :persian_reason, class: "form-control", placeholder: "Enter Persian translation", required: true %>
+        </div>
+
+
+    <%= link_to 'Back to Stop Reasons', stop_reasons_path, class: "btn btn-secondary mt-3" %>
+
+
+</div>
+
+<% end %>

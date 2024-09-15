@@ -1,0 +1,2 @@
+class ReactionTime < ApplicationRecord
+end

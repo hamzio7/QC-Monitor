@@ -4,13 +4,13 @@ Rails.application.routes.draw do
   resources :production_days
   resources :mf_tanks
   resources :uf_tanks
-
-  # Devise routes for users
+  resources :stop_reasons, only: [:new, :create, :index, :edit, :update, :destroy]
   devise_for :users
 
-  # Ensure correct mapping for root route
+  get 'schedules', to: 'schedules#index'
+
   devise_scope :user do
-    root to: "devise/sessions#new"  # Redirect to login page when not authenticated
+    root to: "devise/sessions#new"
   end
 
   resources :pallets do

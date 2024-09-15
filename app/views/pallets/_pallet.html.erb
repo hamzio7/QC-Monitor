@@ -59,7 +59,6 @@
                         <div class="col-6 col-md-6 fw-bold">Quantity:</div>
                         <div class="col-6 col-md-4 text-end"><%= pallet.quantity %></div>
                     </div>
-
                     <div class="row mt-2 mb-2">
                         <div class="col-6 col-md-6 fw-bold">Customer:</div>
                         <div class="col-6 col-md-4 text-end"><%= pallet.customer %></div>
@@ -214,17 +213,29 @@
                 <div class="col-6 fw-bold">Status:</div>
                 <div class="col-6 text-end"><%= pallet.status %></div>
             </div>
-            <% if pallet.status.downcase.include?("stop") || pallet.stop_reason.present? %>
-                <div class="row mb-2">
-                    <div class="col-6 fw-bold">Stop reason:</div>
-                    <div class="col-6 text-end"><%= pallet.stop_reason %></div>
-                </div>
-            <% end %>
             <% if pallet.info? %>
                 <div class="row mb-2">
                     <div class="col-6 fw-bold">Info:</div>
                     <div class="col-6 text-end"><%= pallet.info %></div>
                 </div>
+            <% end %>
+        </div>
+
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h5 class="card-title">Stop Reasons</h5>
+        </div>
+        <div class="card-body">
+            <% if pallet.stop_reasons.any? %>
+                <ul>
+                    <% pallet.stop_reasons.each do |reason| %>
+                        <li><%= reason.reason %></li>
+                    <% end %>
+                </ul>
+            <% else %>
+                <p>No stop reasons available.</p>
             <% end %>
         </div>
     </div>

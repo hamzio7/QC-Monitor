@@ -1,0 +1,24 @@
+<div class="col-6 text-end d-flex justify-content-end">
+    <div class="dropdown">
+        <button class="circled-btn btn btn-dark d-flex justify-content-center align-items-center rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="bi bi-plus"></div>
+        </button>
+        <ul class="dropdown-menu">
+            <li>
+                <%= link_to "Pallet", new_pallet_path, class: 'dropdown-item' %>
+            </li>
+            <li>
+                <%= link_to "MF Analysis", new_mf_tank_path, class: 'dropdown-item' %>
+            </li>
+            <li>
+                <%= link_to "UF Analysis", new_uf_tank_path, class: 'dropdown-item' %>
+            </li>
+            <li>
+                <%= link_to "Line Stop", new_line_stop_path, class: 'dropdown-item' %></li>
+
+            <li>
+                <%= link_to "Resin Program", new_resin_program_path, class: 'dropdown-item' %>
+            </li>
+        </ul>
+    </div>
+</div>

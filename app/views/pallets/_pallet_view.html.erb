@@ -1,0 +1,69 @@
+<a href="<%= pallet_path(pallet) %>" class="text-decoration-none text-dark">
+    <div class="card mb-3 rounded-4 overflow-hidden">
+        <!-- Conditional header background based on status -->
+        <div class="card-header d-flex justify-content-between align-items-center
+      <%= pallet.status.to_s.downcase == 'approved' ? 'bg-success-subtle' : 'bg-danger-subtle' %>">
+
+            <!-- Title on the left -->
+            <strong>Pallet <%= pallet.pallet_number %></strong>
+
+            <!-- Actions on the right -->
+            <div class="d-flex gap-4">
+                <%= link_to '', edit_pallet_path(pallet), class: "bi bi-pencil-fill text-black", data: { turbo: false } %>
+                <%= link_to '', print_pallet_path(pallet), class: "bi bi-printer-fill text-black", data: { turbo: false } %>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <!-- Color Number Section -->
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <strong>Color Number:</strong>
+                        </div>
+                        <div class="col-sm-6 text-end">
+                            <%= pallet.color_number %>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Production Date Section -->
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <strong>Production Date:</strong>
+                        </div>
+                        <div class="col-sm-6 text-end">
+                            <%= pallet.production_date %>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quantity Section -->
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <strong>Quantity:</strong>
+                        </div>
+                        <div class="col-sm-6 text-end">
+                            <%= pallet.quantity %>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customer Section -->
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <strong>Customer:</strong>
+                        </div>
+                        <div class="col-sm-6 text-end">
+                            <%= pallet.customer %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</a>

@@ -1,0 +1,2 @@
+class VolatileContentsController < ApplicationController
+end

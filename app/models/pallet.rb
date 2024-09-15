@@ -1,14 +1,28 @@
 class Pallet < ApplicationRecord
   require 'parsi-date'
 
+  has_many :pallet_stop_reasons, dependent: :destroy
+  has_many :stop_reasons, through: :pallet_stop_reasons
+
   belongs_to :production_day
   belongs_to :uf_tank, class_name: 'UfTank', foreign_key: 'uf_tank_id'
   belongs_to :mf_tank, class_name: 'MfTank', foreign_key: 'mf_tank_id'
 
   after_initialize :set_default_values, if: :new_record?
+  after_commit :update_production_day_counters, on: [:create, :destroy]
 
-  after_save :update_production_day_counters
-  after_destroy :update_production_day_counters
+  before_save :adjust_attrs
+
+  def adjust_attrs
+
+    hijri_date_parts = production_date.to_s.split('-') # Assuming the date is in 'YYYY-MM-DD' format
+    hijri_year = hijri_date_parts[0].to_i
+    hijri_month = hijri_date_parts[1].to_i
+    hijri_day = hijri_date_parts[2].to_i
+    gregorian_date = Parsi::Date.new(hijri_year, hijri_month, hijri_day).to_gregorian
+    self.production_date = gregorian_date.to_date
+
+  end
 
   private
 
@@ -20,16 +34,18 @@ class Pallet < ApplicationRecord
     today = Parsi::Date.today
     time_now = Time.now
 
-    self.production_date ||= today.to_s
-    self.pallet_number ||= format("%02d%d", today.year % 100, today.month)
-    self.color_number ||= 1014
-    self.line_speed ||= 40
-    self.production_time ||= format("%02d:%02d", time_now.hour, time_now.min)
-    self.quantity ||= 1200
-    self.initial_grammage ||= 81
-    self.volatile_content_set_min ||= 5.0
-    self.volatile_content_set_max ||= 5.3
-    self.grammage_min_set ||= self.initial_grammage.to_f + 104
-    self.grammage_max_set ||= self.initial_grammage.to_f + 110
+    self.attributes = {
+      production_date: today.to_s,
+      pallet_number: format("%02d%d", today.year % 100, today.month),
+      color_number: 1014,
+      line_speed: 40,
+      production_time: format("%02d:%02d", time_now.hour, time_now.min),
+      quantity: 1200,
+      initial_grammage: 81,
+      volatile_content_set_min: 5.0,
+      volatile_content_set_max: 5.3,
+      grammage_min_set: initial_grammage.to_f + 104,
+      grammage_max_set: initial_grammage.to_f + 110
+    }.merge(self.attributes.compact)
   end
 end

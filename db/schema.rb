@@ -10,12 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_03_170053) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_15_190004) do
+  create_table "gravures", force: :cascade do |t|
+    t.decimal "h"
+    t.decimal "l"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "time"
+  end
+
   create_table "line_stops", force: :cascade do |t|
     t.string "date"
     t.string "line_number"
-    t.string "time_stopped"
-    t.string "time_restarted"
+    t.time "time_stopped"
+    t.time "time_restarted"
     t.string "reason"
     t.string "shift"
     t.datetime "created_at", null: false
@@ -24,7 +32,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_170053) do
   end
 
   create_table "mf_tanks", force: :cascade do |t|
-    t.string "date"
+    t.datetime "date"
     t.float "initial_temp"
     t.integer "tank_number"
     t.float "ph"
@@ -39,10 +47,36 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_170053) do
     t.integer "production_day_id"
   end
 
+  create_table "oven_temps", force: :cascade do |t|
+    t.integer "oven_1"
+    t.integer "oven_2"
+    t.integer "oven_3"
+    t.integer "oven_4"
+    t.integer "oven_5"
+    t.integer "oven_6"
+    t.integer "oven_7"
+    t.integer "oven_8"
+    t.integer "oven_9"
+    t.integer "oven_10"
+    t.integer "oven_11"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "time"
+  end
+
+  create_table "pallet_stop_reasons", force: :cascade do |t|
+    t.integer "pallet_id", null: false
+    t.integer "stop_reason_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pallet_id"], name: "index_pallet_stop_reasons_on_pallet_id"
+    t.index ["stop_reason_id"], name: "index_pallet_stop_reasons_on_stop_reason_id"
+  end
+
   create_table "pallets", force: :cascade do |t|
     t.string "pallet_number", null: false
-    t.string "production_date"
-    t.string "production_time"
+    t.datetime "production_date"
+    t.datetime "production_time"
     t.string "color_number"
     t.string "quantity"
     t.string "customer", null: false
@@ -83,13 +117,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_170053) do
   end
 
   create_table "production_days", force: :cascade do |t|
-    t.date "production_date"
+    t.datetime "production_date"
     t.text "info"
     t.integer "stopped_pallets_count"
     t.integer "approved_pallets_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "shift"
+  end
+
+  create_table "reaction_times", force: :cascade do |t|
+    t.string "gel_time"
+    t.string "cloudy_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "time"
   end
 
   create_table "resin_programs", force: :cascade do |t|
@@ -114,8 +156,26 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_170053) do
     t.integer "production_day_id"
   end
 
+  create_table "stop_reasons", force: :cascade do |t|
+    t.string "reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "persian_reason"
+  end
+
+  create_table "temperatures", force: :cascade do |t|
+    t.decimal "uf"
+    t.decimal "mf"
+    t.decimal "paper_mf"
+    t.decimal "paper_pr"
+    t.decimal "chiller"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "time"
+  end
+
   create_table "uf_tanks", force: :cascade do |t|
-    t.string "date"
+    t.datetime "date"
     t.float "initial_temp"
     t.integer "tank_number"
     t.float "ph"
@@ -148,5 +208,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_170053) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  create_table "volatile_contents", force: :cascade do |t|
+    t.decimal "min_content"
+    t.decimal "max_content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "time"
+  end
+
+  add_foreign_key "pallet_stop_reasons", "pallets"
+  add_foreign_key "pallet_stop_reasons", "stop_reasons"
   add_foreign_key "pallets", "production_days"
 end

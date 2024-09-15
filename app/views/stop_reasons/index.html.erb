@@ -1,0 +1,34 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col"><h1 class="mb-4">Stop Reasons</h1></div>
+        <div class="col d-flex justify-content-end">
+            <%= link_to '', new_stop_reason_path, class: "circled-btn btn btn-dark d-flex justify-content-center align-items-center rounded-circle bi bi-plus" %>
+        </div>
+    </div>
+
+
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">English</th>
+                <th scope="col">Persian</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @stop_reasons.each do |reason| %>
+                <tr>
+                    <td><%= reason.reason %></td>
+                    <td><%= reason.persian_reason %></td>
+                    <td>
+                        <%= link_to 'Edit', edit_stop_reason_path(reason), class: "btn btn-warning btn-sm me-2" %>
+                        <%= link_to 'Delete', stop_reason_path(reason), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+
+</div>

@@ -1,0 +1,2 @@
+module VolatileContentsHelper
+end

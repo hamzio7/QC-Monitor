@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  oven_1: 1
+  oven_2: 1
+  oven_3: 1
+  oven_4: 1
+  oven_5: 1
+  oven_6: 1
+  oven_7: 1
+  oven_8: 1
+  oven_9: 1
+  oven_10: 1
+  oven_11: 1
+
+two:
+  oven_1: 1
+  oven_2: 1
+  oven_3: 1
+  oven_4: 1
+  oven_5: 1
+  oven_6: 1
+  oven_7: 1
+  oven_8: 1
+  oven_9: 1
+  oven_10: 1
+  oven_11: 1

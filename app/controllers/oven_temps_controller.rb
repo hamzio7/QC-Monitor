@@ -1,0 +1,2 @@
+class OvenTempsController < ApplicationController
+end

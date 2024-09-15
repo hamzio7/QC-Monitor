@@ -1,0 +1,17 @@
+<h1 class="mb-4">Edit Stop Reason</h1>
+
+<%= form_with model: @stop_reason, local: true, class: "needs-validation" do |form| %>
+    <div class="mb-3">
+        <%= form.label :reason, "Stop Reason (English)", class: "form-label" %>
+        <%= form.text_field :reason, class: "form-control", placeholder: "Enter English reason", required: true %>
+    </div>
+
+    <div class="mb-3">
+        <%= form.label :persian_reason, "Stop Reason (Persian)", class: "form-label" %>
+        <%= form.text_field :persian_reason, class: "form-control", placeholder: "Enter Persian translation", required: true %>
+    </div>
+
+    <%= form.submit "Update Stop Reason", class: "btn btn-primary" %>
+<% end %>
+
+<%= link_to 'Back to Stop Reasons', stop_reasons_path, class: "btn btn-secondary mt-3" %>

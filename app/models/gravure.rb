@@ -1,0 +1,2 @@
+class Gravure < ApplicationRecord
+end

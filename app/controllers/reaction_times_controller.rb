@@ -1,0 +1,2 @@
+class ReactionTimesController < ApplicationController
+end

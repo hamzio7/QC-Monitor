@@ -1,25 +1,25 @@
 class PalletsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_pallet, only: %i[ show edit update destroy print]
-  before_action :get_tanks, only: %i[ edit new show create ]
+  before_action :authenticate_user!, only: %i[new create edit update destroy]
+  before_action :set_pallet, only: %i[show edit update destroy print]
+  before_action :get_tanks, only: %i[edit new show create]
+  before_action :get_stop_reasons, only: %i[new edit create update]
 
-  # GET /pallets or /pallets.json
+
+
   def index
-    if params[:query].present?
-      @pallets = Pallet.where("pallet_number LIKE ? OR supervisor LIKE ? OR production_date LIKE ? OR customer LIKE ? OR status LIKE ? OR color_number LIKE ?",
-
-                              "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%")
+    if params[:pallet].present?
+      @pallets = Pallet.where("pallet_number LIKE :query OR supervisor LIKE :query OR production_date LIKE :query OR customer LIKE :query OR status LIKE :query OR color_number LIKE :query", query: "%#{params[:pallet]}%")
+                       .order(production_date: :desc)
+                       .page(params[:page]).per(10)
     else
-      @pallets = Pallet.all.sort_by(&:production_date).reverse
+      @pallets = Pallet.order(production_date: :desc).page(params[:page]).per(10)
     end
   end
 
-  # GET /pallets/1 or /pallets/1.json
   def show
-
+    @stop_reasons = @pallet.stop_reasons
   end
 
-  # GET /pallets/new
   def new
     @pallet = Pallet.new
   end
@@ -28,18 +28,18 @@ class PalletsController < ApplicationController
     render :print
   end
 
-  # GET /pallets/1/edit
-  def edit
+  def edit; end
 
-  end
-
-  # POST /pallets or /pallets.json
   def create
-    production_day = ProductionDay.find_or_create_by(production_date: pallet_params[:production_date]) do |pd|
-      pd.info = ""
-    end
+
+
+
+
+    production_day = find_or_create_production_day(pallet_params[:production_date])
+    stop_reason_ids = process_stop_reasons
 
     @pallet = Pallet.new(pallet_params)
+    @pallet.stop_reasons = StopReason.where(id: stop_reason_ids)
     @pallet.production_day = production_day
 
     respond_to do |format|
@@ -51,16 +51,15 @@ class PalletsController < ApplicationController
         format.json { render json: @pallet.errors, status: :unprocessable_entity }
       end
     end
-
   end
 
-  # PATCH/PUT /pallets/1 or /pallets/1.json
   def update
+    stop_reason_ids = process_stop_reasons
+
     respond_to do |format|
-      if @pallet.update(pallet_params)
+      if @pallet.update(pallet_params.merge(stop_reason_ids: stop_reason_ids))
         format.html { redirect_to pallet_url(@pallet), notice: "Pallet was successfully updated." }
         format.json { render :show, status: :ok, location: @pallet }
-        @pallet.production_day.update_pallet_counts
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @pallet.errors, status: :unprocessable_entity }
@@ -68,10 +67,8 @@ class PalletsController < ApplicationController
     end
   end
 
-  # DELETE /pallets/1 or /pallets/1.json
   def destroy
     @pallet.destroy!
-
     respond_to do |format|
       format.html { redirect_to pallets_url, notice: "Pallet was successfully destroyed." }
       format.json { head :no_content }
@@ -85,13 +82,42 @@ class PalletsController < ApplicationController
     @mf_tanks = MfTank.order(created_at: :desc).limit(5)
   end
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_pallet
     @pallet = Pallet.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
+  def get_stop_reasons
+    @stop_reasons = StopReason.all
+  end
+
   def pallet_params
-    params.require(:pallet).permit(:final_date, :press_quality,:pallet_quality, :finish, :actions_taken, :dimensions, :shift, :pallet_number, :line_speed, :production_date, :production_day, :production_time, :color_number, :quantity, :customer, :initial_grammage, :final_grammage_min, :final_grammage_max, :cloudy_time, :gel_time, :grammage_min_set, :grammage_max_set, :uf_tank_id, :mf_tank_id, :volatile_content_set_min, :volatile_content_set_max, :volatile_content_min, :volatile_content_max, :glossiness, :supervisor, :status, :stop_reason, :info, :final_supervisor, :final_status, :final_stop_reason, :final_info)
+    params.require(:pallet).permit(
+      :line_speed, :pallet_number, :color_number, :shift, :production_date,
+      :production_time, :dimensions, :quantity, :finish, :customer,
+      :initial_grammage, :grammage_min_set, :grammage_max_set,
+      :final_grammage_min, :final_grammage_max, :uf_tank_id, :mf_tank_id,
+      :cloudy_time, :gel_time, :volatile_content_set_min, :volatile_content_set_max,
+      :volatile_content_min, :volatile_content_max, :glossiness, :press_quality,
+      :pallet_quality, :supervisor, :status, :info, :final_supervisor, :final_status,
+      :final_stop_reason, :final_info, stop_reason_ids: [], custom_stop_reasons: []
+    )
+  end
+
+  def find_or_create_production_day(production_date)
+    ProductionDay.find_or_create_by(production_date: production_date) { |pd| pd.info = "" }
+  end
+
+  def process_stop_reasons
+    stop_reason_ids = params[:pallet][:stop_reason_ids].to_a.map(&:to_i)
+    custom_stop_reasons = params[:pallet][:custom_stop_reasons].to_s.strip
+
+    if custom_stop_reasons.present?
+      custom_stop_reasons.split(',').each do |reason|
+        stop_reason = StopReason.find_or_create_by(reason: reason.strip)
+        stop_reason_ids << stop_reason.id
+      end
+    end
+
+    stop_reason_ids
   end
 end

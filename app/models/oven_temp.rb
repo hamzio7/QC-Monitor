@@ -1,0 +1,2 @@
+class OvenTemp < ApplicationRecord
+end

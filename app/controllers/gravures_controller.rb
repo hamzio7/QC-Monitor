@@ -1,0 +1,2 @@
+class GravuresController < ApplicationController
+end

@@ -4,120 +4,28 @@
         <div class="col-6">
             <h3>Pallets</h3>
         </div>
-        <div class="col-6 text-end d-flex justify-content-end">
-            <div class="dropdown">
-                <button class="circled-btn btn btn-dark d-flex justify-content-center align-items-center rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <div class="bi bi-plus"></div>
-                </button>
-                <ul class="dropdown-menu">
-                    <li>
-                        <%= link_to "Pallet", new_pallet_path, class: 'dropdown-item' %>
-                    </li>
-                    <li>
-                        <%= link_to "MF Analysis", new_mf_tank_path, class: 'dropdown-item' %>
-                    </li>
-                    <li>
-                        <%= link_to "UF Analysis", new_uf_tank_path, class: 'dropdown-item' %>
-                    </li>
-                    <li>
-                        <%= link_to "Line Stop", new_line_stop_path, class: 'dropdown-item' %></li>
 
-                    <li>
-                        <%= link_to "Resin Program", new_resin_program_path, class: 'dropdown-item' %>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <%= render 'add_new_button' %>
 
     </div>
 
-    <div class="w-100 mb-2">
-        <form action="/pallets" method="get" class="d-flex align-items-center form-control rounded-pill p-0">
-            <label class="w-100">
-                <input type="search" name="query" class="bg-transparent  w-100 h-100 focus-ring rounded-pill border-0 ms-2 me-4" placeholder="Search..." aria-label="Search">
-            </label>
+    <%= render 'searchbar' %>
 
-            <button type="submit" class="btn rounded-pill w-auto border-0 ms-2 me-1">
-                <i class="bi bi-search"></i>
-            </button>
+    <% if @pallets.any? %>
 
-        </form>
-    </div>
-
-    <div class="card  rounded-4  overflow-hidden">
-        <div class="card-body table-responsive p-0">
-            <% if @pallets.any? %>
-                <table class="table table-hover table-borderless m-0">
-                    <thead class="table-dark">
-                        <tr>
-                            <th scope="col" class="align-middle text-center">Date</th>
-                            <th scope="col" class="align-middle text-center">Pallet Num.</th>
-                            <th scope="col" class="align-middle text-center">Color Num.</th>
-                            <th scope="col" class="align-middle text-center">Customer</th>
-                            <th scope="col" class="align-middle text-center">Status</th>
-                            <th scope="col" class="align-middle text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% @pallets.each do |pallet| %>
-
-                            <% is_pallet_stopped = pallet.status.downcase.include?("stop")
-                               button_type = (is_pallet_stopped ? " btn-danger" : " btn-success")
-                            %>
-
-                            <tr class=" <%= is_pallet_stopped ? "table-danger" : "table-success" %>">
-                                <td class="align-middle text-center "><%= pallet.production_date %></td>
-                                <td class="align-middle text-center "><%= pallet.pallet_number %></td>
-                                <td class="align-middle text-center "><%= pallet.color_number %></td>
-                                <td class="align-middle text-center "><%= pallet.customer %></td>
-                                <td class="align-middle text-center <%= is_pallet_stopped ? "text-danger" : "text-success" %>"><%= pallet.status %></td>
-                                <td class="align-middle">
-                                    <div class="btn-group text-end d-flex justify-content-center gap-2" role="group" aria-label="Pallet actions">
-                                        <div class="div">
-                                            <%= link_to pallet_path(pallet), class: "btn " + button_type + " circled-btn-sm btn d-flex justify-content-center align-items-center rounded-circle" do %>
-                                                <i class="bi bi-eye-fill"></i>
-                                            <% end %>
-                                        </div>
-
-                                        <div>
-
-                                            <%= link_to edit_pallet_path(pallet), class: "btn " + button_type + " circled-btn-sm btn d-flex justify-content-center align-items-center rounded-circle" do %>
-                                                <i class="bi bi-pencil-square"></i>
-                                            <% end %>
-                                        </div>
-
-                                        <div>
-                                            <%= link_to print_pallet_path(pallet), class: "btn " + button_type + " circled-btn-sm btn d-flex justify-content-center align-items-center rounded-circle", data: { action: "print-pallet", url: print_pallet_path(pallet) } do %>
-                                                <i class="bi bi-printer-fill"></i>
-                                            <% end %>
-                                        </div>
-
-
-                                    </div>
-                                </td>
-                            </tr>
-                        <% end %>
-                    </tbody>
-                    <tfoot>
-                        <% unless @pallets.any? %>
-                            <tr>
-                                <td colspan="5">
-                                    <div class="alert alert-warning mb-0 text-center" role="alert">
-                                        No pallets found.
-                                    </div>
-                                </td>
-                            </tr>
-                        <% end %>
-                    </tfoot>
-                </table>
-            <% else %>
-                <div class="alert alert-warning mb-0 text-center" role="alert">
-                    No pallets found.
+        <% @pallets.each do |pallet| %>
+            <div class="row">
+                <div class="col">
+                    <%= render partial: "pallets/pallet_view", locals: { pallet: pallet } %>
                 </div>
-            <% end %>
+            </div>
+
+        <% end %>
+
+    <% else %>
+        <div class="alert alert-warning mb-0 text-center" role="alert">
+            No pallets found.
         </div>
-
-
-    </div>
+    <% end %>
 
 </div>

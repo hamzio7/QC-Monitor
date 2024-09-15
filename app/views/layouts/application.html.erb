@@ -14,53 +14,60 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg sticky-top bg-light mb-4">
-            <div class="container">
-                <%= link_to "QC Monitor", pallets_path, class: "navbar-brand" %>
 
-                <button class="navbar-toggler rounded-pill" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarNav">
-
-                    <% if user_signed_in? %>
-
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item">
-                                <%= link_to "Pallets", pallets_path, class: "nav-link" %>
-                            </li>
-                            <li class="nav-item">
-                                <%= link_to "UF Tank Analysis", uf_tanks_path, class: "nav-link" %>
-                            </li>
-                            <li class="nav-item">
-                                <%= link_to "MF Tanks Analysis", mf_tanks_path, class: "nav-link" %>
-                            </li>
-                            <li class="nav-item">
-                                <%= link_to "Reports", production_days_path, class: "nav-link" %>
-                            </li>
-                        </ul>
-
-                        <ul class="navbar-nav">
-                            <li class="nav-item ">
-                                <div class="nav-link">
-                                    <%= current_user.username %>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %>
-                            </li>
-                        </ul>
-
-                    <% end %>
-
+        <div class="tools container mb-3 mt-3">
+            <div class="d-flex justify-content-start align-items-center">
+                <div class="row">
+                    <div class="col d-flex align-items-center">
+                        <button class="me-2 bg-transparent" style=" border: transparent" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                            <span style="font-size: x-large" class="bi bi-list"></span>
+                        </button>
+                        <%= link_to "QC Monitor", pallets_path, class: "navbar-brand", style:"font-size: large" %>
+                    </div>
                 </div>
             </div>
-        </nav>
+
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                <div class="offcanvas-header">
+                    <% if user_signed_in? %>
+                        <%= link_to current_user.username.capitalize, pallets_path, class: "navbar-brand", style:"font-size: large" %>
+                    <% end %>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div class="dropdown">
+                        <% if user_signed_in? %>
+                            <ul class="navbar-nav me-auto">
+                                <li class="nav-item">
+                                    <%= link_to "Pallets", pallets_path, class: "nav-link" %>
+                                </li>
+                                <li class="nav-item">
+                                    <%= link_to "Overview", schedules_path, class: "nav-link" %>
+                                </li>
+                                <li class="nav-item">
+                                    <%= link_to "UF Tank Analysis", uf_tanks_path, class: "nav-link" %>
+                                </li>
+                                <li class="nav-item">
+                                    <%= link_to "MF Tanks Analysis", mf_tanks_path, class: "nav-link" %>
+                                </li>
+                                <li class="nav-item">
+                                    <%= link_to "Reports", production_days_path, class: "nav-link" %>
+                                </li>
+                            </ul>
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %>
+                                </li>
+                            </ul>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div>
             <% if notice.present? %>
-
                 <div class="container">
                     <div class=" alert alert-success alert-dismissible fade show  mb-3" role="alert">
                         <div>
@@ -69,10 +76,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
-
-
             <% end %>
-
             <% if alert.present? %>
                 <div class="container">
                     <div class=" alert alert-success alert-dismissible fade show mb-3" role="alert">
@@ -83,6 +87,7 @@
                     </div>
                 </div>
             <% end %>
+
             <%= yield %>
         </div>
     </body>
