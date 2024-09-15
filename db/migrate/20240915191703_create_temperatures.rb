@@ -3,9 +3,10 @@ class CreateTemperatures < ActiveRecord::Migration[7.1]
     create_table :temperatures do |t|
       t.decimal :uf
       t.decimal :mf
-      t.decimal :paper_mf
-      t.decimal :paper_pr
+      t.decimal :mf_paper
+      t.decimal :pr_paper
       t.decimal :chiller
+      t.datetime :time
 
       t.timestamps
     end

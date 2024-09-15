@@ -52,18 +52,18 @@
 
         <div class="col-4 text-center border border-1 d-flex flex-column justify-content-around align-items-center p-0">
             <div class="row d-flex justify-content-center align-items-center">
-                Ovens Temp
+                Ovens' Temperatures
             </div>
             <div class="d-flex justify-content-between w-100">
-                <div class="text-center border-end w-100">1</div>
-                <div class="text-center border-end w-100">2</div>
-                <div class="text-center border-end w-100">3</div>
-                <div class="text-center border-end w-100">4</div>
-                <div class="text-center border-end w-100">5</div>
-                <div class="text-center border-end w-100">6</div>
-                <div class="text-center border-end w-100">7</div>
-                <div class="text-center border-end w-100">8</div>
-                <div class="text-center border-end w-100">9</div>
+                <div class="text-center border-end w-100">01</div>
+                <div class="text-center border-end w-100">02</div>
+                <div class="text-center border-end w-100">03</div>
+                <div class="text-center border-end w-100">04</div>
+                <div class="text-center border-end w-100">05</div>
+                <div class="text-center border-end w-100">06</div>
+                <div class="text-center border-end w-100">07</div>
+                <div class="text-center border-end w-100">08</div>
+                <div class="text-center border-end w-100">09</div>
                 <div class="text-center border-end w-100">10</div>
                 <div class="text-center w-100">11</div>
             </div>
@@ -81,80 +81,87 @@
             <!-- Pallet Number -->
             <div class="col-md-1 text-center border border-1 p-0">
                 <% if @pallets_by_slot[slot] %>
-                    <div class=" <%= @pallets_by_slot[slot].status.to_s.downcase == 'approved' ? 'bg-success-subtle' : 'bg-danger-subtle' %> ">
+                    <div class="<%= @pallets_by_slot[slot].status.to_s.downcase == 'approved' ? 'bg-success-subtle' : 'bg-danger-subtle' %>">
                         <%= link_to @pallets_by_slot[slot].pallet_number, pallet_path(@pallets_by_slot[slot]), class: "nav-link p-0" %>
                     </div>
                 <% else %>
-                    &nbsp;
+                    <div>
+                        <%= link_to '', new_pallet_path, class: 'dropdown-item bi bi-plus' %>
+                    </div>
                 <% end %>
             </div>
 
-            <!-- Gel Time and Cloudy Time -->
-
-
+            <!-- Reaction Times -->
             <div class="col-1 text-center border border-1 p-0 d-flex justify-content-center align-items-center">
-                <% if @pallets_by_slot[slot] %>
+                <% if @reaction_times_by_slot[slot] %>
                     <div class="d-flex justify-content-between w-100">
-                        <div class="text-center flex-fill border-end"><%= @pallets_by_slot[slot].gel_time %></div>
-                        <div class="text-center flex-fill"><%= @pallets_by_slot[slot].cloudy_time %></div>
+                        <div class="text-center flex-fill border-end"><%= @reaction_times_by_slot[slot].gel_time %></div>
+                        <div class="text-center flex-fill"><%= @reaction_times_by_slot[slot].cloudy_time %></div>
                     </div>
                 <% else %>
-                    &nbsp;
+                    <!-- For Reaction Times -->
+                    <%= link_to '', new_reaction_time_path(time: slot), class: 'dropdown-item bi bi-plus' %>
+
                 <% end %>
             </div>
 
+            <!-- Volatile Content -->
             <div class="col-1 text-center border border-1 p-0 d-flex justify-content-center align-items-center">
-                <% if @pallets_by_slot[slot] %>
+                <% if @volatile_contents_by_slot[slot] %>
                     <div class="d-flex justify-content-between w-100">
-                        <div class="text-center flex-fill border-end"><%= @pallets_by_slot[slot].volatile_content_min %></div>
-                        <div class="text-center flex-fill"><%= @pallets_by_slot[slot].volatile_content_max %></div>
+                        <div class="text-center flex-fill border-end"><%= @volatile_contents_by_slot[slot].min %></div>
+                        <div class="text-center flex-fill"><%= @volatile_contents_by_slot[slot].max %></div>
                     </div>
                 <% else %>
-                    &nbsp;
+                    <%= link_to '', new_volatile_content_path, class: 'dropdown-item bi bi-plus' %>
                 <% end %>
             </div>
 
             <!-- Temperatures Data -->
             <div class="col-3 text-center border border-1 p-0 d-flex justify-content-around align-items-center">
-                <% if @pallets_by_slot[slot] %>
+                <% if @temperatures_by_slot[slot] %>
                     <div class="d-flex justify-content-between w-100">
-                        <div class="text-center flex-fill border-end">27</div>
-                        <div class="text-center flex-fill border-end">32</div>
-                        <div class="text-center flex-fill border-end">54</div>
-                        <div class="text-center flex-fill border-end">26</div>
-                        <div class="text-center flex-fill border-end">25</div>
+                        <div class="text-center flex-fill border-end"><%= @temperatures_by_slot[slot].uf %></div>
+                        <div class="text-center flex-fill border-end"><%= @temperatures_by_slot[slot].mf %></div>
+                        <div class="text-center flex-fill border-end"><%= @temperatures_by_slot[slot].mf_paper %></div>
+                        <div class="text-center flex-fill border-end"><%= @temperatures_by_slot[slot].pr_paper %></div>
+                        <div class="text-center flex-fill"><%= @temperatures_by_slot[slot].chiller %></div>
                     </div>
                 <% else %>
-                    &nbsp;
+                    <%= link_to '', new_temperature_path, class: 'dropdown-item bi bi-plus' %>
                 <% end %>
             </div>
 
             <!-- Gravures Data -->
             <div class="col-1 text-center border border-1 p-0 d-flex justify-content-center align-items-center">
-                <% if @pallets_by_slot[slot] %>
+                <% if @gravures_by_slot[slot] %>
                     <div class="d-flex justify-content-between w-100">
-                        <div class="text-center flex-fill border-end">H</div>
-                        <div class="text-center flex-fill">L</div>
+                        <div class="text-center flex-fill border-end"><%= @gravures_by_slot[slot].high %></div>
+                        <div class="text-center flex-fill"><%= @gravures_by_slot[slot].low %></div>
                     </div>
                 <% else %>
-                    &nbsp;
+                    <%= link_to '', new_gravure_path, class: 'dropdown-item bi bi-plus' %>
                 <% end %>
             </div>
-
             <!-- Ovens Temp Data -->
-            <div class="col-4 text-center border border-1 d-flex justify-content-around align-items-center p-0">
-                <% if @pallets_by_slot[slot] %>
+            <div class="col-4 text-center border border-1 d-flex flex-column justify-content-around align-items-center p-0">
+                <% if @oven_temps_by_slot[slot] %>
                     <div class="d-flex justify-content-between w-100">
                         <% (1..11).each do |i| %>
-                            <div class="text-center flex-fill border-end">
-                                100
+                            <div class="text-center border-end w-100">
+                                <% if i == @oven_temps_by_slot[slot].oven_number %>
+                                    <%= @oven_temps_by_slot[slot].temperature.to_i %>
+                                <% else %>
+                                    &nbsp;
+                                <% end %>
                             </div>
                         <% end %>
                     </div>
                 <% else %>
-                    &nbsp;
+                    <%= link_to '', new_oven_temp_path, class: 'dropdown-item bi bi-plus' %>
                 <% end %>
             </div>
+
         </div>
     <% end %>
 </div>

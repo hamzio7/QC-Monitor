@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @oven_temp %>
+
+<div>
+  <%= link_to "Edit this oven temp", edit_oven_temp_path(@oven_temp) %> |
+  <%= link_to "Back to oven temps", oven_temps_path %>
+
+  <%= button_to "Destroy this oven temp", @oven_temp, method: :delete %>
+</div>

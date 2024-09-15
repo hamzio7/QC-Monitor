@@ -6,9 +6,9 @@ import "popper"
 import "bootstrap"
 import "flatpickr"
 
-
 //= require flatpickr
-
-
+//= require rails-ujs
+//= require_tree
+//= require bootstrap
 
 

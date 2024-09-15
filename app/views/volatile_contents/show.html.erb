@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @volatile_content %>
+
+<div>
+  <%= link_to "Edit this volatile content", edit_volatile_content_path(@volatile_content) %> |
+  <%= link_to "Back to volatile contents", volatile_contents_path %>
+
+  <%= button_to "Destroy this volatile content", @volatile_content, method: :delete %>
+</div>

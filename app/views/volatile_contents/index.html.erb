@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Volatile contents</h1>
+
+<div id="volatile_contents">
+  <% @volatile_contents.each do |volatile_content| %>
+    <%= render volatile_content %>
+    <p>
+      <%= link_to "Show this volatile content", volatile_content %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New volatile content", new_volatile_content_path %>

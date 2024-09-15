@@ -1,9 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  min_content: 9.99
-  max_content: 9.99
+  min: 9.99
+  max: 9.99
+  time: 2024-09-15 22:46:12
 
 two:
-  min_content: 9.99
-  max_content: 9.99
+  min: 9.99
+  max: 9.99
+  time: 2024-09-15 22:46:12

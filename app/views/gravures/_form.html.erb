@@ -1,0 +1,32 @@
+<%= form_with(model: gravure) do |form| %>
+  <% if gravure.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(gravure.errors.count, "error") %> prohibited this gravure from being saved:</h2>
+
+      <ul>
+        <% gravure.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :high, style: "display: block" %>
+    <%= form.text_field :high %>
+  </div>
+
+  <div>
+    <%= form.label :low, style: "display: block" %>
+    <%= form.text_field :low %>
+  </div>
+
+  <div>
+    <%= form.label :time, style: "display: block" %>
+    <%= form.datetime_field :time %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Gravures</h1>
+
+<div id="gravures">
+  <% @gravures.each do |gravure| %>
+    <%= render gravure %>
+    <p>
+      <%= link_to "Show this gravure", gravure %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New gravure", new_gravure_path %>

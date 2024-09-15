@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_15_190004) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_15_192354) do
   create_table "gravures", force: :cascade do |t|
-    t.decimal "h"
-    t.decimal "l"
+    t.decimal "high"
+    t.decimal "low"
+    t.datetime "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "time"
   end
 
   create_table "line_stops", force: :cascade do |t|
@@ -48,20 +48,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_15_190004) do
   end
 
   create_table "oven_temps", force: :cascade do |t|
-    t.integer "oven_1"
-    t.integer "oven_2"
-    t.integer "oven_3"
-    t.integer "oven_4"
-    t.integer "oven_5"
-    t.integer "oven_6"
-    t.integer "oven_7"
-    t.integer "oven_8"
-    t.integer "oven_9"
-    t.integer "oven_10"
-    t.integer "oven_11"
+    t.integer "oven_number"
+    t.decimal "temperature"
+    t.datetime "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "time"
   end
 
   create_table "pallet_stop_reasons", force: :cascade do |t|
@@ -129,9 +120,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_15_190004) do
   create_table "reaction_times", force: :cascade do |t|
     t.string "gel_time"
     t.string "cloudy_time"
+    t.datetime "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "time"
   end
 
   create_table "resin_programs", force: :cascade do |t|
@@ -166,12 +157,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_15_190004) do
   create_table "temperatures", force: :cascade do |t|
     t.decimal "uf"
     t.decimal "mf"
-    t.decimal "paper_mf"
-    t.decimal "paper_pr"
+    t.decimal "mf_paper"
+    t.decimal "pr_paper"
     t.decimal "chiller"
+    t.datetime "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "time"
   end
 
   create_table "uf_tanks", force: :cascade do |t|
@@ -209,11 +200,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_15_190004) do
   end
 
   create_table "volatile_contents", force: :cascade do |t|
-    t.decimal "min_content"
-    t.decimal "max_content"
+    t.decimal "min"
+    t.decimal "max"
+    t.datetime "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "time"
   end
 
   add_foreign_key "pallet_stop_reasons", "pallets"

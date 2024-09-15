@@ -1,0 +1,32 @@
+<%= form_with(model: reaction_time) do |form| %>
+  <% if reaction_time.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(reaction_time.errors.count, "error") %> prohibited this reaction_time from being saved:</h2>
+
+      <ul>
+        <% reaction_time.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :gel_time, style: "display: block" %>
+    <%= form.text_field :gel_time %>
+  </div>
+
+  <div>
+    <%= form.label :cloudy_time, style: "display: block" %>
+    <%= form.text_field :cloudy_time %>
+  </div>
+
+  <div>
+    <%= form.label :time, style: "display: block" %>
+      <%= form.datetime_select :time, default: @time.present? ? Time.parse(@time) : nil, class: 'form-control' %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -4,8 +4,6 @@ class PalletsController < ApplicationController
   before_action :get_tanks, only: %i[edit new show create]
   before_action :get_stop_reasons, only: %i[new edit create update]
 
-
-
   def index
     if params[:pallet].present?
       @pallets = Pallet.where("pallet_number LIKE :query OR supervisor LIKE :query OR production_date LIKE :query OR customer LIKE :query OR status LIKE :query OR color_number LIKE :query", query: "%#{params[:pallet]}%")

@@ -1,9 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  h: 9.99
-  l: 9.99
+  high: 9.99
+  low: 9.99
+  time: 2024-09-15 22:46:39
 
 two:
-  h: 9.99
-  l: 9.99
+  high: 9.99
+  low: 9.99
+  time: 2024-09-15 22:46:39

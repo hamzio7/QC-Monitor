@@ -1,9 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  gel_time: MyString
-  cloudy_time: MyString
+  gel_time: 9.99
+  cloudy_time: 9.99
+  time: 2024-09-15 22:46:24
 
 two:
-  gel_time: MyString
-  cloudy_time: MyString
+  gel_time: 9.99
+  cloudy_time: 9.99
+  time: 2024-09-15 22:46:24

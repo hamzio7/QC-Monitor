@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @reaction_time %>
+
+<div>
+  <%= link_to "Edit this reaction time", edit_reaction_time_path(@reaction_time) %> |
+  <%= link_to "Back to reaction times", reaction_times_path %>
+
+  <%= button_to "Destroy this reaction time", @reaction_time, method: :delete %>
+</div>
