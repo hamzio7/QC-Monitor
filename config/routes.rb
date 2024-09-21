@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :ovens
   resources :line_stops
   resources :resin_programs
   resources :production_days

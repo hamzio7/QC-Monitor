@@ -11,7 +11,7 @@
         <tbody>
             <% @production_days.each do |production_day| %>
                 <tr style="cursor:pointer;">
-                    <td class="align-middle"><%= production_day.production_date %></td>
+                    <td class="align-middle"><%= production_day.date %></td>
                     <td class="align-middle"><%= production_day.stopped_pallets_count %></td>
                     <td class="align-middle"><%= production_day.approved_pallets_count %></td>
                     <td class="align-middle">

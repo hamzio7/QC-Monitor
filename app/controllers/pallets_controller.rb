@@ -1,16 +1,16 @@
 class PalletsController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create edit update destroy]
+  # before_action :authenticate_user!, only: %i[new create edit update destroy]
   before_action :set_pallet, only: %i[show edit update destroy print]
   before_action :get_tanks, only: %i[edit new show create]
   before_action :get_stop_reasons, only: %i[new edit create update]
 
   def index
     if params[:pallet].present?
-      @pallets = Pallet.where("pallet_number LIKE :query OR supervisor LIKE :query OR production_date LIKE :query OR customer LIKE :query OR status LIKE :query OR color_number LIKE :query", query: "%#{params[:pallet]}%")
-                       .order(production_date: :desc)
+      @pallets = Pallet.where("pallet_number LIKE :query OR supervisor LIKE :query OR date LIKE :query OR customer LIKE :query OR status LIKE :query OR color_number LIKE :query", query: "%#{params[:pallet]}%")
+                       .order(date: :desc)
                        .page(params[:page]).per(10)
     else
-      @pallets = Pallet.order(production_date: :desc).page(params[:page]).per(10)
+      @pallets = Pallet.order(date: :desc).page(params[:page]).per(10)
     end
   end
 
@@ -30,10 +30,7 @@ class PalletsController < ApplicationController
 
   def create
 
-
-
-
-    production_day = find_or_create_production_day(pallet_params[:production_date])
+    production_day = find_or_create_production_day(pallet_params[:date])
     stop_reason_ids = process_stop_reasons
 
     @pallet = Pallet.new(pallet_params)
@@ -90,8 +87,8 @@ class PalletsController < ApplicationController
 
   def pallet_params
     params.require(:pallet).permit(
-      :line_speed, :pallet_number, :color_number, :shift, :production_date,
-      :production_time, :dimensions, :quantity, :finish, :customer,
+      :line_speed, :pallet_number, :color_number, :shift, :date,
+      :time, :dimensions, :quantity, :finish, :customer,
       :initial_grammage, :grammage_min_set, :grammage_max_set,
       :final_grammage_min, :final_grammage_max, :uf_tank_id, :mf_tank_id,
       :cloudy_time, :gel_time, :volatile_content_set_min, :volatile_content_set_max,
@@ -102,7 +99,7 @@ class PalletsController < ApplicationController
   end
 
   def find_or_create_production_day(production_date)
-    ProductionDay.find_or_create_by(production_date: production_date) { |pd| pd.info = "" }
+    ProductionDay.find_or_create_by(date: production_date) { |pd| pd.info = "" }
   end
 
   def process_stop_reasons

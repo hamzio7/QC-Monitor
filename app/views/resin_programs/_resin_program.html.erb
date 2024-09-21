@@ -1,82 +1,63 @@
-<div id="<%= dom_id resin_program %>">
-  <p>
-    <strong>Date:</strong>
-    <%= resin_program.date %>
-  </p>
+<div class="container">
+    <div id="<%= dom_id resin_program %>" class="card my-4">
+        <div class="card-body">
+            <h5 class="card-title">Resin Program Details</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        <strong>Date:</strong> <%= resin_program.date %>
+                    </p>
+                    <p>
+                        <strong>Time:</strong> <%= resin_program.time %>
+                    </p>
+                    <p>
+                        <strong>UF wlf:</strong> <%= resin_program.uf_wlf %>
+                    </p>
+                    <p>
+                        <strong>UF 837:</strong> <%= resin_program.uf_837 %>
+                    </p>
+                    <p>
+                        <strong>UF 1448:</strong> <%= resin_program.uf_1448 %>
+                    </p>
+                    <p>
+                        <strong>MF es700:</strong> <%= resin_program.mf_es700 %>
+                    </p>
+                    <p>
+                        <strong>MF es501:</strong> <%= resin_program.mf_es501 %>
+                    </p>
+                </div>
 
-  <p>
-    <strong>Time:</strong>
-    <%= resin_program.time %>
-  </p>
-
-  <p>
-    <strong>Uf wlf:</strong>
-    <%= resin_program.uf_wlf %>
-  </p>
-
-  <p>
-    <strong>Uf 837:</strong>
-    <%= resin_program.uf_837 %>
-  </p>
-
-  <p>
-    <strong>Uf 1448:</strong>
-    <%= resin_program.uf_1448 %>
-  </p>
-
-  <p>
-    <strong>Mf es700:</strong>
-    <%= resin_program.mf_es700 %>
-  </p>
-
-  <p>
-    <strong>Mf es501:</strong>
-    <%= resin_program.mf_es501 %>
-  </p>
-
-  <p>
-    <strong>Mf 1010:</strong>
-    <%= resin_program.mf_1010 %>
-  </p>
-
-  <p>
-    <strong>Mf 837:</strong>
-    <%= resin_program.mf_837 %>
-  </p>
-
-  <p>
-    <strong>Mf 1014:</strong>
-    <%= resin_program.mf_1014 %>
-  </p>
-
-  <p>
-    <strong>Uf tank num:</strong>
-    <%= resin_program.uf_tank_num %>
-  </p>
-
-  <p>
-    <strong>Mf tank num:</strong>
-    <%= resin_program.mf_tank_num %>
-  </p>
-
-  <p>
-    <strong>Mixing 1:</strong>
-    <%= resin_program.mixing_1 %>
-  </p>
-
-  <p>
-    <strong>Mixing 2:</strong>
-    <%= resin_program.mixing_2 %>
-  </p>
-
-  <p>
-    <strong>Shift:</strong>
-    <%= resin_program.shift %>
-  </p>
-
-  <p>
-    <strong>Line:</strong>
-    <%= resin_program.line %>
-  </p>
+                <div class="col-md-6">
+                    <p>
+                        <strong>MF 1010:</strong> <%= resin_program.mf_1010 %>
+                    </p>
+                    <p>
+                        <strong>MF 837:</strong> <%= resin_program.mf_837 %>
+                    </p>
+                    <p>
+                        <strong>MF 1014:</strong> <%= resin_program.mf_1014 %>
+                    </p>
+                    <p>
+                        <strong>UF tank num:</strong> <%= resin_program.uf_tank_num %>
+                    </p>
+                    <p>
+                        <strong>MF tank num:</strong> <%= resin_program.mf_tank_num %>
+                    </p>
+                    <p>
+                        <strong>Mixing 1:</strong> <%= resin_program.mixing_1 %>
+                    </p>
+                    <p>
+                        <strong>Mixing 2:</strong> <%= resin_program.mixing_2 %>
+                    </p>
+                    <p>
+                        <strong>Shift:</strong> <%= resin_program.shift %>
+                    </p>
+                    <p>
+                        <strong>Line Number:</strong> <%= resin_program.line_number %>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>

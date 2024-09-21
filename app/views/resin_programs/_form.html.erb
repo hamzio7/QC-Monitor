@@ -1,97 +1,104 @@
-<%= form_with(model: resin_program) do |form| %>
-  <% if resin_program.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(resin_program.errors.count, "error") %> prohibited this resin_program from being saved:</h2>
+<%= form_with(model: @resin_program, class: "container mt-4") do |form| %>
+    <% if @resin_program.errors.any? %>
+        <div class="alert alert-danger">
+            <h4 class="alert-heading"><%= pluralize(@resin_program.errors.count, "error") %> prohibited this resin program from being saved:</h4>
+            <ul>
+                <% @resin_program.errors.each do |error| %>
+                    <li><%= error.full_message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
 
-      <ul>
-        <% resin_program.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <%= form.label :date, class: "form-label text-uppercase" %>
+            <%= form.text_field :date, class: "form-control" %>
+        </div>
+        <div class="col-md-6">
+            <%= form.label :time, class: "form-label text-uppercase" %>
+            <%= form.text_field :time, class: "form-control" %>
+        </div>
     </div>
-  <% end %>
 
-  <div>
-    <%= form.label :date, style: "display: block" %>
-    <%= form.text_field :date %>
-  </div>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <%= form.label :uf_wlf, class: "form-label text-uppercase" %>
+            <%= form.text_field :uf_wlf, class: "form-control" %>
+        </div>
+        <div class="col-md-6">
+            <%= form.label :uf_837, class: "form-label text-uppercase" %>
+            <%= form.text_field :uf_837, class: "form-control" %>
+        </div>
+    </div>
 
-  <div>
-    <%= form.label :time, style: "display: block" %>
-    <%= form.text_field :time %>
-  </div>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <%= form.label :uf_1448, class: "form-label text-uppercase" %>
+            <%= form.text_field :uf_1448, class: "form-control" %>
+        </div>
+        <div class="col-md-6">
+            <%= form.label :mf_es700, class: "form-label text-uppercase" %>
+            <%= form.text_field :mf_es700, class: "form-control" %>
+        </div>
+    </div>
 
-  <div>
-    <%= form.label :uf_wlf, style: "display: block" %>
-    <%= form.text_field :uf_wlf %>
-  </div>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <%= form.label :mf_es501, class: "form-label text-uppercase" %>
+            <%= form.text_field :mf_es501, class: "form-control" %>
+        </div>
+        <div class="col-md-6">
+            <%= form.label :mf_1010, class: "form-label text-uppercase" %>
+            <%= form.text_field :mf_1010, class: "form-control" %>
+        </div>
+    </div>
 
-  <div>
-    <%= form.label :uf_837, style: "display: block" %>
-    <%= form.text_field :uf_837 %>
-  </div>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <%= form.label :mf_837, class: "form-label text-uppercase" %>
+            <%= form.text_field :mf_837, class: "form-control" %>
+        </div>
+        <div class="col-md-6">
+            <%= form.label :mf_1014, class: "form-label text-uppercase" %>
+            <%= form.text_field :mf_1014, class: "form-control" %>
+        </div>
+    </div>
 
-  <div>
-    <%= form.label :uf_1448, style: "display: block" %>
-    <%= form.text_field :uf_1448 %>
-  </div>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <%= form.label :uf_tank_num, class: "form-label text-uppercase" %>
+            <%= form.text_field :uf_tank_num, class: "form-control" %>
+        </div>
+        <div class="col-md-6">
+            <%= form.label :mf_tank_num, class: "form-label text-uppercase" %>
+            <%= form.text_field :mf_tank_num, class: "form-control" %>
+        </div>
+    </div>
 
-  <div>
-    <%= form.label :mf_es700, style: "display: block" %>
-    <%= form.text_field :mf_es700 %>
-  </div>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <%= form.label :mixing_1, class: "form-label text-uppercase" %>
+            <%= form.text_field :mixing_1, class: "form-control" %>
+        </div>
+        <div class="col-md-6">
+            <%= form.label :mixing_2, class: "form-label text-uppercase" %>
+            <%= form.text_field :mixing_2, class: "form-control" %>
+        </div>
+    </div>
 
-  <div>
-    <%= form.label :mf_es501, style: "display: block" %>
-    <%= form.text_field :mf_es501 %>
-  </div>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <%= form.label :shift, class: "form-label text-uppercase" %>
+            <%= form.text_field :shift, class: "form-control" %>
+        </div>
+        <div class="col-md-6">
+            <%= form.label :line_number, class: "form-label text-uppercase" %>
+            <%= form.number_field :line_number, class: "form-control" %>
+        </div>
+    </div>
 
-  <div>
-    <%= form.label :mf_1010, style: "display: block" %>
-    <%= form.text_field :mf_1010 %>
-  </div>
-
-  <div>
-    <%= form.label :mf_837, style: "display: block" %>
-    <%= form.text_field :mf_837 %>
-  </div>
-
-  <div>
-    <%= form.label :mf_1014, style: "display: block" %>
-    <%= form.text_field :mf_1014 %>
-  </div>
-
-  <div>
-    <%= form.label :uf_tank_num, style: "display: block" %>
-    <%= form.text_field :uf_tank_num %>
-  </div>
-
-  <div>
-    <%= form.label :mf_tank_num, style: "display: block" %>
-    <%= form.text_field :mf_tank_num %>
-  </div>
-
-  <div>
-    <%= form.label :mixing_1, style: "display: block" %>
-    <%= form.text_field :mixing_1 %>
-  </div>
-
-  <div>
-    <%= form.label :mixing_2, style: "display: block" %>
-    <%= form.text_field :mixing_2 %>
-  </div>
-
-  <div>
-    <%= form.label :shift, style: "display: block" %>
-    <%= form.text_field :shift %>
-  </div>
-
-  <div>
-    <%= form.label :line, style: "display: block" %>
-    <%= form.text_field :line %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+    <div class="mt-3">
+        <%= form.submit class: "btn btn-primary" %>
+    </div>
 <% end %>

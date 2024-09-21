@@ -77,7 +77,7 @@
                                             when 'Quantity' then @pallet.quantity
                                             when 'Customer' then @pallet.customer
                                             when 'Volatile Content' then " #{@pallet.volatile_content_set_min} - #{@pallet.volatile_content_set_max}"
-                                            when 'Date' then @pallet.production_date
+                                            when 'Date' then @pallet.date
                                             when 'Shift' then @pallet.shift
                                             when 'Dimensions' then @pallet.dimensions
                                             when 'Grammage' then "#{@pallet.grammage_min_set} - #{@pallet.grammage_max_set}"

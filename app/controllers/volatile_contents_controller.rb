@@ -65,6 +65,6 @@ class VolatileContentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def volatile_content_params
-      params.require(:volatile_content).permit(:min, :max, :time)
+      params.require(:volatile_content).permit(:min, :max, :time, :date)
     end
 end

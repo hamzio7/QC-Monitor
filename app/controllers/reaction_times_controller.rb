@@ -13,6 +13,7 @@ class ReactionTimesController < ApplicationController
   # GET /reaction_times/new
   def new
     @reaction_time = ReactionTime.new
+    @date = params[:date]
     @time = params[:time]
   end
 
@@ -66,6 +67,6 @@ class ReactionTimesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def reaction_time_params
-      params.require(:reaction_time).permit(:gel_time, :cloudy_time, :time)
+      params.require(:reaction_time).permit(:gel_time, :cloudy_time, :time, :date)
     end
 end

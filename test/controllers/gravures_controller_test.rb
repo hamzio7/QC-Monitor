@@ -17,7 +17,7 @@ class GravuresControllerTest < ActionDispatch::IntegrationTest
 
   test "should create gravure" do
     assert_difference("Gravure.count") do
-      post gravures_url, params: { gravure: { high: @gravure.high, low: @gravure.low, time: @gravure.time } }
+      post gravures_url, params: { gravure: { date: @gravure.date, high: @gravure.high, low: @gravure.low, time: @gravure.time } }
     end
 
     assert_redirected_to gravure_url(Gravure.last)
@@ -34,7 +34,7 @@ class GravuresControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update gravure" do
-    patch gravure_url(@gravure), params: { gravure: { high: @gravure.high, low: @gravure.low, time: @gravure.time } }
+    patch gravure_url(@gravure), params: { gravure: { date: @gravure.date, high: @gravure.high, low: @gravure.low, time: @gravure.time } }
     assert_redirected_to gravure_url(@gravure)
   end
 

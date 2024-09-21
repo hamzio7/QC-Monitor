@@ -29,8 +29,8 @@ class PalletsTest < ApplicationSystemTestCase
     fill_in "Initial grammage", with: @pallet.initial_grammage
     fill_in "MF tank", with: @pallet.mf_tank
     fill_in "Pallet number", with: @pallet.pallet_number
-    fill_in "Production date", with: @pallet.production_date
-    fill_in "Production time", with: @pallet.production_time
+    fill_in "Production date", with: @pallet.date
+    fill_in "Production time", with: @pallet.time
     fill_in "Quantity", with: @pallet.quantity
     fill_in "Status", with: @pallet.status
     fill_in "Stop reason", with: @pallet.stop_reason

@@ -14,6 +14,7 @@ class GravuresTest < ApplicationSystemTestCase
     visit gravures_url
     click_on "New gravure"
 
+    fill_in "Date", with: @gravure.date
     fill_in "High", with: @gravure.high
     fill_in "Low", with: @gravure.low
     fill_in "Time", with: @gravure.time
@@ -27,6 +28,7 @@ class GravuresTest < ApplicationSystemTestCase
     visit gravure_url(@gravure)
     click_on "Edit this gravure", match: :first
 
+    fill_in "Date", with: @gravure.date
     fill_in "High", with: @gravure.high
     fill_in "Low", with: @gravure.low
     fill_in "Time", with: @gravure.time

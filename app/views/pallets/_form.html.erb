@@ -35,17 +35,17 @@
 
                     <div class="col-md-2">
                         <%= form.label :line_speed, class: "form-label" %>
-                        <%= form.text_field :line_speed, class: "form-control text-md-center", required: true %>
+                        <%= form.text_field :line_speed, class: "form-control text-md-center", required: false %>
                     </div>
 
                     <div class="col-md-5">
                         <%= form.label :pallet_number, class: "form-label" %>
-                        <%= form.text_field :pallet_number, class: "form-control text-md-center", required: true %>
+                        <%= form.text_field :pallet_number, class: "form-control text-md-center", required: false %>
                     </div>
 
                     <div class="col-md-5">
                         <%= form.label :color_number, class: "form-label" %>
-                        <%= form.text_field :color_number, class: "form-control text-md-center", required: true %>
+                        <%= form.text_field :color_number, class: "form-control text-md-center", required: false %>
                     </div>
 
                 </div>
@@ -54,32 +54,40 @@
                 <div class="row mb-3">
                     <div class="col-md-2">
                         <%= form.label :shift, class: "form-label" %>
-                        <%= form.select :shift, options_for_select(shifts, @pallet.shift), { prompt: :shift }, class: "form-control text-md-center", required: true %>
+                        <%= form.select :shift, options_for_select(shifts, @pallet.shift), { prompt: :shift }, class: "form-control text-md-center", required: false %>
                     </div>
 
                     <div class="col-md-2">
-                        <%= form.label :production_date, class: "form-label" %>
-                        <%= form.text_field :production_date, value: @pallet.new_record? ? Date.today.to_parsi : Date.civil(@pallet.production_date.year, @pallet.production_date.month, @pallet.production_date.day).to_parsi, class: "form-control text-md-center", required: true %>
+                        <%= form.label :date, class: "form-label" %>
+                        <%= form.text_field :date, value: if params[:date].present?
+                                                            Date.parse(params[:date]).to_parsi
+                                                          else
+                                                            @pallet.new_record? ? Date.today.to_parsi :  Date.parse(@pallet.date).to_parsi
+                                                          end, class: "form-control text-md-center", required: false %>
                     </div>
 
                     <div class="col-md-2">
-                        <%= form.label :production_time, class: "form-label" %>
-                        <%= form.text_field :production_time, value: format("%02d:%02d", @pallet.production_time.hour, @pallet.production_time.min), class: "form-control text-md-center", required: true %>
+                        <%= form.label :time, class: "form-label" %>
+                        <%= form.text_field :time, value: if params[:time].present?
+                                                            Time.parse(params[:time].to_s).strftime("%H:%M")
+                                                          else
+                                                            @pallet.new_record? ? Time.now.strftime("%H:%M") : @pallet.time.strftime("%H:%M")
+                                                          end, class: "form-control text-md-center", required: false %>
                     </div>
 
                     <div class="col-md-2">
                         <%= form.label :dimensions, class: "form-label" %>
-                        <%= form.text_field :dimensions, class: "form-control text-md-center", required: true %>
+                        <%= form.text_field :dimensions, class: "form-control text-md-center", required: false %>
                     </div>
 
                     <div class="col-md-2">
                         <%= form.label :quantity, class: "form-label" %>
-                        <%= form.text_field :quantity, class: "form-control text-md-center", required: true %>
+                        <%= form.text_field :quantity, class: "form-control text-md-center", required: false %>
                     </div>
 
                     <div class="col-md-2">
                         <%= form.label :finish, class: "form-label" %>
-                        <%= form.select :finish, options_for_select(finishes, @pallet.finish), { prompt: :finish }, class: "form-control text-md-center", required: true %>
+                        <%= form.select :finish, options_for_select(finishes, @pallet.finish), { prompt: :finish }, class: "form-control text-md-center", required: false %>
                     </div>
 
                 </div>
@@ -105,26 +113,26 @@
                 <div class="row mb-3">
                     <div class="col-md-2">
                         <%= form.label :initial_grammage, class: "form-label" %>
-                        <%= form.text_field :initial_grammage, class: "form-control", required: true %>
+                        <%= form.text_field :initial_grammage, class: "form-control", required: false %>
                     </div>
                     <div class="col-md-3">
                         <%= form.label "Required Min", class: "form-label" %>
-                        <%= form.text_field :grammage_min_set, class: "form-control", required: true %>
+                        <%= form.text_field :grammage_min_set, class: "form-control", required: false %>
                     </div>
                     <div class="col-md-3">
                         <%= form.label "Required Max", class: "form-label" %>
-                        <%= form.text_field :grammage_max_set, class: "form-control", required: true %>
+                        <%= form.text_field :grammage_max_set, class: "form-control", required: false %>
                     </div>
 
 
                     <div class="col-md-2">
                         <%= form.label "Experimental Min", class: "form-label" %>
-                        <%= form.text_field :final_grammage_min, class: "form-control", required: true %>
+                        <%= form.text_field :final_grammage_min, class: "form-control", required: false %>
                     </div>
 
                     <div class="col-md-2">
                         <%= form.label "Experimental Max", class: "form-label" %>
-                        <%= form.text_field :final_grammage_max, class: "form-control", required: true %>
+                        <%= form.text_field :final_grammage_max, class: "form-control", required: false %>
                     </div>
                 </div>
 
@@ -149,11 +157,11 @@
                     </div>
                     <div class="col-md-3">
                         <%= form.label "Experimental Cloudy Time", class: "form-label" %>
-                        <%= form.text_field :cloudy_time, class: "form-control text-md-center", placeholder: "mm:ss", required: true %>
+                        <%= form.text_field :cloudy_time, class: "form-control text-md-center", placeholder: "mm:ss", required: false %>
                     </div>
                     <div class="col-md-3">
                         <%= form.label "Experimental Gel Time", class: "form-label" %>
-                        <%= form.text_field :gel_time, class: "form-control text-md-center", placeholder: "mm:ss", required: true %>
+                        <%= form.text_field :gel_time, class: "form-control text-md-center", placeholder: "mm:ss", required: false %>
                     </div>
                 </div>
 
@@ -169,20 +177,20 @@
                 <div class="row mb-3">
                     <div class="col-md-3">
                         <%= form.label "Required min", class: "form-label" %>
-                        <%= form.text_field :volatile_content_set_min, class: "form-control text-md-center", required: true %>
+                        <%= form.text_field :volatile_content_set_min, class: "form-control text-md-center", required: false %>
                     </div>
                     <div class="col-md-3">
                         <%= form.label "Required max", class: "form-label" %>
-                        <%= form.text_field :volatile_content_set_max, class: "form-control text-md-center", required: true %>
+                        <%= form.text_field :volatile_content_set_max, class: "form-control text-md-center", required: false %>
                     </div>
 
                     <div class="col-md-3">
                         <%= form.label "Experimental min", class: "form-label" %>
-                        <%= form.text_field :volatile_content_min, class: "form-control text-md-center", required: true %>
+                        <%= form.text_field :volatile_content_min, class: "form-control text-md-center", required: false %>
                     </div>
                     <div class="col-md-3">
                         <%= form.label "Experimental max", class: "form-label" %>
-                        <%= form.text_field :volatile_content_max, class: "form-control text-md-center", required: true %>
+                        <%= form.text_field :volatile_content_max, class: "form-control text-md-center", required: false %>
                     </div>
                 </div>
 
@@ -223,12 +231,12 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <%= form.label :supervisor, class: "form-label" %>
-                        <%= form.select :supervisor, options_for_select(supervisors), { prompt: :supervisor }, class: "form-control", required: true %>
+                        <%= form.select :supervisor, options_for_select(supervisors), { prompt: :supervisor }, class: "form-control", required: false %>
                     </div>
 
                     <div class="col-md-6">
                         <%= form.label :status, class: "form-label" %>
-                        <%= form.select :status, options_for_select(status, @pallet.status), { prompt: :status }, class: "form-control", required: true %>
+                        <%= form.select :status, options_for_select(status, @pallet.status), { prompt: :status }, class: "form-control", required: false %>
                     </div>
 
                 </div>

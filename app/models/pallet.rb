@@ -5,8 +5,8 @@ class Pallet < ApplicationRecord
   has_many :stop_reasons, through: :pallet_stop_reasons
 
   belongs_to :production_day
-  belongs_to :uf_tank, class_name: 'UfTank', foreign_key: 'uf_tank_id'
-  belongs_to :mf_tank, class_name: 'MfTank', foreign_key: 'mf_tank_id'
+  belongs_to :uf_tank, class_name: 'UfTank', foreign_key: 'uf_tank_id', optional: true
+  belongs_to :mf_tank, class_name: 'MfTank', foreign_key: 'mf_tank_id', optional: true
 
   after_initialize :set_default_values, if: :new_record?
   after_commit :update_production_day_counters, on: [:create, :destroy]
@@ -15,12 +15,12 @@ class Pallet < ApplicationRecord
 
   def adjust_attrs
 
-    hijri_date_parts = production_date.to_s.split('-') # Assuming the date is in 'YYYY-MM-DD' format
+    hijri_date_parts = date.to_s.split('-') # Assuming the date is in 'YYYY-MM-DD' format
     hijri_year = hijri_date_parts[0].to_i
     hijri_month = hijri_date_parts[1].to_i
     hijri_day = hijri_date_parts[2].to_i
     gregorian_date = Parsi::Date.new(hijri_year, hijri_month, hijri_day).to_gregorian
-    self.production_date = gregorian_date.to_date
+    self.date = gregorian_date.to_date
 
   end
 
@@ -35,11 +35,11 @@ class Pallet < ApplicationRecord
     time_now = Time.now
 
     self.attributes = {
-      production_date: today.to_s,
+      date: today.to_gregorian,
       pallet_number: format("%02d%d", today.year % 100, today.month),
       color_number: 1014,
       line_speed: 40,
-      production_time: format("%02d:%02d", time_now.hour, time_now.min),
+      time: format("%02d:%02d", time_now.hour, time_now.min),
       quantity: 1200,
       initial_grammage: 81,
       volatile_content_set_min: 5.0,

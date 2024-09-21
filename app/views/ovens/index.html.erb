@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Ovens</h1>
+
+<div id="ovens">
+  <% @ovens.each do |oven| %>
+    <%= render oven %>
+    <p>
+      <%= link_to "Show this oven", oven %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New oven", new_oven_path %>

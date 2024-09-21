@@ -50,6 +50,39 @@
   align-items: end; /* Center content vertically */
 }
 
+/* Make sure Bootstrap styles are still available */
+
+
+/* The grid container will have a fixed size with scrollbars */
+.grid-container {
+  width: fit-content;   /* Adjust width as needed */
+  height: 600px;  /* Adjust height as needed */
+  overflow: auto; /* Enable scrollbars for overflowing content */
+  border: 1px solid #ccc;
+}
+
+/* Each row in the grid should be horizontal, with no wrapping */
+.grid-row {
+  display: flex;
+  width: 1920px; /* 24 cells x 60px = 1440px (change as needed) */
+}
+
+/* Each cell has a fixed width and height */
+.grid-cell {
+  width: 200px;   /* Fixed width for each cell */
+  height: 60px;  /* Fixed height for each cell */
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Prevent responsiveness: Cells won't shrink on smaller screens */
+
+
+
 
 
 

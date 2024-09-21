@@ -22,7 +22,7 @@ class LineStopsController < ApplicationController
   # POST /line_stops or /line_stops.json
   def create
 
-    production_day = ProductionDay.find_or_create_by(production_date: line_stop_params[:date]) do |pd|
+    production_day = ProductionDay.find_or_create_by(date: line_stop_params[:date]) do |pd|
       pd.info = ""
     end
 

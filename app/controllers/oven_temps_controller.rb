@@ -65,6 +65,6 @@ class OvenTempsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def oven_temp_params
-      params.require(:oven_temp).permit(:oven_number, :temperature, :time)
+      params.require(:oven_temp).permit(:oven_number, :temperature, :time , :date)
     end
 end

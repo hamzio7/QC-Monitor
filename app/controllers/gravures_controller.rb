@@ -65,6 +65,6 @@ class GravuresController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def gravure_params
-      params.require(:gravure).permit(:high, :low, :time)
+      params.require(:gravure).permit(:date, :time, :high, :low)
     end
 end

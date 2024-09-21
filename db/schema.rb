@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_15_192354) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_21_061015) do
   create_table "gravures", force: :cascade do |t|
+    t.string "date"
+    t.datetime "time"
     t.decimal "high"
     t.decimal "low"
-    t.datetime "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "line_number"
   end
 
   create_table "line_stops", force: :cascade do |t|
@@ -32,7 +34,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_15_192354) do
   end
 
   create_table "mf_tanks", force: :cascade do |t|
-    t.datetime "date"
+    t.string "date"
     t.float "initial_temp"
     t.integer "tank_number"
     t.float "ph"
@@ -51,6 +53,26 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_15_192354) do
     t.integer "oven_number"
     t.decimal "temperature"
     t.datetime "time"
+    t.string "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ovens", force: :cascade do |t|
+    t.integer "oven_1"
+    t.integer "oven_2"
+    t.integer "oven_3"
+    t.integer "oven_4"
+    t.integer "oven_5"
+    t.integer "oven_6"
+    t.integer "oven_7"
+    t.integer "oven_8"
+    t.integer "oven_9"
+    t.integer "oven_10"
+    t.integer "oven_11"
+    t.string "date"
+    t.datetime "time"
+    t.integer "line_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -66,8 +88,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_15_192354) do
 
   create_table "pallets", force: :cascade do |t|
     t.string "pallet_number", null: false
-    t.datetime "production_date"
-    t.datetime "production_time"
+    t.string "date"
+    t.datetime "time"
     t.string "color_number"
     t.string "quantity"
     t.string "customer", null: false
@@ -104,25 +126,29 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_15_192354) do
     t.string "finish"
     t.string "press_quality"
     t.string "pallet_quality"
+    t.integer "line_number"
     t.index ["production_day_id"], name: "index_pallets_on_production_day_id"
   end
 
   create_table "production_days", force: :cascade do |t|
-    t.datetime "production_date"
+    t.string "date"
     t.text "info"
     t.integer "stopped_pallets_count"
     t.integer "approved_pallets_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "shift"
+    t.integer "line_number"
   end
 
   create_table "reaction_times", force: :cascade do |t|
     t.string "gel_time"
     t.string "cloudy_time"
     t.datetime "time"
+    t.string "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "line_number"
   end
 
   create_table "resin_programs", force: :cascade do |t|
@@ -141,7 +167,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_15_192354) do
     t.string "mixing_1"
     t.string "mixing_2"
     t.string "shift"
-    t.string "line"
+    t.integer "line_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "production_day_id"
@@ -161,12 +187,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_15_192354) do
     t.decimal "pr_paper"
     t.decimal "chiller"
     t.datetime "time"
+    t.string "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "line_number"
   end
 
   create_table "uf_tanks", force: :cascade do |t|
-    t.datetime "date"
+    t.string "date"
     t.float "initial_temp"
     t.integer "tank_number"
     t.float "ph"
@@ -179,6 +207,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_15_192354) do
     t.string "time"
     t.string "shift"
     t.integer "production_day_id"
+  end
+
+  create_table "user_preferences", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "shift"
+    t.string "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_preferences_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -203,11 +240,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_15_192354) do
     t.decimal "min"
     t.decimal "max"
     t.datetime "time"
+    t.string "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "line_number"
   end
 
   add_foreign_key "pallet_stop_reasons", "pallets"
   add_foreign_key "pallet_stop_reasons", "stop_reasons"
   add_foreign_key "pallets", "production_days"
+  add_foreign_key "user_preferences", "users"
 end

@@ -22,7 +22,7 @@ class ResinProgramsController < ApplicationController
   # POST /resin_programs or /resin_programs.json
   def create
 
-    production_day = ProductionDay.find_or_create_by(production_date: resin_program_params[:date]) do |pd|
+    production_day = ProductionDay.find_or_create_by(date: resin_program_params[:date]) do |pd|
       pd.info = ""
     end
 
@@ -71,6 +71,6 @@ class ResinProgramsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def resin_program_params
-      params.require(:resin_program).permit(:date, :time, :uf_wlf, :uf_837, :uf_1448, :mf_es700, :mf_es501, :mf_1010, :mf_837, :mf_1014, :uf_tank_num, :mf_tank_num, :mixing_1, :mixing_2, :shift, :line)
+      params.require(:resin_program).permit(:date, :time, :uf_wlf, :uf_837, :uf_1448, :mf_es700, :mf_es501, :mf_1010, :mf_837, :mf_1014, :uf_tank_num, :mf_tank_num, :mixing_1, :mixing_2, :shift, :line_number)
     end
 end

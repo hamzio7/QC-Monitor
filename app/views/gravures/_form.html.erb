@@ -1,32 +1,45 @@
-<%= form_with(model: gravure) do |form| %>
-  <% if gravure.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(gravure.errors.count, "error") %> prohibited this gravure from being saved:</h2>
+<%= form_with(model: @gravure) do |form| %>
+    <% if @gravure.errors.any? %>
+        <div style="color: red">
+            <h2><%= pluralize(@gravure.errors.count, "error") %> prohibited this gravure from being saved:</h2>
 
-      <ul>
-        <% gravure.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+            <ul>
+                <% @gravure.errors.each do |error| %>
+                    <li><%= error.full_message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <div class="col-md-2">
+        <%= form.label :date, class: "form-label" %>
+        <%= form.text_field :date, value: if params[:date].present?
+                                            Date.parse(params[:date]).to_parsi
+                                          else
+                                            @gravure.new_record? ? Date.today.to_parsi : Date.parse(@gravure.date).to_parsi
+                                          end, class: "form-control text-md-center", required: false %>
     </div>
-  <% end %>
 
-  <div>
-    <%= form.label :high, style: "display: block" %>
-    <%= form.text_field :high %>
-  </div>
+    <div class="col-md-2">
+        <%= form.label :time, class: "form-label" %>
+        <%= form.text_field :time, value: if params[:time].present?
+                                            Time.parse(params[:time].to_s).strftime("%H:%M")
+                                          else
+                                            @gravure.new_record? ? Time.now.strftime("%H:%M") : @gravure.time.strftime("%H:%M")
+                                          end, class: "form-control text-md-center", required: false %>
+    </div>
 
-  <div>
-    <%= form.label :low, style: "display: block" %>
-    <%= form.text_field :low %>
-  </div>
+    <div>
+        <%= form.label :high, style: "display: block" %>
+        <%= form.text_field :high %>
+    </div>
 
-  <div>
-    <%= form.label :time, style: "display: block" %>
-    <%= form.datetime_field :time %>
-  </div>
+    <div>
+        <%= form.label :low, style: "display: block" %>
+        <%= form.text_field :low %>
+    </div>
 
-  <div>
-    <%= form.submit %>
-  </div>
+    <div>
+        <%= form.submit %>
+    </div>
 <% end %>

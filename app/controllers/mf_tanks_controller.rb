@@ -21,7 +21,7 @@ class MfTanksController < ApplicationController
 
 
   def create
-    production_day = ProductionDay.find_or_create_by(production_date: mf_tank_params[:date]) do |pd|
+    production_day = ProductionDay.find_or_create_by(date: mf_tank_params[:date]) do |pd|
       pd.info = ""
     end
 

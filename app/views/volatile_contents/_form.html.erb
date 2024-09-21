@@ -1,10 +1,10 @@
 <%= form_with(model: volatile_content) do |form| %>
   <% if volatile_content.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(volatile_content.errors.count, "error") %> prohibited this volatile_content from being saved:</h2>
+      <h2><%= pluralize(@volatile_content.errors.count, "error") %> prohibited this volatile_content from being saved:</h2>
 
       <ul>
-        <% volatile_content.errors.each do |error| %>
+        <% @volatile_content.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -21,10 +21,23 @@
     <%= form.text_field :max %>
   </div>
 
-  <div>
-    <%= form.label :time, style: "display: block" %>
-    <%= form.datetime_field :time %>
-  </div>
+    <div class="col-md-2">
+        <%= form.label :date, class: "form-label" %>
+        <%= form.text_field :date, value: if params[:date].present?
+                                            Date.parse(params[:date]).to_parsi
+                                          else
+                                            @volatile_content.new_record? ? Date.today.to_parsi : Date.parse(@volatile_content.date).to_parsi
+                                          end, class: "form-control text-md-center", required: false %>
+    </div>
+
+    <div class="col-md-2">
+        <%= form.label :time, class: "form-label" %>
+        <%= form.text_field :time, value: if params[:time].present?
+                                            Time.parse(params[:time].to_s).strftime("%H:%M")
+                                          else
+                                            @volatile_content.new_record? ? Time.now.strftime("%H:%M") : @volatile_content.time.strftime("%H:%M")
+                                          end, class: "form-control text-md-center", required: false %>
+    </div>
 
   <div>
     <%= form.submit %>
