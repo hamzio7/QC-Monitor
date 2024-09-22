@@ -10,12 +10,20 @@ class SchedulesController < ApplicationController
              else
                cookies[:shift].present? ? cookies[:shift] : "day"
              end
+    @shift_name = if params[:shift_name].present?
+                            params[:shift_name].to_s
+                          else
+                            cookies[:shift_name].present? ? cookies[:shift_name] : "C"
+                          end
 
     cookies[:shift] = { value: @shift, expires: 1.year.from_now }
     cookies[:date] = { value: @date.to_s, expires: 1.year.from_now }
+    cookies[:shift_name] = { value: @shift_name, expires: 1.year.from_now }
+
+    logger.debug "Shift Name " + @shift_name.to_s.upcase
 
     # Fetch records
-    @pallets = Pallet.where(date: @date)
+    @pallets = Pallet.where(date: @date).where(shift: @shift_name.to_s.upcase)
     @temperatures = Temperature.where(date: @date)
     @oven_temps = Oven.where(date: @date)
     @gravures = Gravure.where(date: @date)
