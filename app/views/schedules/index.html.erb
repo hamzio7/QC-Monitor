@@ -1,75 +1,177 @@
-<div class="container-fluid">
-
+<div class="container-fluid " style="font-size:small">
     <div class="container tools">
-        <div class="row mb-4">
+        <div class="row">
             <div class="col">
                 <%= form_with url: schedules_path, method: :get, local: true do |form| %>
                     <div class="d-flex align-items-center justify-content-center">
                         <%= form.label :shift, "Select Shift", class: 'me-2 w-auto col-1' %>
                         <%= form.select :shift, options_for_select([%w[Day day], %w[Night night]], @shift), {}, { class: 'form-select me-2' } %>
-
                         <%= form.label :date, "Select Date", class: 'me-2 w-auto col-1' %>
                         <%= form.date_field :date, value: @date, class: 'form-control me-2' %>
-
                         <%= form.submit 'Filter', class: 'btn btn-primary col-1 tools' %>
                     </div>
                 <% end %>
             </div>
         </div>
     </div>
+    <div class="m-2 table-responsive">
+        <table class="table table-sm table-hover table-bordered text-center">
+            <%= render 'table_headers' %>
+            <tbody>
+                <% @time_slots.each do |slot| %>
+                    <tr>
+                        <!-- Time slot -->
+                        <td><%= slot %></td>
 
-    <div class="m-4">
-        <div class="row justify-content-center">
-            <div class="col-md-auto text-center  border border-1 align-content-center" style="width: 60px;">Time</div>
-            <div class="col-md-auto text-center  border border-1 align-content-center" style="width: 50px; font-size: x-small">Line
-                Speed
-            </div>
-            <div class="col-md-1 text-center  border border-1 align-content-center">Pallet #</div>
-            <div class="col-md-1 text-center border border-1 d-flex flex-column justify-content-around align-items-center ">
-                <div class="text-wrap">Reaction Times</div>
-                <div class="row">
-                    <div class="col-1 text-center flex-fill border-end">G.T</div>
-                    <div class="col-1 text-center flex-fill">C.T</div>
-                </div>
-            </div>
-            <div class="col-1 text-center border border-1 d-flex flex-column justify-content-around align-items-center ">
-                <div>Volatile Content</div>
-                <div class="row w-100  p-0">
-                    <div class="col-1 text-start flex-fill border-end p-0">Min</div>
-                    <div class="col-1 text-center flex-fill p-0">Max</div>
-                </div>
-            </div>
-            <div class="col-3 text-center border p-0 border-1 d-flex flex-column justify-content-around align-items-center ">
-                <div>Temperatures</div>
-                <div class="row justify-content-between w-100 p-0">
-                    <div class="col-1 text-center flex-fill border-end">UF</div>
-                    <div class="col-1 text-center flex-fill border-end">MF</div>
-                    <div class="col-1 text-center flex-fill border-end">MF Paper</div>
-                    <div class="col-1 text-center flex-fill border-end">PR Paper</div>
-                    <div class="col-1 text-center flex-fill">Chiller</div>
-                </div>
-            </div>
-            <div class="col-1 text-center border border-1 d-flex flex-column justify-content-around align-items-center ">
-                <div>Gravures</div>
-                <div class="d-flex justify-content-between w-100">
-                    <div class="text-center flex-fill border-end">H</div>
-                    <div class="text-center flex-fill">L</div>
-                </div>
-            </div>
-            <div class="col-4 text-center border p-0 border-1 d-flex flex-column justify-content-around align-items-center ">
-                <div>Ovens' Temperatures</div>
-                <div class="d-flex justify-content-between w-100">
-                    <% (1..11).each do |i| %>
-                        <div class="text-center border-end w-100"><%= i %></div>
-                    <% end %>
-                </div>
-            </div>
-        </div>
-        <% @time_slots.each do |slot| %>
-            <div class="row justify-content-center">
-                <%= render partial: 'time_slot_row', locals: { slot: slot, pallets_by_slot: @pallets_by_slot, reaction_times_by_slot: @reaction_times_by_slot, volatile_contents_by_slot: @volatile_contents_by_slot, temperatures_by_slot: @temperatures_by_slot, gravures_by_slot: @gravures_by_slot, oven_temps_by_slot: @oven_temps_by_slot } %>
-            </div>
-        <% end %>
+                        <td class="text-center">
+                            <% if @pallets_by_slot[slot] %>
+                                <div>
+                                    <%= link_to @pallets_by_slot[slot].line_speed, pallet_path(@pallets_by_slot[slot]), class: "nav-link p-0" %>
+                                </div>
+                            <% else %>
+                                <%= link_to '', new_pallet_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus tools' %>
+                            <% end %>
+                        </td>
+
+                        <!-- Pallet # -->
+                        <td class="text-center">
+                            <% if @pallets_by_slot[slot] %>
+                                <div class="<%= @pallets_by_slot[slot].status.to_s.downcase == 'approved' ? 'bg-success-subtle' : 'bg-danger-subtle' %>">
+                                    <%= link_to @pallets_by_slot[slot].pallet_number, edit_pallet_path(@pallets_by_slot[slot]), class: "nav-link p-0" %>
+                                </div>
+                            <% else %>
+                                <%= link_to '', new_pallet_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus tools' %>
+                            <% end %>
+                        </td>
+                        <!-- Line Speed -->
+                        <td class="text-center">
+                            <% if @pallets_by_slot[slot] %>
+                                <div>
+                                    <%= link_to @pallets_by_slot[slot].color_number, pallet_path(@pallets_by_slot[slot]), class: "nav-link p-0" %>
+                                </div>
+                            <% else %>
+                                <%= link_to '', new_pallet_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus tools' %>
+                            <% end %>
+                        </td>
+
+                        <!-- Reaction Times -->
+                        <td class="text-center">
+                            <% if @reaction_times_by_slot[slot] %>
+                                <div class="text-center">
+                                    <%= link_to @reaction_times_by_slot[slot].gel_time, edit_reaction_time_path(@reaction_times_by_slot[slot]), class: "nav-link p-0" %>
+                                </div>
+                            <% else %>
+                                <%= link_to '', new_reaction_time_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus  tools' %>
+                            <% end %>
+                        </td>
+                        <td class="text-center">
+                            <% if @reaction_times_by_slot[slot] %>
+                                <div class="text-center">
+                                    <%= link_to @reaction_times_by_slot[slot].cloudy_time, edit_reaction_time_path(@reaction_times_by_slot[slot]), class: "nav-link p-0" %>
+                                </div>
+                            <% else %>
+                                <%= link_to '', new_reaction_time_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus tools' %>
+                            <% end %>
+                        </td>
+
+                        <!-- Volatile Content -->
+                        <td class="text-center">
+                            <% if @volatile_contents_by_slot[slot] %>
+                                <div class="text-center">
+                                    <%= link_to @volatile_contents_by_slot[slot].min, edit_volatile_content_path(@volatile_contents_by_slot[slot]), class: "nav-link p-0" %>
+                                </div>
+                            <% else %>
+                                <%= link_to '', new_volatile_content_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus tools' %>
+                            <% end %>
+                        </td>
+                        <td class="text-center">
+                            <% if @volatile_contents_by_slot[slot] %>
+                                <div class="text-center">
+                                    <%= link_to @volatile_contents_by_slot[slot].max, edit_volatile_content_path(@volatile_contents_by_slot[slot]), class: "nav-link p-0" %>
+                                </div>
+                            <% else %>
+                                <%= link_to '', new_volatile_content_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus tools' %>
+                            <% end %>
+                        </td>
+
+                        <!-- Temperatures -->
+                        <td class="text-center">
+                            <% if @temperatures_by_slot[slot] %>
+                                <div>
+                                    <%= link_to @temperatures_by_slot[slot].uf, edit_temperature_path(@temperatures_by_slot[slot]), class: "nav-link p-0" %>
+                                </div>
+                            <% else %>
+                                <%= link_to '', new_temperature_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus tools' %>
+                            <% end %>
+                        </td>
+                        <td class="text-center">
+                            <% if @temperatures_by_slot[slot] %>
+                                <div>
+                                    <%= link_to @temperatures_by_slot[slot].mf, edit_temperature_path(@temperatures_by_slot[slot]), class: "nav-link p-0" %>
+                                </div>
+                            <% else %>
+                                <%= link_to '', new_temperature_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus tools' %>
+                            <% end %>
+                        </td>
+                        <td class="text-center">
+                            <% if @temperatures_by_slot[slot] %>
+                                <div>
+                                    <%= link_to @temperatures_by_slot[slot].mf_paper, edit_temperature_path(@temperatures_by_slot[slot]), class: "nav-link p-0" %>
+                                </div>
+                            <% else %>
+                                <%= link_to '', new_temperature_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus tools' %>
+                            <% end %>
+                        </td>
+                        <td class="text-center">
+                            <% if @temperatures_by_slot[slot] %>
+                                <div>
+                                    <%= link_to @temperatures_by_slot[slot].pr_paper, edit_temperature_path(@temperatures_by_slot[slot]), class: "nav-link p-0" %>
+                                </div>
+                            <% else %>
+                                <%= link_to '', new_temperature_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus tools' %>
+                            <% end %>
+                        </td>
+                        <td class="text-center">
+                            <% if @temperatures_by_slot[slot] %>
+                                <div>
+                                    <%= link_to @temperatures_by_slot[slot].chiller, edit_temperature_path(@temperatures_by_slot[slot]), class: "nav-link p-0" %>
+                                </div>
+                            <% else %>
+                                <%= link_to '', new_temperature_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus tools' %>
+                            <% end %>
+                        </td>
+
+                        <!-- Gravures -->
+                        <td class="text-center">
+                            <% if @gravures_by_slot[slot] %>
+                                <div>
+                                    <%= link_to @gravures_by_slot[slot].high, edit_gravure_path(@gravures_by_slot[slot]), class: "nav-link p-0" %>
+                                </div>
+                            <% else %>
+                                <%= link_to '', new_gravure_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus tools' %>
+                            <% end %>
+                        </td>
+                        <td class="text-center">
+                            <% if @gravures_by_slot[slot] %>
+                                <%= link_to @gravures_by_slot[slot].low, edit_gravure_path(@gravures_by_slot[slot]), class: "nav-link p-0" %>
+                            <% else %>
+                                <%= link_to '', new_gravure_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus tools' %>
+                            <% end %>
+                        </td>
+
+                        <!-- Ovens' Temperatures -->
+                        <% (1..11).each do |i| %>
+                            <td class="text-center">
+                                <% if @oven_temps_by_slot[slot] %>
+                                    <%= link_to @oven_temps_by_slot[slot].send("oven_#{i}"), edit_oven_path(@oven_temps_by_slot[slot]), class: "nav-link p-0" %>
+                                <% else %>
+                                    <%= link_to '', new_oven_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus  tools' %>
+                                <% end %>
+                            </td>
+                        <% end %>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
     </div>
-
 </div>

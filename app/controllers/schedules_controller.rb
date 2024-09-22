@@ -14,9 +14,6 @@ class SchedulesController < ApplicationController
     cookies[:shift] = { value: @shift, expires: 1.year.from_now }
     cookies[:date] = { value: @date.to_s, expires: 1.year.from_now }
 
-
-
-
     # Fetch records
     @pallets = Pallet.where(date: @date)
     @temperatures = Temperature.where(date: @date)
@@ -37,7 +34,6 @@ class SchedulesController < ApplicationController
 
   private
 
-
   def generate_time_slots(shift)
     start_time, end_time = shift == 'day' ? %w[07:00 19:00] : %w[19:00 07:00]
     start_time = Time.parse(start_time)
@@ -54,9 +50,7 @@ class SchedulesController < ApplicationController
   def match_records_to_time_slots(records, time_slots)
     records_by_slot = {}
     records.each do |record|
-
       logger.debug " time : " + record.time.to_s
-
     end
 
     time_slots.each do |slot|
