@@ -10,12 +10,19 @@ class SchedulesController < ApplicationController
              else
                cookies[:shift].present? ? cookies[:shift] : "day"
              end
-    @shift_name = if params[:shift_name].present?
-                            params[:shift_name].to_s
-                          else
-                            cookies[:shift_name].present? ? cookies[:shift_name] : "C"
-                          end
 
+    @line_number = if params[:line_number].present?
+                     params[:line_number].to_s
+                   else
+                     cookies[:line_number].present? ? cookies[:line_number] : "1"
+                   end
+    @shift_name = if params[:shift_name].present?
+                    params[:shift_name].to_s
+                  else
+                    cookies[:shift_name].present? ? cookies[:shift_name] : "C"
+                  end
+
+    cookies[:line_number] = { value: @line_number, expires: 1.year.from_now }
     cookies[:shift] = { value: @shift, expires: 1.year.from_now }
     cookies[:date] = { value: @date.to_s, expires: 1.year.from_now }
     cookies[:shift_name] = { value: @shift_name, expires: 1.year.from_now }

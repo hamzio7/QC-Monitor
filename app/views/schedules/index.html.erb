@@ -1,31 +1,33 @@
 <div class="container-fluid " style="font-size:small">
-    <div class="container tools">
-        <div class="row">
-            <div class="col">
-                <%= form_with url: schedules_path, method: :get, local: true do |form| %>
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <%= form.label :shift, "Shift", class: 'me-2 w-auto col-1', style:"width:96px" %>
-                            <%= form.select :shift_name, options_for_select([%w[A A], %w[B B], %w[C C]], @shift_name), {}, { class: 'form-select me-2' , style:"width:96px" } %>
-                            <%= form.select :shift, options_for_select([%w[Day day], %w[Night night]], @shift), {}, { class: 'form-select me-2' , style:"width:96px" } %>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-between">
-                            <%= form.label :date, "Select Date", class: 'me-2 w-auto col-1' %>
-                            <%= form.date_field :date, value: @date, class: 'form-control me-2' , style:"width:144px" %>
-                            <%= form.submit 'Filter', class: 'btn btn-primary col-1 tools' , style:"width:64px" %>
-                        </div>
-                    </div>
-                <% end %>
+
+    <p class="d-inline-flex gap-1 w-100">
+        <button class="btn btn-light btn-outline w-100" type="button" data-bs-toggle="modal" data-bs-target="#time_modal" aria-expanded="false" aria-controls="collapseExample">
+            <span class="me-2"> Shift: <%= @shift_name %>  </span>
+            <span class="me-2"> Line: <%= @line_number %>  </span>
+            <span class="me-2"> Date: <%= to_parsi(Date.parse(@date)) %> </span>
+            <span class="ms-2 bi bi-calendar-check"></span>
+        </button>
+    </p>
+    <div class="modal fade" id="time_modal" tabindex="-1" aria-labelledby="time_modalLabel" data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="time_modalLabel">Date And Shift</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <%= render 'date_form' %>
+                </div>
             </div>
         </div>
     </div>
+
     <div class="m-2 table-responsive">
-        <table class="table table-sm table-hover table-bordered text-center">
+        <table class="table table-sm table-hover table-bordered text-center table-striped">
             <%= render 'table_headers' %>
             <tbody>
                 <% @time_slots.each do |slot| %>
                     <tr>
-                        <!-- Time slot -->
                         <td><%= slot %></td>
 
                         <td class="text-center">
@@ -38,7 +40,6 @@
                             <% end %>
                         </td>
 
-                        <!-- Pallet # -->
                         <td class="text-center">
                             <% if @pallets_by_slot[slot] %>
                                 <div class="<%= @pallets_by_slot[slot].status.to_s.downcase == 'approved' ? 'bg-success-subtle' : 'bg-danger-subtle' %>">
@@ -48,7 +49,7 @@
                                 <%= link_to '', new_pallet_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus tools' %>
                             <% end %>
                         </td>
-                        <!-- Line Speed -->
+
                         <td class="text-center">
                             <% if @pallets_by_slot[slot] %>
                                 <div>
@@ -59,7 +60,6 @@
                             <% end %>
                         </td>
 
-                        <!-- Reaction Times -->
                         <td class="text-center">
                             <% if @reaction_times_by_slot[slot] %>
                                 <div class="text-center">
@@ -69,6 +69,7 @@
                                 <%= link_to '', new_reaction_time_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus  tools' %>
                             <% end %>
                         </td>
+
                         <td class="text-center">
                             <% if @reaction_times_by_slot[slot] %>
                                 <div class="text-center">
@@ -89,6 +90,7 @@
                                 <%= link_to '', new_volatile_content_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus tools' %>
                             <% end %>
                         </td>
+
                         <td class="text-center">
                             <% if @volatile_contents_by_slot[slot] %>
                                 <div class="text-center">
@@ -109,6 +111,7 @@
                                 <%= link_to '', new_temperature_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus tools' %>
                             <% end %>
                         </td>
+
                         <td class="text-center">
                             <% if @temperatures_by_slot[slot] %>
                                 <div>
@@ -118,6 +121,7 @@
                                 <%= link_to '', new_temperature_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus tools' %>
                             <% end %>
                         </td>
+
                         <td class="text-center">
                             <% if @temperatures_by_slot[slot] %>
                                 <div>
@@ -127,6 +131,7 @@
                                 <%= link_to '', new_temperature_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus tools' %>
                             <% end %>
                         </td>
+
                         <td class="text-center">
                             <% if @temperatures_by_slot[slot] %>
                                 <div>
@@ -136,6 +141,7 @@
                                 <%= link_to '', new_temperature_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus tools' %>
                             <% end %>
                         </td>
+
                         <td class="text-center">
                             <% if @temperatures_by_slot[slot] %>
                                 <div>
@@ -156,6 +162,7 @@
                                 <%= link_to '', new_gravure_path(time: slot, date: params[:date].present? ? params[:date] : Date.today), class: 'dropdown-item bi bi-plus tools' %>
                             <% end %>
                         </td>
+
                         <td class="text-center">
                             <% if @gravures_by_slot[slot] %>
                                 <%= link_to @gravures_by_slot[slot].low, edit_gravure_path(@gravures_by_slot[slot]), class: "nav-link p-0" %>

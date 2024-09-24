@@ -1,0 +1,32 @@
+<%= form_with url: schedules_path, method: :get, local: true do |form| %>
+    <div class="row g-3 align-items-center justify-content-between">
+        <!-- Shift Name -->
+        <div class="col-12">
+            <%= form.label :shift_name, "Shift", class: 'form-label' %>
+            <%= form.select :shift_name, options_for_select([%w[A A], %w[B B], %w[C C]], @shift_name), {}, { class: 'form-select', aria: { label: "Shift name" } } %>
+        </div>
+
+        <!-- Shift Time -->
+        <div class="col-12">
+            <%= form.label :shift, "Time", class: 'form-label' %>
+            <%= form.select :shift, options_for_select([%w[Day day], %w[Night night]], @shift), {}, { class: 'form-select', aria: { label: "Shift time" } } %>
+        </div>
+
+        <!-- Line Number -->
+        <div class="col-12">
+            <%= form.label :line_number, "Line", class: 'form-label' %>
+            <%= form.select :line_number, options_for_select([%w[1 1], %w[2 2], %w[3 3]], @line_number), {}, { class: 'form-select', aria: { label: "Line number" } } %>
+        </div>
+
+        <!-- Date Selection -->
+        <div class="col-12">
+            <%= form.label :date, "Select Date", class: 'form-label' %>
+            <%= form.date_field :date, value: @date, class: 'form-control', aria: { label: "Date" } %>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <%= form.submit 'Save', class: 'btn btn-primary' %>
+        </div>
+    </div>
+<% end %>
