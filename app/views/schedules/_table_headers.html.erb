@@ -1,22 +1,25 @@
 <thead>
     <tr class="border-white border">
         <th class="border-start border-top"></th>
-        <th class="border-top"></th>
-        <th class="border-top"></th>
-        <th class="border-top border-end"></th>
+        <th class="border-top">Line</th>
+        <th class="border-top">Pallet</th>
+        <th class="border-top border-end">Color</th>
         <th colspan="2" class="border-end  border-top">Reaction Times</th>
+        <th colspan="2" class="border-end  border-top">Grammage</th>
         <th colspan="2" class="border-end  border-top">Volatile Content</th>
-        <th colspan="5" class="border-end  border-top">Temperatures</th>
+        <th colspan="6" class="border-end  border-top">Temperatures</th>
         <th colspan="2" class="border-end  border-top">Gravures</th>
         <th colspan="11" class=" border-top border-end">Ovens' Temperatures</th>
     </tr>
     <tr >
         <th>Time</th>
         <th>Speed</th>
-        <th>Pallet #</th>
-        <th>Color Code</th>
+        <th>Number</th>
+        <th>Code</th>
         <th>G.T</th>
         <th>C.T</th>
+        <th>Min</th>
+        <th>Max</th>
         <th>Min</th>
         <th>Max</th>
         <th>UF</th>
@@ -24,6 +27,7 @@
         <th>MF Paper</th>
         <th>PR Paper</th>
         <th>Chiller</th>
+        <th>Midline</th>
         <th>H</th>
         <th>L</th>
         <% (1..11).each do |i| %>

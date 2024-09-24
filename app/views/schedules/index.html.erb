@@ -31,9 +31,11 @@
                         <!-- Volatile Content -->
                         <%= render partial: 'shared/table_cell', locals: { slot: slot, data_by_slot: @volatile_contents_by_slot, attribute: :min, edit_path: ->(vc) { edit_volatile_content_path(vc) }, new_path: ->(slot) { new_volatile_content_path(time: slot, date: @date, line_number: @line_number) } } %>
                         <%= render partial: 'shared/table_cell', locals: { slot: slot, data_by_slot: @volatile_contents_by_slot, attribute: :max, edit_path: ->(vc) { edit_volatile_content_path(vc) }, new_path: ->(slot) { new_volatile_content_path(time: slot, date: @date, line_number: @line_number) } } %>
+                        <%= render partial: 'shared/table_cell', locals: { slot: slot, data_by_slot: @volatile_contents_by_slot, attribute: :min, edit_path: ->(vc) { edit_volatile_content_path(vc) }, new_path: ->(slot) { new_volatile_content_path(time: slot, date: @date, line_number: @line_number) } } %>
+                        <%= render partial: 'shared/table_cell', locals: { slot: slot, data_by_slot: @volatile_contents_by_slot, attribute: :max, edit_path: ->(vc) { edit_volatile_content_path(vc) }, new_path: ->(slot) { new_volatile_content_path(time: slot, date: @date, line_number: @line_number) } } %>
 
                         <!-- Temperatures -->
-                        <% [:uf, :mf, :mf_paper, :pr_paper, :chiller].each do |temp_type| %>
+                        <% [:uf, :mf, :mf_paper, :pr_paper, :chiller, :chiller ].each do |temp_type| %>
                             <%= render partial: 'shared/table_cell', locals: { slot: slot, data_by_slot: @temperatures_by_slot, attribute: temp_type, edit_path: ->(temp) { edit_temperature_path(temp) }, new_path: ->(slot) { new_temperature_path(time: slot, date: @date, line_number: @line_number) } } %>
                         <% end %>
 
@@ -51,7 +53,6 @@
             </tbody>
         </table>
     </div>
-
 
 
     <div class="modal fade " id="time_modal" tabindex="-1" aria-labelledby="time_modalLabel" data-bs-backdrop="static" aria-hidden="true">
