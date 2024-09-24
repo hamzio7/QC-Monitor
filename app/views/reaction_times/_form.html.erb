@@ -1,46 +1,59 @@
-<%= form_with(model: reaction_time) do |form| %>
-    <% if reaction_time.errors.any? %>
-        <div style="color: red">
-            <h2><%= pluralize(reaction_time.errors.count, "error") %> prohibited this reaction_time from being
-                saved:</h2>
+<div class="container">
+    <%= form_with(model: reaction_time) do |form| %>
+        <% if reaction_time.errors.any? %>
+            <div class="alert alert-danger">
+                <h4><%= pluralize(reaction_time.errors.count, "error") %> prohibited this reaction time from being saved:</h4>
+                <ul>
+                    <% reaction_time.errors.each do |error| %>
+                        <li><%= error.full_message %></li>
+                    <% end %>
+                </ul>
+            </div>
+        <% end %>
 
-            <ul>
-                <% reaction_time.errors.each do |error| %>
-                    <li><%= error.full_message %></li>
-                <% end %>
-            </ul>
+        <div class="row">
+
+            <div class="col-md-3">
+                <%= form.label :date, class: "form-label" %>
+                <%= form.text_field :date,
+                                    value: if params[:date].present?
+                                             Date.parse(params[:date]).to_parsi
+                                           else
+                                             @reaction_time.new_record? ? Date.today.to_parsi : Date.parse(@reaction_time.date).to_parsi
+                                           end,
+                                    class: "form-control text-md-center", required: false %>
+            </div>
+
+            <!-- Time Field -->
+            <div class="col-md-3">
+                <%= form.label :time, class: "form-label" %>
+                <%= form.text_field :time,
+                                    value: if params[:time].present?
+                                             Time.parse(params[:time].to_s).strftime("%H:%M")
+                                           else
+                                             @reaction_time.new_record? ? Time.now.strftime("%H:%M") : @reaction_time.time.strftime("%H:%M")
+                                           end,
+                                    class: "form-control text-md-center", required: false %>
+            </div>
+
+            <!-- Gel Time Field -->
+            <div class="col-md-3">
+                <%= form.label :gel_time, class: "form-label" %>
+                <%= form.text_field :gel_time, class: "form-control text-md-center" %>
+            </div>
+
+            <!-- Cloudy Time Field -->
+            <div class="col-md-3">
+                <%= form.label :cloudy_time, class: "form-label" %>
+                <%= form.text_field :cloudy_time, class: "form-control text-md-center" %>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <!-- Submit Button -->
+            <div class="col-md-12">
+                <%= form.submit "Save",class: "btn btn-primary" %>
+            </div>
         </div>
     <% end %>
-
-    <div>
-        <%= form.label :gel_time, style: "display: block" %>
-        <%= form.text_field :gel_time %>
-    </div>
-
-    <div>
-        <%= form.label :cloudy_time, style: "display: block" %>
-        <%= form.text_field :cloudy_time %>
-    </div>
-
-    <div class="col-md-2">
-        <%= form.label :date, class: "form-label" %>
-        <%= form.text_field :date, value: if params[:date].present?
-                                            Date.parse(params[:date]).to_parsi
-                                          else
-                                            @reaction_time.new_record? ? Date.today.to_parsi : Date.parse(@reaction_time.date).to_parsi
-                                          end, class: "form-control text-md-center", required: false %>
-    </div>
-
-    <div class="col-md-2">
-        <%= form.label :time, class: "form-label" %>
-        <%= form.text_field :time, value: if params[:time].present?
-                                            Time.parse(params[:time].to_s).strftime("%H:%M")
-                                          else
-                                            @reaction_time.new_record? ? Time.now.strftime("%H:%M") : @reaction_time.time.strftime("%H:%M")
-                                          end, class: "form-control text-md-center", required: false %>
-    </div>
-
-    <div>
-        <%= form.submit %>
-    </div>
-<% end %>
+</div>

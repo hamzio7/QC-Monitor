@@ -1,18 +1,23 @@
 <div class="container-fluid " style="font-size:small">
 
-    <p class="d-inline-flex gap-1 w-100">
-        <button class="btn btn-light btn-outline w-100" type="button" data-bs-toggle="modal" data-bs-target="#time_modal" aria-expanded="false" aria-controls="collapseExample">
-            <span class="me-2"> Shift: <%= @shift_name %>  </span>
-            <span class="me-2"> Line: <%= @line_number %>  </span>
-            <span class="me-2"> Date: <%= to_parsi(Date.parse(@date)) %> </span>
-            <span class="ms-2 bi bi-calendar-check"></span>
-        </button>
-    </p>
-    <div class="modal fade" id="time_modal" tabindex="-1" aria-labelledby="time_modalLabel" data-bs-backdrop="static" aria-hidden="true">
-        <div class="modal-dialog">
+
+    <div class="d-flex justify-content-center align-content-center">
+        <p class="d-inline-flex gap-1">
+            <button class="d-flex gap-4 btn btn-light btn-outline w-100" type="button" data-bs-toggle="modal" data-bs-target="#time_modal" aria-expanded="false" aria-controls="collapseExample">
+                <span class="bi bi-calendar-check"></span>
+                <span > Shift: <%= @shift_name %>  </span>
+                <span > Time: <%= @shift.to_s.capitalize %>  </span>
+                <span > Line: <%= @line_number %>  </span>
+                <span > Date: <%= to_parsi(Date.parse(@date)) %> </span>
+            </button>
+        </p>
+    </div>
+
+    <div class="modal fade " id="time_modal" tabindex="-1" aria-labelledby="time_modalLabel" data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="time_modalLabel">Date And Shift</h1>
+                    <h1 class="modal-title fs-5" id="time_modalLabel">Date and Shift</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -80,7 +85,6 @@
                             <% end %>
                         </td>
 
-                        <!-- Volatile Content -->
                         <td class="text-center">
                             <% if @volatile_contents_by_slot[slot] %>
                                 <div class="text-center">
@@ -101,7 +105,6 @@
                             <% end %>
                         </td>
 
-                        <!-- Temperatures -->
                         <td class="text-center">
                             <% if @temperatures_by_slot[slot] %>
                                 <div>

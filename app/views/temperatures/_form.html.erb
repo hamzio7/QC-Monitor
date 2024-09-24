@@ -1,8 +1,7 @@
-<%= form_with(model: temperature) do |form| %>
+<%= form_with(model: temperature, class: "container mt-4") do |form| %>
     <% if temperature.errors.any? %>
-        <div style="color: red">
-            <h2><%= pluralize(temperature.errors.count, "error") %> prohibited this temperature from being saved:</h2>
-
+        <div class="alert alert-danger">
+            <h4 class="alert-heading"><%= pluralize(temperature.errors.count, "error") %> prohibited this temperature from being saved:</h4>
             <ul>
                 <% temperature.errors.each do |error| %>
                     <li><%= error.full_message %></li>
@@ -11,50 +10,52 @@
         </div>
     <% end %>
 
-    <div>
-        <%= form.label :uf, style: "display: block" %>
-        <%= form.text_field :uf %>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <%= form.label :uf, class: "form-label text-uppercase" %>
+            <%= form.text_field :uf, class: "form-control" %>
+        </div>
+        <div class="col-md-6">
+            <%= form.label :mf, class: "form-label text-uppercase" %>
+            <%= form.text_field :mf, class: "form-control" %>
+        </div>
     </div>
 
-    <div>
-        <%= form.label :mf, style: "display: block" %>
-        <%= form.text_field :mf %>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <%= form.label :mf_paper, class: "form-label text-uppercase" %>
+            <%= form.text_field :mf_paper, class: "form-control" %>
+        </div>
+        <div class="col-md-6">
+            <%= form.label "Production Room Paper", class: "form-label text-uppercase" %>
+            <%= form.text_field :pr_paper, class: "form-control" %>
+        </div>
     </div>
 
-    <div>
-        <%= form.label :mf_paper, style: "display: block" %>
-        <%= form.text_field :mf_paper %>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <%= form.label :chiller, class: "form-label text-uppercase" %>
+            <%= form.text_field :chiller, class: "form-control" %>
+        </div>
+        <div class="col-md-3">
+            <%= form.label :date, class: "form-label text-uppercase" %>
+            <%= form.text_field :date, value: if params[:date].present?
+                                                Date.parse(params[:date]).to_parsi
+                                              else
+                                                @temperature.new_record? ? Date.today.to_parsi : Date.parse(@temperature.date).to_parsi
+                                              end, class: "form-control text-md-center", required: false %>
+        </div>
+        <div class="col-md-3">
+            <%= form.label :time, class: "form-label text-uppercase" %>
+            <%= form.text_field :time, value: if params[:time].present?
+                                                Time.parse(params[:time].to_s).strftime("%H:%M")
+                                              else
+                                                @temperature.new_record? ? Time.now.strftime("%H:%M") : @temperature.time.strftime("%H:%M")
+                                              end, class: "form-control text-md-center", required: false %>
+        </div>
     </div>
 
-    <div>
-        <%= form.label :pr_paper, style: "display: block" %>
-        <%= form.text_field :pr_paper %>
-    </div>
-
-    <div>
-        <%= form.label :chiller, style: "display: block" %>
-        <%= form.text_field :chiller %>
-    </div>
-
-    <div class="col-md-2">
-        <%= form.label :date, class: "form-label" %>
-        <%= form.text_field :date, value: if params[:date].present?
-                                            Date.parse(params[:date]).to_parsi
-                                          else
-                                            @temperature.new_record? ? Date.today.to_parsi : Date.parse(@temperature.date).to_parsi
-                                          end, class: "form-control text-md-center", required: false %>
-    </div>
-
-    <div class="col-md-2">
-        <%= form.label :time, class: "form-label" %>
-        <%= form.text_field :time, value: if params[:time].present?
-                                            Time.parse(params[:time].to_s).strftime("%H:%M")
-                                          else
-                                            @temperature.new_record? ? Time.now.strftime("%H:%M") : @temperature.time.strftime("%H:%M")
-                                          end, class: "form-control text-md-center", required: false %>
-    </div>
-
-    <div>
-        <%= form.submit %>
+    <div class="mt-3">
+        <%= form.submit "Save",class: "btn btn-primary" %>
     </div>
 <% end %>
