@@ -40,7 +40,7 @@ class ReactionTimesController < ApplicationController
   def update
     respond_to do |format|
       if @reaction_time.update(reaction_time_params)
-        format.html { redirect_to reaction_time_url(@reaction_time), notice: "Reaction time was successfully updated." }
+        format.html { redirect_to schedules_path, notice: "Reaction time was successfully updated." }
         format.json { render :show, status: :ok, location: @reaction_time }
       else
         format.html { render :edit, status: :unprocessable_entity }

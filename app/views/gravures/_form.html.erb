@@ -51,6 +51,10 @@
                 <%= form.label :low, class: "form-label" %>
                 <%= form.text_field :low, class: "form-control text-md-center" %>
             </div>
+            <div class="col-md-6">
+                <%= form.label :line_number, class: "form-label" %>
+                <%= form.select :line_number, options_for_select(lines, params[:line_number]), { prompt: :line_number }, class: "form-control text-md-center", required: false %>
+            </div>
         </div>
 
         <div class="row mt-4">

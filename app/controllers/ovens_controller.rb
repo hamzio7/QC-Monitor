@@ -25,7 +25,7 @@ class OvensController < ApplicationController
 
     respond_to do |format|
       if @oven.save
-        format.html { redirect_to oven_url(@oven), notice: "Oven was successfully created." }
+        format.html { redirect_to schedules_path, notice: "Oven was successfully created." }
         format.json { render :show, status: :created, location: @oven }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class OvensController < ApplicationController
   def update
     respond_to do |format|
       if @oven.update(oven_params)
-        format.html { redirect_to oven_url(@oven), notice: "Oven was successfully updated." }
+        format.html { redirect_to schedules_path, notice: "Oven was successfully updated." }
         format.json { render :show, status: :ok, location: @oven }
       else
         format.html { render :edit, status: :unprocessable_entity }

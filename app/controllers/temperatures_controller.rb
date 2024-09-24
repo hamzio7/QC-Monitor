@@ -25,7 +25,7 @@ class TemperaturesController < ApplicationController
 
     respond_to do |format|
       if @temperature.save
-        format.html { redirect_to schedules_path}
+        format.html { redirect_to schedules_path }
         format.json { render :show, status: :created, location: @temperature }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class TemperaturesController < ApplicationController
   def update
     respond_to do |format|
       if @temperature.update(temperature_params)
-        format.html { redirect_to temperature_url(@temperature), notice: "Temperature was successfully updated." }
+        format.html { redirect_to schedules_path, notice: "Temperature was successfully updated." }
         format.json { render :show, status: :ok, location: @temperature }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -58,13 +58,14 @@ class TemperaturesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_temperature
-      @temperature = Temperature.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def temperature_params
-      params.require(:temperature).permit(:uf, :mf, :mf_paper, :pr_paper, :chiller, :time, :date)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_temperature
+    @temperature = Temperature.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def temperature_params
+    params.require(:temperature).permit(:uf, :mf, :mf_paper, :pr_paper, :chiller, :time, :date)
+  end
 end

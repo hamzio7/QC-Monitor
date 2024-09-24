@@ -25,7 +25,7 @@ class GravuresController < ApplicationController
 
     respond_to do |format|
       if @gravure.save
-        format.html { redirect_to gravure_url(@gravure), notice: "Gravure was successfully created." }
+        format.html { redirect_to schedules_path, notice: "Gravure was successfully created." }
         format.json { render :show, status: :created, location: @gravure }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class GravuresController < ApplicationController
   def update
     respond_to do |format|
       if @gravure.update(gravure_params)
-        format.html { redirect_to gravure_url(@gravure), notice: "Gravure was successfully updated." }
+        format.html { redirect_to schedules_path, notice: "Gravure was successfully updated." }
         format.json { render :show, status: :ok, location: @gravure }
       else
         format.html { render :edit, status: :unprocessable_entity }

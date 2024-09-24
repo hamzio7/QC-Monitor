@@ -5,6 +5,14 @@ module SchedulesHelper
            .min_by { |pallet| (pallet.time - time).abs }
   end
 
+  def render_link_by_slot(slot, data_by_slot, attribute, path, new_path, options = {})
+    if data_by_slot[slot]
+      link_to data_by_slot[slot].send(attribute).present? ? data_by_slot[slot].send(attribute) : "+", path.call(data_by_slot[slot]), class: data_by_slot[slot].send(attribute).present? ? "nav-link p-0 " : "nav-link p-0 plus-link"
+    else
+      link_to '+', new_path.call(slot), class: 'dropdown-item plus-link'
+    end
+  end
+
   def column_width(index)
     case index
     when 0 then 'auto' # Time column

@@ -11,21 +11,10 @@
         </div>
     <% end %>
 
-    <% supervisors = [['Hamza Taffakh', 'Hamza Taffakh'],
-                      ['Saeed Khadem', 'Saeed Khadem'],
-                      ['Saeed Yousefi', 'Saeed Yousefi'],
-                      ['Ahmad Jandane', 'Ahmad Jandane'],
-                      ['Navid Mombeiny', 'Navid Mombeiny']
-    ].sort
 
-       shifts = [%w[A A], %w[B B], %w[C C]]
-       finishes = [%w[Glossy Glossy], %w[Matte Matte], %w[Fancy Fancy]]
-       status = [%w[Approved Approved], %w[Stopped Stopped]]
-    %>
 
     <div class="container">
 
-        <!-- General Information Card -->
         <div class="card mb-3">
             <div class="card-header">
                 <h5 class="card-title">General Information</h5>
@@ -38,18 +27,22 @@
                         <%= form.text_field :line_speed, class: "form-control text-md-center", required: false %>
                     </div>
 
-                    <div class="col-md-5">
+                    <div class="col-md-2">
+                        <%= form.label :line_number, class: "form-label" %>
+                        <%= form.select :line_number, options_for_select(lines, @pallet.line_number), { prompt: :line_number }, class: "form-control text-md-center", required: false %>
+                    </div>
+
+                    <div class="col-md-4">
                         <%= form.label :pallet_number, class: "form-label" %>
                         <%= form.text_field :pallet_number, class: "form-control text-md-center", required: false %>
                     </div>
 
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <%= form.label :color_number, class: "form-label" %>
                         <%= form.text_field :color_number, class: "form-control text-md-center", required: false %>
                     </div>
 
                 </div>
-
 
                 <div class="row mb-3">
                     <div class="col-md-2">
@@ -62,7 +55,7 @@
                         <%= form.text_field :date, value: if params[:date].present?
                                                             Date.parse(params[:date]).to_parsi
                                                           else
-                                                            @pallet.new_record? ? Date.today.to_parsi :  Date.parse(@pallet.date).to_parsi
+                                                            @pallet.new_record? ? Date.today.to_parsi : Date.parse(@pallet.date).to_parsi
                                                           end, class: "form-control text-md-center", required: false %>
                     </div>
 
@@ -231,7 +224,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <%= form.label :supervisor, class: "form-label" %>
-                        <%= form.select :supervisor, options_for_select(supervisors), { prompt: :supervisor }, class: "form-control", required: false %>
+                        <%= form.select :supervisor, options_for_select(supervisors , @pallet.supervisor), { prompt: :supervisor }, class: "form-control", required: false %>
                     </div>
 
                     <div class="col-md-6">

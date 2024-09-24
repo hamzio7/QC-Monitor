@@ -1,16 +1,16 @@
 <thead>
-    <tr class>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th colspan="2">Reaction Times</th>
-        <th colspan="2">Volatile Content</th>
-        <th colspan="5">Temperatures</th>
-        <th colspan="2">Gravures</th>
-        <th colspan="11">Ovens' Temperatures</th>
+    <tr class="border-white border">
+        <th class="border-start border-top"></th>
+        <th class="border-top"></th>
+        <th class="border-top"></th>
+        <th class="border-top border-end"></th>
+        <th colspan="2" class="border-end  border-top">Reaction Times</th>
+        <th colspan="2" class="border-end  border-top">Volatile Content</th>
+        <th colspan="5" class="border-end  border-top">Temperatures</th>
+        <th colspan="2" class="border-end  border-top">Gravures</th>
+        <th colspan="11" class=" border-top border-end">Ovens' Temperatures</th>
     </tr>
-    <tr>
+    <tr >
         <th>Time</th>
         <th>Speed</th>
         <th>Pallet #</th>
@@ -27,7 +27,7 @@
         <th>H</th>
         <th>L</th>
         <% (1..11).each do |i| %>
-            <th><%= i %></th>
+            <th><%= i.to_s.rjust(2, '0') %></th>
         <% end %>
     </tr>
 </thead>

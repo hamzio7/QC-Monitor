@@ -1,10 +1,35 @@
 class SchedulesController < ApplicationController
   def index
+
+    get_date
+
+    # Fetch records
+    @pallets = Pallet.where(date: @date).where(shift: @shift_name.to_s.upcase).where(line_number: @line_number)
+    @temperatures = Temperature.where(date: @date)
+    @oven_temps = Oven.where(date: @date)
+    @gravures = Gravure.where(date: @date)
+    @reaction_times = ReactionTime.where(date: @date)
+    @volatile_contents = VolatileContent.where(date: @date)
+
+    # Generate and match time slots
+    @time_slots = generate_time_slots(@shift)
+    @pallets_by_slot = match_records_to_time_slots(@pallets, @time_slots)
+    @temperatures_by_slot = match_records_to_time_slots(@temperatures, @time_slots)
+    @oven_temps_by_slot = match_records_to_time_slots(@oven_temps, @time_slots)
+    @gravures_by_slot = match_records_to_time_slots(@gravures, @time_slots)
+    @reaction_times_by_slot = match_records_to_time_slots(@reaction_times, @time_slots)
+    @volatile_contents_by_slot = match_records_to_time_slots(@volatile_contents, @time_slots)
+  end
+
+  private
+
+  def get_date
     @date = if params[:date].present?
               params[:date].to_s
             else
-              cookies[:date]
+              cookies[:date].present? ? cookies[:date] : Parsi::Date.today.to_gregorian.to_s
             end
+
     @shift = if params[:shift].present?
                params[:shift].to_s
              else
@@ -26,28 +51,7 @@ class SchedulesController < ApplicationController
     cookies[:shift] = { value: @shift, expires: 1.year.from_now }
     cookies[:date] = { value: @date.to_s, expires: 1.year.from_now }
     cookies[:shift_name] = { value: @shift_name, expires: 1.year.from_now }
-
-    logger.debug "Shift Name " + @shift_name.to_s.upcase
-
-    # Fetch records
-    @pallets = Pallet.where(date: @date).where(shift: @shift_name.to_s.upcase)
-    @temperatures = Temperature.where(date: @date)
-    @oven_temps = Oven.where(date: @date)
-    @gravures = Gravure.where(date: @date)
-    @reaction_times = ReactionTime.where(date: @date)
-    @volatile_contents = VolatileContent.where(date: @date)
-
-    # Generate and match time slots
-    @time_slots = generate_time_slots(@shift)
-    @pallets_by_slot = match_records_to_time_slots(@pallets, @time_slots)
-    @temperatures_by_slot = match_records_to_time_slots(@temperatures, @time_slots)
-    @oven_temps_by_slot = match_records_to_time_slots(@oven_temps, @time_slots)
-    @gravures_by_slot = match_records_to_time_slots(@gravures, @time_slots)
-    @reaction_times_by_slot = match_records_to_time_slots(@reaction_times, @time_slots)
-    @volatile_contents_by_slot = match_records_to_time_slots(@volatile_contents, @time_slots)
   end
-
-  private
 
   def generate_time_slots(shift)
     start_time, end_time = shift == 'day' ? %w[07:00 19:00] : %w[19:00 07:00]

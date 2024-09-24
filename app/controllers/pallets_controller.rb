@@ -39,7 +39,7 @@ class PalletsController < ApplicationController
 
     respond_to do |format|
       if @pallet.save
-        format.html { redirect_to pallet_url(@pallet), notice: "Pallet was successfully created." }
+        format.html { redirect_to schedules_path, notice: "Pallet was successfully created." }
         format.json { render :show, status: :created, location: @pallet }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -53,7 +53,7 @@ class PalletsController < ApplicationController
 
     respond_to do |format|
       if @pallet.update(pallet_params.merge(stop_reason_ids: stop_reason_ids))
-        format.html { redirect_to pallet_url(@pallet), notice: "Pallet was successfully updated." }
+        format.html { redirect_to schedules_path, notice: "Pallet was successfully updated." }
         format.json { render :show, status: :ok, location: @pallet }
       else
         format.html { render :edit, status: :unprocessable_entity }
