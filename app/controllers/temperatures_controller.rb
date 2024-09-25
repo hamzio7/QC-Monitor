@@ -66,6 +66,6 @@ class TemperaturesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def temperature_params
-    params.require(:temperature).permit(:uf, :mf, :mf_paper, :pr_paper, :chiller, :time, :date)
+    params.require(:temperature).permit(:uf, :mf, :mf_paper, :pr_paper, :chiller, :time, :date, :line_number)
   end
 end

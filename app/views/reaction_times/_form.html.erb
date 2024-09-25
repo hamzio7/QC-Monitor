@@ -2,7 +2,8 @@
     <%= form_with(model: reaction_time) do |form| %>
         <% if reaction_time.errors.any? %>
             <div class="alert alert-danger">
-                <h4><%= pluralize(reaction_time.errors.count, "error") %> prohibited this reaction time from being saved:</h4>
+                <h4><%= pluralize(reaction_time.errors.count, "error") %> prohibited this reaction time from being
+                    saved:</h4>
                 <ul>
                     <% reaction_time.errors.each do |error| %>
                         <li><%= error.full_message %></li>
@@ -36,6 +37,11 @@
                                     class: "form-control text-md-center", required: false %>
             </div>
 
+            <div class="col-md-3">
+                <%= form.label :line_number, class: "form-label" %>
+                <%= form.select :line_number, options_for_select(lines, @reaction_time.line_number.present? ? @reaction_time.line_number : params[:line_number]), { prompt: :line_number }, class: "form-control text-md-center", required: false %>
+            </div>
+
             <!-- Gel Time Field -->
             <div class="col-md-3">
                 <%= form.label :gel_time, class: "form-label" %>
@@ -47,12 +53,15 @@
                 <%= form.label :cloudy_time, class: "form-label" %>
                 <%= form.text_field :cloudy_time, class: "form-control text-md-center" %>
             </div>
+
+
         </div>
+
 
         <div class="row mt-4">
             <!-- Submit Button -->
             <div class="col-md-12">
-                <%= form.submit "Save",class: "btn btn-primary" %>
+                <%= form.submit "Save", class: "btn btn-primary" %>
             </div>
         </div>
     <% end %>

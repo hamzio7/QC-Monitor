@@ -37,10 +37,12 @@
                                     value: default_time,
                                     class: "form-control text-md-center", required: false %>
             </div>
-        </div>
 
-        <div class="row mt-3">
-            <!-- High Field -->
+            <div class="col-md-6">
+                <%= form.label :line_number, class: "form-label" %>
+                <%= form.select :line_number, options_for_select(lines, params[:line_number]), { prompt: :line_number }, class: "form-control text-md-center", required: false %>
+            </div>
+
             <div class="col-md-6">
                 <%= form.label :high, class: "form-label" %>
                 <%= form.text_field :high, class: "form-control text-md-center" %>
@@ -51,11 +53,9 @@
                 <%= form.label :low, class: "form-label" %>
                 <%= form.text_field :low, class: "form-control text-md-center" %>
             </div>
-            <div class="col-md-6">
-                <%= form.label :line_number, class: "form-label" %>
-                <%= form.select :line_number, options_for_select(lines, params[:line_number]), { prompt: :line_number }, class: "form-control text-md-center", required: false %>
-            </div>
+
         </div>
+
 
         <div class="row mt-4">
             <!-- Submit Button -->

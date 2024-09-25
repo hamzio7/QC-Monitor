@@ -87,7 +87,7 @@ class PalletsController < ApplicationController
 
   def pallet_params
     params.require(:pallet).permit(
-      :line_speed, :pallet_number, :color_number, :shift, :date,
+      :line_speed, :line_number, :pallet_number, :color_number, :shift, :date,
       :time, :dimensions, :quantity, :finish, :customer,
       :initial_grammage, :grammage_min_set, :grammage_max_set,
       :final_grammage_min, :final_grammage_max, :uf_tank_id, :mf_tank_id,

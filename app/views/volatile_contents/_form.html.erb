@@ -30,6 +30,12 @@
                                                 @volatile_content.new_record? ? Time.now.strftime("%H:%M") : @volatile_content.time.strftime("%H:%M")
                                               end, class: "form-control text-md-center", required: false %>
         </div>
+
+        <div class="col-md-6">
+            <%= form.label :line_number, class: "form-label" %>
+            <%= form.select :line_number, options_for_select(lines, @volatile_content.line_number.present? ? @volatile_content.line_number : params[:line_number]), { prompt: :line_number }, class: "form-control text-md-center", required: false %>
+        </div>
+
         <div class="col-md-3">
             <%= form.label :min, class: "form-label text-uppercase" %>
             <%= form.text_field :min, class: "form-control" %>
@@ -38,11 +44,21 @@
             <%= form.label :max, class: "form-label text-uppercase" %>
             <%= form.text_field :max, class: "form-control" %>
         </div>
+
+        <div class="col-md-3">
+            <%= form.label :grammage_min, class: "form-label text-uppercase" %>
+            <%= form.text_field :grammage_min, class: "form-control" %>
+        </div>
+        <div class="col-md-3">
+            <%= form.label :grammage_max, class: "form-label text-uppercase" %>
+            <%= form.text_field :grammage_max, class: "form-control" %>
+        </div>
+
     </div>
 
 
 
     <div class="mt-3">
-        <%= form.submit "Save",class: "btn btn-primary" %>
+        <%= form.submit "Save", class: "btn btn-primary" %>
     </div>
 <% end %>

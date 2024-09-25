@@ -19,9 +19,9 @@
             </div>
 
             <!-- Line Number Field -->
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <%= form.label :line_number, class: "form-label" %>
-                <%= form.text_field :line_number, value: @line_stop.line_number, class: "form-control text-md-center" %>
+                <%= form.select :line_number, options_for_select(lines, @line_stop.line_number.present? ? @line_stop.line_number : params[:line_number]), { prompt: :line_number }, class: "form-control text-md-center", required: false %>
             </div>
         </div>
 

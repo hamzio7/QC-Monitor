@@ -60,13 +60,14 @@ class ReactionTimesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_reaction_time
-      @reaction_time = ReactionTime.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def reaction_time_params
-      params.require(:reaction_time).permit(:gel_time, :cloudy_time, :time, :date)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_reaction_time
+    @reaction_time = ReactionTime.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def reaction_time_params
+    params.require(:reaction_time).permit(:gel_time, :cloudy_time, :time, :date, :line_number)
+  end
 end

@@ -60,13 +60,14 @@ class ProductionDaysController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_production_day
-      @production_day = ProductionDay.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def production_day_params
-      params.require(:production_day).permit(:date,:shift, :info, :stopped_pallets_count, :approved_pallets_count)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_production_day
+    @production_day = ProductionDay.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def production_day_params
+    params.require(:production_day).permit(:date, :shift, :info, :stopped_pallets_count, :approved_pallets_count, :line_number)
+  end
 end

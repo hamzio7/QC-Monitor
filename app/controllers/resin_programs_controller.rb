@@ -64,13 +64,14 @@ class ResinProgramsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_resin_program
-      @resin_program = ResinProgram.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def resin_program_params
-      params.require(:resin_program).permit(:date, :time, :uf_wlf, :uf_837, :uf_1448, :mf_es700, :mf_es501, :mf_1010, :mf_837, :mf_1014, :uf_tank_num, :mf_tank_num, :mixing_1, :mixing_2, :shift, :line_number)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_resin_program
+    @resin_program = ResinProgram.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def resin_program_params
+    params.require(:resin_program).permit(:date, :time, :uf_wlf, :uf_837, :uf_1448, :mf_es700, :mf_es501, :mf_1010, :mf_837, :mf_1014, :uf_tank_num, :mf_tank_num, :mixing_1, :mixing_2, :shift, :line_number)
+  end
 end

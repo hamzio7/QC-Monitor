@@ -58,13 +58,14 @@ class GravuresController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_gravure
-      @gravure = Gravure.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def gravure_params
-      params.require(:gravure).permit(:date, :time, :high, :low)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_gravure
+    @gravure = Gravure.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def gravure_params
+    params.require(:gravure).permit(:date, :time, :high, :low, :line_number)
+  end
 end
