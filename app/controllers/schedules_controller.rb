@@ -1,17 +1,11 @@
 class SchedulesController < ApplicationController
   def index
-
     get_date
 
     # Fetch records
-    @pallets = Pallet.where(date: @date).where(shift: @shift_name.to_s.upcase).where(line_number: @line_number)
-    @temperatures = Temperature.where(date: @date)
-    @oven_temps = Oven.where(date: @date)
-    @gravures = Gravure.where(date: @date)
-    @reaction_times = ReactionTime.where(date: @date)
-    @volatile_contents = VolatileContent.where(date: @date)
+    fetch_records
 
-    # Generate and match time slots
+    # Generate time slots and match records to them
     @time_slots = generate_time_slots(@shift)
     @pallets_by_slot = match_records_to_time_slots(@pallets, @time_slots)
     @temperatures_by_slot = match_records_to_time_slots(@temperatures, @time_slots)
@@ -19,38 +13,37 @@ class SchedulesController < ApplicationController
     @gravures_by_slot = match_records_to_time_slots(@gravures, @time_slots)
     @reaction_times_by_slot = match_records_to_time_slots(@reaction_times, @time_slots)
     @volatile_contents_by_slot = match_records_to_time_slots(@volatile_contents, @time_slots)
+
+    # Initialize new records and fetch additional data
+    initialize_new_records
+    fetch_additional_data
   end
 
   private
 
   def get_date
-    @date = if params[:date].present?
-              params[:date].to_s
-            else
-              cookies[:date].present? ? cookies[:date] : Parsi::Date.today.to_gregorian.to_s
-            end
+    @date = params[:date].presence || cookies[:date] || Parsi::Date.today.to_gregorian.to_s
+    @shift = params[:shift].presence || cookies[:shift] || "day"
+    @line_number = params[:line_number].presence || cookies[:line_number] || "1"
+    @shift_name = params[:shift_name].presence || cookies[:shift_name] || "C"
 
-    @shift = if params[:shift].present?
-               params[:shift].to_s
-             else
-               cookies[:shift].present? ? cookies[:shift] : "day"
-             end
+    store_in_cookies
+  end
 
-    @line_number = if params[:line_number].present?
-                     params[:line_number].to_s
-                   else
-                     cookies[:line_number].present? ? cookies[:line_number] : "1"
-                   end
-    @shift_name = if params[:shift_name].present?
-                    params[:shift_name].to_s
-                  else
-                    cookies[:shift_name].present? ? cookies[:shift_name] : "C"
-                  end
-
+  def store_in_cookies
     cookies[:line_number] = { value: @line_number, expires: 1.year.from_now }
     cookies[:shift] = { value: @shift, expires: 1.year.from_now }
     cookies[:date] = { value: @date.to_s, expires: 1.year.from_now }
     cookies[:shift_name] = { value: @shift_name, expires: 1.year.from_now }
+  end
+
+  def fetch_records
+    @pallets = Pallet.where(date: @date, shift: @shift_name.upcase, line_number: @line_number)
+    @temperatures = Temperature.where(date: @date, line_number: @line_number)
+    @oven_temps = Oven.where(date: @date, line_number: @line_number)
+    @gravures = Gravure.where(date: @date, line_number: @line_number)
+    @reaction_times = ReactionTime.where(date: @date, line_number: @line_number)
+    @volatile_contents = VolatileContent.where(date: @date, line_number: @line_number)
   end
 
   def generate_time_slots(shift)
@@ -68,9 +61,6 @@ class SchedulesController < ApplicationController
 
   def match_records_to_time_slots(records, time_slots)
     records_by_slot = {}
-    records.each do |record|
-      logger.debug " time : " + record.time.to_s
-    end
 
     time_slots.each do |slot|
       records_by_slot[slot] = records.find { |record| round_to_nearest_30(record.time) == slot }
@@ -80,14 +70,26 @@ class SchedulesController < ApplicationController
 
   def round_to_nearest_30(time)
     minutes = time.min
-    if minutes < 15
-      rounded_time = time.change(min: 0)
-    elsif minutes < 45
-      rounded_time = time.change(min: 30)
-    else
-      rounded_time = (time + 1.hour).change(min: 0)
-    end
+    rounded_time = case minutes
+                   when 0...15 then time.change(min: 0)
+                   when 15...45 then time.change(min: 30)
+                   else (time + 1.hour).change(min: 0)
+                   end
     rounded_time.strftime("%H:%M")
   end
 
+  def initialize_new_records
+    @gravure = Gravure.new
+    @temperature = Temperature.new
+    @pallet = Pallet.new
+    @oven = Oven.new
+    @reaction_time = ReactionTime.new
+    @volatile_content = VolatileContent.new
+  end
+
+  def fetch_additional_data
+    @stop_reasons = StopReason.all
+    @uf_tanks = UfTank.order(created_at: :desc).limit(5)
+    @mf_tanks = MfTank.order(created_at: :desc).limit(5)
+  end
 end

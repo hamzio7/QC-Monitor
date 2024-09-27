@@ -1,0 +1,14 @@
+<% if @gravure.errors.any? %>
+    <%= turbo_stream.replace 'new_gravure_modal' do %>
+        <%= render 'form', gravure: @gravure %>
+    <% end %>
+<% else %>
+    <%= turbo_stream.replace 'new_gravure_modal' do %>
+        <div class="modal-body">
+            <p>Gravure was successfully created.</p>
+        </div>
+    <% end %>
+    <script>
+        Turbo.visit(window.location.pathname); // Refresh the page
+    </script>
+<% end %>

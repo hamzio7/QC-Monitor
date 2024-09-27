@@ -5,11 +5,18 @@ module SchedulesHelper
            .min_by { |pallet| (pallet.time - time).abs }
   end
 
-  def render_link_by_slot(slot, data_by_slot, attribute, path, new_path, options = {})
-    if data_by_slot[slot]
-      link_to data_by_slot[slot].send(attribute).present? ? data_by_slot[slot].send(attribute) : "+", path.call(data_by_slot[slot]), class: data_by_slot[slot].send(attribute).present? ? "nav-link p-0 " : "nav-link p-0 plus-link"
+  def render_link_by_slot(slot, record, attribute, type)
+    modal_id = "modal_#{type}_#{slot.to_s.parameterize}"
+
+    data_attributes = {
+      bs_toggle: 'modal',
+      bs_target: "##{modal_id}"
+    }
+
+    if record[slot] && record[slot].send(attribute).present?
+      link_to record[slot].send(attribute), '#', class: 'nav-link p-0', data: data_attributes
     else
-      link_to '+', new_path.call(slot), class: 'dropdown-item plus-link'
+      link_to '+', '#', class: 'nav-link plus-link', data: data_attributes
     end
   end
 

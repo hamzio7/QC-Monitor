@@ -1,100 +1,97 @@
-<div class="container">
-    <%= form_with(model: oven) do |form| %>
-        <% if oven.errors.any? %>
-            <div class="alert alert-danger">
-                <h4><%= pluralize(oven.errors.count, "error") %> prohibited this oven from being saved:</h4>
+<div>
+    <%= form_with(model: @oven) do |form| %>
+        <% if @oven.errors.any? %>
+            <div>
+                <h4><%= pluralize(@oven.errors.count, "error") %> prohibited this oven from being saved:</h4>
                 <ul>
-                    <% oven.errors.each do |error| %>
+                    <% @oven.errors.each do |error| %>
                         <li><%= error.full_message %></li>
                     <% end %>
                 </ul>
             </div>
         <% end %>
 
-        <div class="row">
+        <div>
 
-            <div class="col-md-2">
-                <%= form.label :date, class: "form-label" %>
+            <div>
+                <%= form.label :date %>
                 <%= form.text_field :date,
-                                    value: params[:date].present? ? Date.parse(params[:date]).to_parsi : @oven.new_record? ? Date.today.to_parsi : Date.parse(@oven.date).to_parsi,
-                                    class: "form-control text-md-center", required: false %>
+                                    value: default_date(@oven), required: false %>
             </div>
 
             <!-- Time Field -->
-            <div class="col-md-2">
-                <%= form.label :time, class: "form-label" %>
+            <div>
+                <%= form.label :time %>
                 <%= form.text_field :time,
-                                    value: params[:time].present? ? Time.parse(params[:time].to_s).strftime("%H:%M") : @oven.new_record? ? Time.now.strftime("%H:%M") : @oven.time.strftime("%H:%M"),
-                                    class: "form-control text-md-center", required: false %>
+                                    value: default_time(@oven), required: false %>
             </div>
 
             <!-- Line Number Field -->
-            <div class="col-md-2">
-                <%= form.label :line_number, class: "form-label" %>
-                <%= form.number_field :line_number, class: "form-control text-md-center" %>
+            <div>
+                <%= form.label :line_number %>
+                <%= form.number_field :line_number %>
             </div>
 
-            <div class="col-md-2">
-                <%= form.label :oven_1, class: "form-label" %>
-                <%= form.number_field :oven_1, class: "form-control text-md-center" %>
+            <div>
+                <%= form.label :oven_1 %>
+                <%= form.number_field :oven_1 %>
             </div>
 
-            <div class="col-md-2">
-                <%= form.label :oven_2, class: "form-label" %>
-                <%= form.number_field :oven_2, class: "form-control text-md-center" %>
+            <div>
+                <%= form.label :oven_2 %>
+                <%= form.number_field :oven_2 %>
             </div>
 
-            <div class="col-md-2">
-                <%= form.label :oven_3, class: "form-label" %>
-                <%= form.number_field :oven_3, class: "form-control text-md-center" %>
+            <div>
+                <%= form.label :oven_3 %>
+                <%= form.number_field :oven_3 %>
             </div>
 
-            <div class="col-md-2">
-                <%= form.label :oven_4, class: "form-label" %>
-                <%= form.number_field :oven_4, class: "form-control text-md-center" %>
+            <div>
+                <%= form.label :oven_4 %>
+                <%= form.number_field :oven_4 %>
             </div>
 
-            <div class="col-md-2">
-                <%= form.label :oven_5, class: "form-label" %>
-                <%= form.number_field :oven_5, class: "form-control text-md-center" %>
+            <div>
+                <%= form.label :oven_5 %>
+                <%= form.number_field :oven_5 %>
             </div>
 
-            <div class="col-md-2">
-                <%= form.label :oven_6, class: "form-label" %>
-                <%= form.number_field :oven_6, class: "form-control text-md-center" %>
+            <div>
+                <%= form.label :oven_6 %>
+                <%= form.number_field :oven_6 %>
             </div>
 
-            <div class="col-md-2">
-                <%= form.label :oven_7, class: "form-label" %>
-                <%= form.number_field :oven_7, class: "form-control text-md-center" %>
+            <div>
+                <%= form.label :oven_7 %>
+                <%= form.number_field :oven_7 %>
             </div>
 
-            <div class="col-md-2">
-                <%= form.label :oven_8, class: "form-label" %>
-                <%= form.number_field :oven_8, class: "form-control text-md-center" %>
+            <div>
+                <%= form.label :oven_8 %>
+                <%= form.number_field :oven_8 %>
             </div>
 
-            <div class="col-md-2">
-                <%= form.label :oven_9, class: "form-label" %>
-                <%= form.number_field :oven_9, class: "form-control text-md-center" %>
+            <div>
+                <%= form.label :oven_9 %>
+                <%= form.number_field :oven_9 %>
             </div>
 
-            <div class="col-md-2">
-                <%= form.label :oven_10, class: "form-label" %>
-                <%= form.number_field :oven_10, class: "form-control text-md-center" %>
+            <div>
+                <%= form.label :oven_10 %>
+                <%= form.number_field :oven_10 %>
             </div>
 
-            <div class="col-md-2">
-                <%= form.label :oven_11, class: "form-label" %>
-                <%= form.number_field :oven_11, class: "form-control text-md-center" %>
+            <div>
+                <%= form.label :oven_11 %>
+                <%= form.number_field :oven_11 %>
             </div>
         </div>
 
-
-        <div class="row mt-4">
+        <div>
             <!-- Submit Button -->
-            <div class="col-md-12">
-                <%= form.submit 'Save', class: "btn btn-primary w-100" %>
+            <div>
+                <%= form.submit 'Save' %>
             </div>
         </div>
     <% end %>

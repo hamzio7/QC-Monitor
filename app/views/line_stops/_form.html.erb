@@ -1,7 +1,7 @@
-<div class="container">
+<div>
     <%= form_with(model: @line_stop) do |form| %>
         <% if @line_stop.errors.any? %>
-            <div class="alert alert-danger">
+            <div>
                 <h4><%= pluralize(@line_stop.errors.count, "error") %> prohibited this line_stop from being saved:</h4>
                 <ul>
                     <% @line_stop.errors.each do |error| %>
@@ -11,52 +11,52 @@
             </div>
         <% end %>
 
-        <div class="row">
+        <div>
             <!-- Date Field -->
-            <div class="col-md-6">
-                <%= form.label :date, class: "form-label" %>
-                <%= form.text_field :date, value: @line_stop.date, class: "form-control text-md-center", required: false %>
+            <div>
+                <%= form.label :date %>
+                <%= form.text_field :date, value: @line_stop.date, required: false %>
             </div>
 
             <!-- Line Number Field -->
-            <div class="col-md-3">
-                <%= form.label :line_number, class: "form-label" %>
-                <%= form.select :line_number, options_for_select(lines, @line_stop.line_number.present? ? @line_stop.line_number : params[:line_number]), { prompt: :line_number }, class: "form-control text-md-center", required: false %>
+            <div>
+                <%= form.label :line_number %>
+                <%= form.select :line_number, options_for_select(lines, @line_stop.line_number.present? ? @line_stop.line_number : params[:line_number]), { prompt: :line_number }, required: false %>
             </div>
         </div>
 
-        <div class="row mt-3">
+        <div>
             <!-- Time Stopped Field -->
-            <div class="col-md-6">
-                <%= form.label :time_stopped, class: "form-label" %>
-                <%= form.text_field :time_stopped, value: format("%02d:%02d", @line_stop.time_stopped.hour, @line_stop.time_stopped.min), class: "form-control text-md-center" %>
+            <div>
+                <%= form.label :time_stopped %>
+                <%= form.text_field :time_stopped, value: format("%02d:%02d", @line_stop.time_stopped.hour, @line_stop.time_stopped.min) %>
             </div>
 
             <!-- Time Restarted Field -->
-            <div class="col-md-6">
-                <%= form.label :time_restarted, class: "form-label" %>
-                <%= form.text_field :time_restarted, value: @line_stop.time_restarted, class: "form-control text-md-center" %>
+            <div>
+                <%= form.label :time_restarted %>
+                <%= form.text_field :time_restarted, value: @line_stop.time_restarted %>
             </div>
         </div>
 
-        <div class="row mt-3">
+        <div>
             <!-- Reason Field -->
-            <div class="col-md-6">
-                <%= form.label :reason, class: "form-label" %>
-                <%= form.text_field :reason, value: @line_stop.reason, class: "form-control text-md-center" %>
+            <div>
+                <%= form.label :reason %>
+                <%= form.text_field :reason, value: @line_stop.reason %>
             </div>
 
             <!-- Shift Field -->
-            <div class="col-md-6">
-                <%= form.label :shift, class: "form-label" %>
-                <%= form.text_field :shift, value: @line_stop.shift, class: "form-control text-md-center" %>
+            <div>
+                <%= form.label :shift %>
+                <%= form.text_field :shift, value: @line_stop.shift %>
             </div>
         </div>
 
-        <div class="row mt-4">
+        <div>
             <!-- Submit Button -->
-            <div class="col">
-                <%= form.submit 'Save', class: "btn btn-primary w-100" %>
+            <div>
+                <%= form.submit 'Save' %>
             </div>
         </div>
     <% end %>
