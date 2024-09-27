@@ -1,0 +1,286 @@
+<%= form_with(model: model, local: true) do |form| %>
+    <% if model.errors.any? %>
+        <div class="alert alert-danger">
+            <h4><%= pluralize(model.errors.count, "error") %> prohibited this pallet from being saved:</h4>
+            <ul>
+                <% model.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <div class="container">
+
+        <div class="mb-4">
+            <h5>General Information</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label :line_speed %>
+                        <%= form.text_field :line_speed, class: "form-control", required: false %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label :date %>
+                        <%= form.text_field :date, value: Date.parse(date).to_parsi, class: "form-control", required: false %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label :time %>
+                        <%= form.text_field :time, value: time, class: "form-control", required: false %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label :line_number %>
+                        <%= form.select :line_number, options_for_select(lines, line_number), { prompt: :line_number }, class: "form-control", required: false %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label :pallet_number %>
+                        <%= form.text_field :pallet_number, class: "form-control", required: false %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label :color_number %>
+                        <%= form.text_field :color_number, class: "form-control", required: false %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label :shift %>
+                        <%= form.select :shift, options_for_select(shifts, shift), { prompt: :shift }, class: "form-control", required: false %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label :dimensions %>
+                        <%= form.text_field :dimensions, class: "form-control", required: false %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label :quantity %>
+                        <%= form.text_field :quantity, class: "form-control", required: false %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label :finish %>
+                        <%= form.select :finish, options_for_select(finishes, model.finish), { prompt: :finish }, class: "form-control", required: false %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label :customer %>
+                        <%= form.text_field :customer, class: "form-control" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grammage Card -->
+        <div class="mb-4">
+            <h5>Grammage</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label :initial_grammage %>
+                        <%= form.text_field :initial_grammage, class: "form-control", required: false %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label "Required Min" %>
+                        <%= form.text_field :grammage_min_set, class: "form-control", required: false %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label "Required Max" %>
+                        <%= form.text_field :grammage_max_set, class: "form-control", required: false %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label "Experimental Min" %>
+                        <%= form.text_field :final_grammage_min, class: "form-control", required: false %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label "Experimental Max" %>
+                        <%= form.text_field :final_grammage_max, class: "form-control", required: false %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tank and Times Card -->
+        <div class="mb-4">
+            <h5>Tank and Times</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label :uf_tank_id %>
+                        <%= form.select :uf_tank_id, options_from_collection_for_select(@uf_tanks, :id, :display_info, model.uf_tank_id), { prompt: "Select a UF Tank" }, class: "form-control" %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label :mf_tank_id %>
+                        <%= form.select :mf_tank_id, options_from_collection_for_select(@mf_tanks, :id, :display_info, model.mf_tank_id), { prompt: "Select a MF Tank" }, class: "form-control" %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label "Experimental Cloudy Time" %>
+                        <%= form.text_field :cloudy_time, placeholder: "mm:ss", class: "form-control", required: false %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label "Experimental Gel Time" %>
+                        <%= form.text_field :gel_time, placeholder: "mm:ss", class: "form-control", required: false %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Volatile Content Card -->
+        <div class="mb-4">
+            <h5>Volatile Content</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label "Required min" %>
+                        <%= form.text_field :volatile_content_set_min, class: "form-control", required: false %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label "Required max" %>
+                        <%= form.text_field :volatile_content_set_max, class: "form-control", required: false %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label "Experimental min" %>
+                        <%= form.text_field :volatile_content_min, class: "form-control", required: false %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label "Experimental max" %>
+                        <%= form.text_field :volatile_content_max, class: "form-control", required: false %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <h5>Press Information</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label :glossiness %>
+                        <%= form.text_field :glossiness, class: "form-control" %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label :press_quality %>
+                        <%= form.text_field :press_quality, class: "form-control" %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label :pallet_quality %>
+                        <%= form.text_field :pallet_quality, class: "form-control" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Information Card -->
+        <div class="mb-4">
+            <h5>Additional Information</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label :supervisor %>
+                        <%= form.select :supervisor, options_for_select(supervisors, model.supervisor), { prompt: :supervisor }, class: "form-control", required: false %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label :status %>
+                        <%= form.select :status, options_for_select(status, model.status), { prompt: :status }, class: "form-control", required: false %>
+                    </div>
+                </div>
+
+                <!-- Stop Reasons Checkboxes -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label :stop_reasons, "Stop Reasons" %>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="stopReasonsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Select Stop Reasons
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="stopReasonsDropdown">
+                                <% @stop_reasons.each do |reason| %>
+                                    <div class="form-check">
+                                        <%= check_box_tag 'pallet[stop_reason_ids][]', reason.id, model.stop_reasons.include?(reason), id: "stop_reason_#{reason.id}", class: "form-check-input" %>
+                                        <%= label_tag "stop_reason_#{reason.id}", reason.reason, class: "form-check-label" %>
+                                    </div>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label :custom_stop_reasons, "Other Stop Reasons" %>
+                        <%= form.text_field :custom_stop_reasons, placeholder: "Enter new stop reasons, comma-separated", class: "form-control" %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.label :info %>
+                        <%= form.text_area :info, rows: 3, class: "form-control" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Information Card -->
+        <% if model.persisted? %>
+            <div class="mb-4">
+                <h5>Final Information</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <%= form.label :final_supervisor %>
+                            <%= form.select :final_supervisor, options_for_select(supervisors, model.final_supervisor), { prompt: :supervisor }, class: "form-control" %>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <%= form.label :final_status %>
+                            <%= form.select :final_status, options_for_select(status, model.final_status), { prompt: :status }, class: "form-control" %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+
+        <div>
+            <%= form.submit "Save", class: "btn btn-primary" %>
+        </div>
+    </div>
+<% end %>

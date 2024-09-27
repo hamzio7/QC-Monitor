@@ -1,0 +1,62 @@
+<%= form_with(model: model) do |form| %>
+    <% if @temperature.errors.any? %>
+        <div>
+            <h4><%= pluralize(@temperature.errors.count, "error") %> prohibited this temperature from being saved:</h4>
+            <ul>
+                <% @temperature.errors.each do |error| %>
+                    <li><%= error.full_message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <div>
+        <div>
+            <%= form.label :uf, class: "text-uppercase" %>
+            <%= form.text_field :uf %>
+        </div>
+        <div>
+            <%= form.label :mf, class: "text-uppercase" %>
+            <%= form.text_field :mf %>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <%= form.label "Paper Before MF" %>
+            <%= form.text_field :mf_paper %>
+        </div>
+        <div>
+            <%= form.label "Paper after Chiller" %>
+            <%= form.text_field :pr_paper %>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <%= form.label :chiller %>
+            <%= form.text_field :chiller %>
+        </div>
+        <div>
+            <%= form.label :midline %>
+            <%= form.text_field :midline %>
+        </div>
+        <div>
+            <%= form.label :date %>
+            <%= form.text_field :date, value: Date.parse(date).to_parsi, required: false %>
+        </div>
+        <div>
+            <%= form.label :time %>
+            <%= form.text_field :time, value: time, required: false %>
+        </div>
+
+        <div>
+            <%= form.label :line_number %>
+            <%= form.select :line_number, options_for_select(lines, line_number), { prompt: :line_number }, required: false %>
+        </div>
+    </div>
+
+    <div>
+        <%= form.submit "Save" %>
+    </div>
+<% end %>

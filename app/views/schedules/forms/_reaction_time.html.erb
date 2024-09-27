@@ -1,0 +1,50 @@
+<div>
+    <%= form_with(model: @reaction_time) do |form| %>
+        <% if @reaction_time.errors.any? %>
+            <div>
+                <h4><%= pluralize(@reaction_time.errors.count, "error") %> prohibited this reaction time from being saved:</h4>
+                <ul>
+                    <% @reaction_time.errors.each do |error| %>
+                        <li><%= error.full_message %></li>
+                    <% end %>
+                </ul>
+            </div>
+        <% end %>
+
+        <div>
+
+            <div>
+                <%= form.label :date %>
+                <%= form.text_field :date, value: Date.parse(date).to_parsi, required: false %>
+            </div>
+            <div>
+                <%= form.label :time %>
+                <%= form.text_field :time, value: time, required: false %>
+            </div>
+
+            <div>
+                <%= form.label :line_number %>
+                <%= form.select :line_number, options_for_select(lines, line_number), { prompt: :line_number }, required: false %>
+            </div>
+
+            <!-- Gel Time Field -->
+            <div>
+                <%= form.label :gel_time %>
+                <%= form.text_field :gel_time %>
+            </div>
+
+            <!-- Cloudy Time Field -->
+            <div>
+                <%= form.label :cloudy_time %>
+                <%= form.text_field :cloudy_time %>
+            </div>
+        </div>
+
+        <div>
+            <!-- Submit Button -->
+            <div>
+                <%= form.submit "Save" %>
+            </div>
+        </div>
+    <% end %>
+</div>

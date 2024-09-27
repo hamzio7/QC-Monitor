@@ -20,28 +20,28 @@
                 <tr>
                     <td><%= slot %></td>
 
-                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @pallets_by_slot, attribute: :line_speed, type: 'pallet' } %>
-                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @pallets_by_slot, attribute: :pallet_number, type: 'pallet' } %>
-                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @pallets_by_slot, attribute: :color_number, type: 'pallet' } %>
+                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @pallets_by_slot, path: new_pallet_path, new_path: new_pallet_path, attribute: :line_speed, type: 'pallet' } %>
+                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @pallets_by_slot, path: new_pallet_path, new_path: new_pallet_path, attribute: :pallet_number, type: 'pallet' } %>
+                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @pallets_by_slot, path: new_pallet_path, new_path: new_pallet_path, attribute: :color_number, type: 'pallet' } %>
 
-                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @reaction_times_by_slot, attribute: :gel_time, type: 'reaction_time' } %>
-                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @reaction_times_by_slot, attribute: :cloudy_time, type: 'reaction_time' } %>
+                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @reaction_times_by_slot, path: new_reaction_time_path, new_path: new_reaction_time_path, attribute: :gel_time, type: 'reaction_time' } %>
+                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @reaction_times_by_slot, path: new_reaction_time_path, new_path: new_reaction_time_path, attribute: :cloudy_time, type: 'reaction_time' } %>
 
-                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @pallets_by_slot, attribute: :initial_grammage, type: 'volatile_content' } %>
-                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @volatile_contents_by_slot, attribute: :grammage_min, type: 'volatile_content' } %>
-                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @volatile_contents_by_slot, attribute: :grammage_max, type: 'volatile_content' } %>
-                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @volatile_contents_by_slot, attribute: :min, type: 'volatile_content' } %>
-                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @volatile_contents_by_slot, attribute: :max, type: 'volatile_content' } %>
+                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @pallets_by_slot, path: new_pallet_path, new_path: new_pallet_path, attribute: :initial_grammage, type: 'pallet' } %>
+                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @volatile_contents_by_slot, path: new_volatile_content_path, new_path: new_volatile_content_path, attribute: :grammage_min, type: 'volatile_content' } %>
+                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @volatile_contents_by_slot, path: new_volatile_content_path, new_path: new_volatile_content_path, attribute: :grammage_max, type: 'volatile_content' } %>
+                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @volatile_contents_by_slot, path: new_volatile_content_path, new_path: new_volatile_content_path, attribute: :min, type: 'volatile_content' } %>
+                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @volatile_contents_by_slot, path: new_volatile_content_path, new_path: new_volatile_content_path, attribute: :max, type: 'volatile_content' } %>
 
                     <% [:uf, :mf, :mf_paper, :pr_paper, :chiller, :midline].each do |temp_type| %>
-                        <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @temperatures_by_slot, attribute: temp_type, type: 'temperature' } %>
+                        <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @temperatures_by_slot, path: new_temperature_path, new_path: new_temperature_path, attribute: temp_type, type: 'temperature' } %>
                     <% end %>
 
-                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @gravures_by_slot, attribute: :high, type: 'gravure' } %>
-                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @gravures_by_slot, attribute: :low, type: 'gravure' } %>
+                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @gravures_by_slot, path: new_gravure_path, new_path: new_gravure_path, attribute: :high, type: 'gravure' } %>
+                    <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @gravures_by_slot, path: new_gravure_path, new_path: new_gravure_path, attribute: :low, type: 'gravure' } %>
 
                     <% (1..11).each do |i| %>
-                        <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @oven_temps_by_slot, attribute: "oven_#{i}", type: 'oven' } %>
+                        <%= render partial: 'shared/table_cell', locals: { slot: slot, record: @oven_temps_by_slot, path: new_oven_path, new_path: new_oven_path, attribute: "oven_#{i}", type: 'oven' } %>
                     <% end %>
                 </tr>
             <% end %>
@@ -49,33 +49,7 @@
     </table>
 </div>
 
-<% @time_slots.each do |slot| %>
-    <% form_types = {
-            gravure: 'gravures/form',
-            oven: 'ovens/form',
-            pallet: 'pallets/form',
-            reaction_time: 'reaction_times/form',
-            volatile_content: 'volatile_contents/form',
-            temperature: 'temperatures/form'
-    } %>
 
-    <% form_types.each do |form_type, partial| %>
-        <% modal_id = "modal_#{form_type}_#{slot.to_s.parameterize}" %>
-        <div class="modal fade" id="<%= modal_id %>" tabindex="-1" aria-labelledby="<%= modal_id %>_label" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="<%= modal_id %>_label"><%= slot %></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <%= render partial: partial, locals: { slot: slot, record: form_type.to_s.classify.constantize.new(time: slot, date: @date, line_number: @line_number), form_type: form_type } %>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <% end %>
-<% end %>
 
 
 

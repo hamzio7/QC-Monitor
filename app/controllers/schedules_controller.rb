@@ -2,6 +2,8 @@ class SchedulesController < ApplicationController
   def index
     get_date
 
+
+
     # Fetch records
     fetch_records
 
@@ -89,7 +91,7 @@ class SchedulesController < ApplicationController
 
   def fetch_additional_data
     @stop_reasons = StopReason.all
-    @uf_tanks = UfTank.order(created_at: :desc).limit(5)
-    @mf_tanks = MfTank.order(created_at: :desc).limit(5)
+    @uf_tanks = ResinTank.order(created_at: :desc).limit(5)
+    @mf_tanks = ResinTank.order(created_at: :desc).limit(5)
   end
 end

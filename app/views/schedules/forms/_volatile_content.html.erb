@@ -1,0 +1,53 @@
+<%= form_with(model: model) do |form| %>
+    <% if model.errors.any? %>
+        <div>
+            <h4><%= pluralize(model.errors.count, "error") %> prohibited this volatile content from being
+                saved:</h4>
+            <ul>
+                <% model.errors.each do |error| %>
+                    <li><%= error.full_message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <div>
+        <div>
+            <div>
+                <%= form.label :date %>
+                <%= form.text_field :date, value: Date.parse(date).to_parsi %>
+            </div>
+            <div>
+                <%= form.label :time %>
+                <%= form.text_field :time, value: time %>
+            </div>
+
+            <div>
+                <%= form.label :line_number %>
+                <%= form.select :line_number, options_for_select(lines, line_number), { prompt: :line_number }, required: false %>
+            </div>
+
+            <div>
+                <%= form.label :min %>
+                <%= form.text_field :min %>
+            </div>
+            <div>
+                <%= form.label :max %>
+                <%= form.text_field :max %>
+            </div>
+
+            <div>
+                <%= form.label :grammage_min %>
+                <%= form.text_field :grammage_min %>
+            </div>
+            <div>
+                <%= form.label :grammage_max %>
+                <%= form.text_field :grammage_max %>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <%= form.submit "Save" %>
+    </div>
+<% end %>

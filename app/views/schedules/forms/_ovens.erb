@@ -12,24 +12,21 @@
         <% end %>
 
         <div>
-
             <div>
                 <%= form.label :date %>
-                <%= form.text_field :date,
-                                    value: default_date(@oven), required: false %>
+                <%= form.text_field :date, value: Date.parse(date).to_parsi, required: false %>
             </div>
 
-            <!-- Time Field -->
+
             <div>
                 <%= form.label :time %>
                 <%= form.text_field :time,
-                                    value: default_time(@oven), required: false %>
+                                    value: time.to_s, required: false %>
             </div>
 
-            <!-- Line Number Field -->
             <div>
                 <%= form.label :line_number %>
-                <%= form.select :line_number, options_for_select(lines, params[:line_number]), { prompt: :line_number }, required: false %>
+                <%= form.select :line_number, options_for_select(lines, line_number), { prompt: :line_number }, required: false %>
             </div>
 
             <div>
@@ -89,7 +86,6 @@
         </div>
 
         <div>
-            <!-- Submit Button -->
             <div>
                 <%= form.submit 'Save' %>
             </div>

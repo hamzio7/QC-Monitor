@@ -261,7 +261,7 @@
                         </div>
                         <div>
                             <%= form.label :final_status %>
-                            <%= form.select :final_status, options_for_select(final_statuses, @pallet.final_status), { prompt: :status } %>
+                            <%= form.select :final_status, options_for_select(status, @pallet.final_status), { prompt: :status } %>
                         </div>
                     </div>
                 </div>
